@@ -17,8 +17,22 @@ services:
       - db
     tty: true
 
+  front:
+    image: node:12.0.0
+    working_dir:
+      "/myapp/front"
+    command: bash -c "cd react-app && yarn && yarn start"
+    ports:
+      - "5000:3000"
+    volumes:
+     - ./front:/myapp/front/react-app
+     - modules:/myapp/front/react-app/node_modules:cached
+    tty: true
+
 volumes:
   bundle:
     driver: local
   pgdata:
+    driver: local
+  modules:
     driver: local
