@@ -20,8 +20,8 @@ services:
   front:
     image: node:12.0.0
     working_dir:
-      "/myapp/front"
-    command: bash -c "cd react-app && yarn && yarn start"
+      "/myapp/front/react-app"
+    command: bash -c "yarn && yarn start"
     ports:
       - "5000:3000"
     volumes:
