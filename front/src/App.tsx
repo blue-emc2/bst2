@@ -7,6 +7,7 @@ import {
   Icon,
   Segment,
   Menu,
+  List,
 } from 'semantic-ui-react';
 import StroyList, { Story } from './components/StoryList';
 
@@ -63,6 +64,17 @@ const App: React.FC = () => {
         </Segment>
 
         <StroyList stories={stories} />
+
+        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Header inverted as="h4" content="About" />
+            <List link inverted>
+              <List.Item as="a">権利</List.Item>
+              <List.Item as="a">作成者</List.Item>
+              <List.Item as="a">問い合わせ</List.Item>
+            </List>
+          </Container>
+        </Segment>
       </main>
     </div>
   );
