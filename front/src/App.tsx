@@ -1,6 +1,13 @@
 import React from 'react';
 import './App.css';
-import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Header,
+  Icon,
+  Segment,
+  Menu,
+} from 'semantic-ui-react';
 import StroyList, { Story } from './components/StoryList';
 
 const App: React.FC = () => {
@@ -36,6 +43,16 @@ const App: React.FC = () => {
           style={{ minHeight: 400, padding: '1em 0em' }}
           vertical
         >
+          <Menu size="large">
+            <Container>
+              <Menu.Item as="a" active>
+                Home
+              </Menu.Item>
+              <Menu.Item position="right">
+                <Button as="a">Log in</Button>
+              </Menu.Item>
+            </Container>
+          </Menu>
           <Container text>
             <Header as="h1" inverted content="back story" />
             <Button primary size="huge">
