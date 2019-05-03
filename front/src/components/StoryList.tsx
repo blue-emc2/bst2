@@ -5,6 +5,7 @@ export interface Story {
   id: number;
   header: string;
   description: string;
+  meta?: string;
 }
 
 interface StoryListProps {
@@ -19,6 +20,7 @@ const StoryList: FC<StoryListProps> = ({ stories }) => (
           key={s.id}
           header={s.header}
           description={s.description}
+          meta={s.meta ? s.meta : '???'}
           image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
         />
       ))}
