@@ -12,28 +12,15 @@ import {
 import StroyList, { Story } from './components/StoryList';
 
 const App: React.FC = () => {
-  const stories: Story[] = [
-    {
-      id: 1,
+  const a = Array.from(Array(10).keys());
+  const stories = a.map(
+    (n: number): Story => ({
+      id: n,
       header: 'Matthew',
+      meta: 'author',
       description: 'Matthew is a musician living in Nashville.',
-    },
-    {
-      id: 2,
-      header: 'Matthew',
-      description: 'Matthew is a musician living in Nashville.',
-    },
-    {
-      id: 3,
-      header: 'Matthew',
-      description: 'Matthew is a musician living in Nashville.',
-    },
-    {
-      id: 4,
-      header: 'Matthew',
-      description: 'Matthew is a musician living in Nashville.',
-    },
-  ];
+    }),
+  );
 
   return (
     <div className="container">
