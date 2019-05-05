@@ -12,7 +12,7 @@ import {
 import StroyList, { Story } from './components/StoryList';
 
 const App: React.FC = () => {
-  const a = Array.from(Array(10).keys());
+  const a = Array.from(Array(13).keys());
   const stories = a.map(
     (n: number): Story => ({
       id: n,
