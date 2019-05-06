@@ -10,6 +10,7 @@ import {
   List,
 } from 'semantic-ui-react';
 import StroyList, { Story } from './containers/StoryList';
+import About from './components/About';
 
 const App: React.FC = () => {
   const a = Array.from(Array(13).keys());
