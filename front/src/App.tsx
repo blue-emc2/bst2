@@ -9,7 +9,7 @@ import {
   Menu,
   List,
 } from 'semantic-ui-react';
-import StroyList, { Story } from './components/StoryList';
+import StroyList, { Story } from './containers/StoryList';
 
 const App: React.FC = () => {
   const a = Array.from(Array(13).keys());
@@ -56,10 +56,13 @@ const App: React.FC = () => {
           <Container>
             <Header inverted as="h4" content="About" />
             <List link inverted>
-              <List.Item as="a">権利</List.Item>
-              <List.Item as="a">作成者</List.Item>
+              <List.Item as="a">bstとは</List.Item>
+              <List.Item as="a">作者</List.Item>
               <List.Item as="a">問い合わせ</List.Item>
             </List>
+            <Switch>
+              <Route path="/abount" component={About} />
+            </Switch>
           </Container>
         </Segment>
       </main>
