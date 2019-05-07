@@ -43,8 +43,8 @@ const Home: FC<{}> = () => {
           </Menu>
           <Container text>
             <Header as="h1" inverted content="back story" />
-            <Button primary size="huge">
-              ストーリーを書いてみる
+            <Button primary inverted size="huge">
+              <Link to="/new">ストーリーを書いてみる</Link>
               <Icon name="arrow right" />
             </Button>
           </Container>
