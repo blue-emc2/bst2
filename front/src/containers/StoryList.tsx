@@ -34,6 +34,7 @@ const StoryList: FC<StoryListProps> = ({ stories }) => {
             description={s.description}
             meta={s.meta ? s.meta : '???'}
             image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+            href="/stories"
           />
         ))}
       </Card.Group>
