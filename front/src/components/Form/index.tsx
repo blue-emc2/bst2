@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
-import { Header } from 'semantic-ui-react';
+import { Menu, Container, Button } from 'semantic-ui-react';
 
 const Form: FC<{}> = () => {
-  return (
-    <>
-      <Header as="h1">Form</Header>
-    </>
-  );
+  return <></>;
 };
 
 export default Form;

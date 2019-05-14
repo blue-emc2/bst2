@@ -1,13 +1,25 @@
 import React, { FC } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { Menu, Button, Container } from 'semantic-ui-react';
 import Home from './components/Home';
 import About from './components/About';
 import Form from './components/Form';
 import Stories from './components/Stories';
 
 const App: FC<{}> = () => (
-  <div className="container">
+  <>
+    <Menu fixed="top" size="large">
+      <Container>
+        <Menu.Item as="a" active>
+          Home
+        </Menu.Item>
+        <Menu.Item position="right">
+          <Button as="a">Log in</Button>
+        </Menu.Item>
+      </Container>
+    </Menu>
+
     <Switch>
       <Route path="/stories" component={Stories} />
       <Route path="/new" component={Form} />
@@ -15,7 +27,7 @@ const App: FC<{}> = () => (
       <Route path="/" component={Home} />
       <Redirect to="/" />;
     </Switch>
-  </div>
+  </>
 );
 
 export default App;

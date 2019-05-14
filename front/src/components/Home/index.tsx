@@ -31,16 +31,6 @@ const Home: FC<{}> = () => {
           style={{ minHeight: 400, padding: '1em 0em' }}
           vertical
         >
-          <Menu size="large">
-            <Container>
-              <Menu.Item as="a" active>
-                Home
-              </Menu.Item>
-              <Menu.Item position="right">
-                <Button as="a">Log in</Button>
-              </Menu.Item>
-            </Container>
-          </Menu>
           <Container text>
             <Header as="h1" inverted content="back story" />
             <Button primary inverted size="huge">
