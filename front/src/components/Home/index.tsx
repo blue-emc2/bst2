@@ -5,7 +5,6 @@ import {
   Header,
   Icon,
   Segment,
-  Menu,
   List,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
