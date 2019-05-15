@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Menu, Button, Container } from 'semantic-ui-react';
 import Home from './components/Home';
 import About from './components/About';
-import Form from './components/Form';
+import StoryForm from './components/Form';
 import Stories from './components/Stories';
 
 const App: FC<{}> = () => (
@@ -22,7 +22,7 @@ const App: FC<{}> = () => (
 
     <Switch>
       <Route path="/stories" component={Stories} />
-      <Route path="/new" component={Form} />
+      <Route path="/new" component={StoryForm} />
       <Route path="/about" component={About} />
       <Route path="/" component={Home} />
       <Redirect to="/" />;
