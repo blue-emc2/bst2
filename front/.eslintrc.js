@@ -100,6 +100,9 @@ module.exports = {
     ],
     'import/prefer-default-export': 'off',
 
+    // jsx-a11y
+    'jsx-a11y/label-has-for': ['off'],
+
     // prettier
     'prettier/prettier': [
       'error',
