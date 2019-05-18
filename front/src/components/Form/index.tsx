@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC } from 'react';
 import { Form, Container, Grid, Image, Button, Icon } from 'semantic-ui-react';
 
