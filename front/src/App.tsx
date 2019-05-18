@@ -1,7 +1,14 @@
 import React, { FC } from 'react';
 import './App.css';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import { Menu, Button, Container } from 'semantic-ui-react';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import {
+  Menu,
+  Button,
+  Container,
+  Segment,
+  Header,
+  List,
+} from 'semantic-ui-react';
 import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
@@ -20,13 +27,30 @@ const App: FC<{}> = () => (
       </Container>
     </Menu>
 
-    <Switch>
-      <Route path="/stories" component={Stories} />
-      <Route path="/new" component={StoryForm} />
-      <Route path="/about" component={About} />
-      <Route path="/" component={Home} />
-      <Redirect to="/" />;
-    </Switch>
+    <main>
+      <Switch>
+        <Route path="/stories" component={Stories} />
+        <Route path="/new" component={StoryForm} />
+        <Route path="/about" component={About} />
+        <Route path="/" component={Home} />
+        <Redirect to="/" />;
+      </Switch>
+    </main>
+
+    <footer>
+      <Segment inverted vertical style={{ padding: '5em 0em' }}>
+        <Container>
+          <Header inverted as="h4" content="About" />
+          <List link inverted>
+            <List.Item>
+              <Link to="/about">bstとは</Link>
+            </List.Item>
+            <List.Item as="a">作者</List.Item>
+            <List.Item as="a">問い合わせ</List.Item>
+          </List>
+        </Container>
+      </Segment>
+    </footer>
   </>
 );
 
