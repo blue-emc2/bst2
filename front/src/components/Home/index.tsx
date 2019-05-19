@@ -1,12 +1,5 @@
 import React, { FC } from 'react';
-import {
-  Button,
-  Container,
-  Header,
-  Icon,
-  Segment,
-  List,
-} from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import StroyList, { Story } from '../../containers/StoryList';
 
