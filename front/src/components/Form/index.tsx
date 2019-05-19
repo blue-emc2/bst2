@@ -23,21 +23,21 @@ const AuthorInputForm: FC<{}> = () => (
 const PreviewButton = () => <Button content="プレビューする" />;
 
 interface RowEventProps {
-  decrement?: () => void;
-  increment?: () => void;
+  onDeleteRow?: () => void;
+  onAddRow?: () => void;
 }
 
-const AppendRowButton: FC<RowEventProps> = ({ increment = () => {} }) => {
+const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => {} }) => {
   return (
-    <Button icon onClick={increment}>
+    <Button icon onClick={onAddRow}>
       <Icon name="plus circle" />
     </Button>
   );
 };
 
-const DeleteRowButton: FC<RowEventProps> = ({ decrement = () => {} }) => {
+const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => {} }) => {
   return (
-    <Button icon onClick={decrement}>
+    <Button icon onClick={onDeleteRow}>
       <Icon name="minus circle" />
     </Button>
   );
@@ -77,8 +77,8 @@ const SectionTable: FC<{}> = () => {
       {Array.from(Array(size).keys()).map((i: number) => (
         <SectionRow key={i} />
       ))}
-      <AppendRowButton {...increment} />
-      <DeleteRowButton {...decrement} />
+      <AppendRowButton onAddRow={increment} />
+      <DeleteRowButton onDeleteRow={decrement} />
     </Grid>
   );
 };
