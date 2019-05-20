@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState } from 'react';
-import { Form, Container, Grid, Image, Button, Icon } from 'semantic-ui-react';
+import { Form, Container, Grid, Image, Button, Icon, Menu } from 'semantic-ui-react';
 
 const CharacterNameInputForm: FC<{}> = () => (
   <Form.Field>
@@ -19,6 +19,8 @@ const AuthorInputForm: FC<{}> = () => (
     </label>
   </Form.Field>
 );
+
+const InputLayoutChangeMenu = () => <Menu></Menu>
 
 const PreviewButton = () => <Button content="プレビューする" />;
 
@@ -80,6 +82,7 @@ const SectionTable: FC<{}> = () => {
   return (
     <Grid celled="internally" columns={2}>
       {Array.from(Array(size).keys()).map((i: number) => (
+        <InputLayoutChangeMenu />
         <SectionRow key={i} />
       ))}
       <AppendRowButton onAddRow={increment} />
