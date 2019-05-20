@@ -65,11 +65,19 @@ const SectionTable: FC<{}> = () => {
   const [size, setSize] = useState(1);
 
   const increment = () => {
-    setSize(size + 1);
+    const newSize = size + 1;
+    if (newSize > 10) {
+      return;
+    }
+    setSize(newSize);
   };
 
   const decrement = () => {
-    setSize(size - 1);
+    const newSize = size - 1;
+    if (newSize < 1) {
+      return;
+    }
+    setSize(newSize);
   };
 
   return (
