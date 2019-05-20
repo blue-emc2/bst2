@@ -27,7 +27,7 @@ interface RowEventProps {
   onAddRow?: () => void;
 }
 
-const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => {} }) => {
+const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => { } }) => {
   return (
     <Button icon onClick={onAddRow}>
       <Icon name="plus circle" />
@@ -35,7 +35,7 @@ const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => {} }) => {
   );
 };
 
-const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => {} }) => {
+const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => { } }) => {
   return (
     <Button icon onClick={onDeleteRow}>
       <Icon name="minus circle" />
@@ -46,15 +46,12 @@ const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => {} }) => {
 const SectionRow: FC<{}> = () => {
   return (
     <Grid.Row>
-      <Grid.Column width={3}>
-        <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-      </Grid.Column>
-      <Grid.Column width={10}>
+      <Grid.Column width={8}>
         <Form.Field>
           <input />
         </Form.Field>
       </Grid.Column>
-      <Grid.Column width={3}>
+      <Grid.Column width={8}>
         <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
       </Grid.Column>
     </Grid.Row>
@@ -81,7 +78,7 @@ const SectionTable: FC<{}> = () => {
   };
 
   return (
-    <Grid celled="internally">
+    <Grid celled="internally" columns={2}>
       {Array.from(Array(size).keys()).map((i: number) => (
         <SectionRow key={i} />
       ))}
