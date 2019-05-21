@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, useState } from 'react';
+import React, { FC, useState, SyntheticEvent } from 'react';
 import {
   Form,
   Container,
@@ -30,18 +30,46 @@ const AuthorInputForm: FC<{}> = () => (
   </Form.Field>
 );
 
-const InputLayoutChangeMenuRow: FC<{}> = () => (
-  <GridRow>
-    <GridColumn>
-      <Menu>
-        <Menu.Item header>レイアウトを選択</Menu.Item>
-        <Menu.Item>文章のみ</Menu.Item>
-        <Menu.Item>文章と画像</Menu.Item>
-        <Menu.Item>画像と文章</Menu.Item>
-      </Menu>
-    </GridColumn>
-  </GridRow>
-);
+interface MenuRowProps {
+  activeItem: string;
+  handleItemClick: (e: SyntheticEvent, activeItem: string) => void;
+}
+
+const InputLayoutChangeMenuRow: FC<MenuRowProps> = ({
+  activeItem,
+  handleItemClick,
+}) => {
+  return (
+    <GridRow>
+      <GridColumn>
+        <Menu>
+          <Menu.Item header>レイアウトを選択</Menu.Item>
+          <Menu.Item
+            name="text_only"
+            active={activeItem === 'text_only'}
+            onClick={(e: SyntheticEvent) => handleItemClick(e, 'text_only')}
+          >
+            文章のみ
+          </Menu.Item>
+          <Menu.Item
+            name="left_text"
+            active={activeItem === 'left_text'}
+            onClick={(e: SyntheticEvent) => handleItemClick(e, 'left_text')}
+          >
+            文章と画像
+          </Menu.Item>
+          <Menu.Item
+            name="right_text"
+            active={activeItem === 'right_text'}
+            onClick={(e: SyntheticEvent) => handleItemClick(e, 'right_text')}
+          >
+            画像と文章
+          </Menu.Item>
+        </Menu>
+      </GridColumn>
+    </GridRow>
+  );
+};
 
 const PreviewButton = () => <Button content="プレビューする" />;
 
@@ -81,12 +109,24 @@ const SectionRow: FC<{}> = () => {
   );
 };
 
-const SectionBar: FC<{}> = () => (
-  <Grid divided>
-    <InputLayoutChangeMenuRow />
-    <SectionRow />
-  </Grid>
-);
+const SectionBar: FC<{}> = () => {
+  const [activeItem, setActiveItem] = useState('text_only');
+
+  const handleItemClick = (e: SyntheticEvent, item: string) => {
+    e.preventDefault();
+    setActiveItem(item);
+  };
+
+  return (
+    <Grid divided>
+      <InputLayoutChangeMenuRow
+        activeItem={activeItem}
+        handleItemClick={handleItemClick}
+      />
+      <SectionRow />
+    </Grid>
+  );
+};
 
 const SectionTable: FC<{}> = () => {
   const [size, setSize] = useState(1);
