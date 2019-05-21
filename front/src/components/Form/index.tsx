@@ -1,6 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState } from 'react';
-import { Form, Container, Grid, Image, Button, Icon, Menu } from 'semantic-ui-react';
+import {
+  Form,
+  Container,
+  Grid,
+  Image,
+  Button,
+  Icon,
+  Menu,
+  GridRow,
+  GridColumn,
+} from 'semantic-ui-react';
 
 const CharacterNameInputForm: FC<{}> = () => (
   <Form.Field>
@@ -20,7 +30,18 @@ const AuthorInputForm: FC<{}> = () => (
   </Form.Field>
 );
 
-const InputLayoutChangeMenu = () => <Menu></Menu>
+const InputLayoutChangeMenuRow: FC<{}> = () => (
+  <GridRow>
+    <GridColumn>
+      <Menu>
+        <Menu.Item header>レイアウトを選択</Menu.Item>
+        <Menu.Item>文章のみ</Menu.Item>
+        <Menu.Item>文章と画像</Menu.Item>
+        <Menu.Item>画像と文章</Menu.Item>
+      </Menu>
+    </GridColumn>
+  </GridRow>
+);
 
 const PreviewButton = () => <Button content="プレビューする" />;
 
@@ -29,7 +50,7 @@ interface RowEventProps {
   onAddRow?: () => void;
 }
 
-const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => { } }) => {
+const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => {} }) => {
   return (
     <Button icon onClick={onAddRow}>
       <Icon name="plus circle" />
@@ -37,7 +58,7 @@ const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => { } }) => {
   );
 };
 
-const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => { } }) => {
+const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => {} }) => {
   return (
     <Button icon onClick={onDeleteRow}>
       <Icon name="minus circle" />
@@ -59,6 +80,13 @@ const SectionRow: FC<{}> = () => {
     </Grid.Row>
   );
 };
+
+const SectionBar: FC<{}> = () => (
+  <Grid divided>
+    <InputLayoutChangeMenuRow />
+    <SectionRow />
+  </Grid>
+);
 
 const SectionTable: FC<{}> = () => {
   const [size, setSize] = useState(1);
@@ -82,8 +110,7 @@ const SectionTable: FC<{}> = () => {
   return (
     <Grid celled="internally" columns={2}>
       {Array.from(Array(size).keys()).map((i: number) => (
-        <InputLayoutChangeMenu />
-        <SectionRow key={i} />
+        <SectionBar key={i} />
       ))}
       <AppendRowButton onAddRow={increment} />
       <DeleteRowButton onDeleteRow={decrement} />
