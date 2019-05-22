@@ -59,7 +59,7 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
     indent: 'off',
     '@typescript-eslint/indent': 'off',
-    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+    // '@typescript-eslint/no-unnecessary-type-assertion': 'error',
 
     // prefer-arrow
     'prefer-arrow/prefer-arrow-functions': [
@@ -86,6 +86,7 @@ module.exports = {
 
     // react hooks
     'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
 
     // import
     'import/extensions': [
@@ -99,6 +100,9 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+
+    // jsx-a11y
+    'jsx-a11y/label-has-for': ['off'],
 
     // prettier
     'prettier/prettier': [
