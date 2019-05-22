@@ -157,7 +157,7 @@ const SectionTable: FC<{}> = () => {
           <SectionBar key={i} />
         ))}
       </Grid>
-      <Segment>
+      <Segment textAlign="right">
         <RowEventButton iconName="plus circle" onClickHandler={increment} />
         <RowEventButton iconName="minus circle" onClickHandler={decrement} />
       </Segment>
