@@ -10,6 +10,7 @@ import {
   Menu,
   GridRow,
   GridColumn,
+  SemanticICONS,
 } from 'semantic-ui-react';
 
 const CharacterNameInputForm: FC<{}> = () => (
@@ -73,26 +74,19 @@ const InputLayoutChangeMenuRow: FC<MenuRowProps> = ({
 
 const PreviewButton = () => <Button content="プレビューする" />;
 
-interface RowEventProps {
-  onDeleteRow?: () => void;
-  onAddRow?: () => void;
+interface RowEventButtonProps {
+  iconName: SemanticICONS;
+  onClickHandler: () => void;
 }
 
-const AppendRowButton: FC<RowEventProps> = ({ onAddRow = () => {} }) => {
-  return (
-    <Button icon onClick={onAddRow}>
-      <Icon name="plus circle" />
-    </Button>
-  );
-};
-
-const DeleteRowButton: FC<RowEventProps> = ({ onDeleteRow = () => {} }) => {
-  return (
-    <Button icon onClick={onDeleteRow}>
-      <Icon name="minus circle" />
-    </Button>
-  );
-};
+const RowEventButton: FC<RowEventButtonProps> = ({
+  iconName,
+  onClickHandler = () => {},
+}) => (
+  <Button icon onClick={onClickHandler}>
+    <Icon name={iconName} />
+  </Button>
+);
 
 const SectionRow: FC<{}> = () => {
   return (
@@ -152,8 +146,8 @@ const SectionTable: FC<{}> = () => {
       {Array.from(Array(size).keys()).map((i: number) => (
         <SectionBar key={i} />
       ))}
-      <AppendRowButton onAddRow={increment} />
-      <DeleteRowButton onDeleteRow={decrement} />
+      <RowEventButton iconName="plus circle" onClickHandler={increment} />
+      <RowEventButton iconName="minus circle" onClickHandler={decrement} />
     </Grid>
   );
 };
