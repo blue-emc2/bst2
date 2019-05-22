@@ -88,20 +88,39 @@ const RowEventButton: FC<RowEventButtonProps> = ({
   </Button>
 );
 
-const SectionRow: FC<{}> = () => {
-  return (
-    <Grid.Row>
-      <Grid.Column width={8}>
-        <Form.Field>
-          <input />
-        </Form.Field>
-      </Grid.Column>
-      <Grid.Column width={8}>
+const InputText = () => (
+  <GridColumn width={16}>
+    <Form.Field>
+      <input />
+    </Form.Field>
+  </GridColumn>
+);
+
+const TextAndImage = () => (
+  <>
+    <Grid.Column width={8}>
+      <Form.Field>
+        <input />
+      </Form.Field>
+    </Grid.Column>
+    <Grid.Column width={8}>
+      <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+    </Grid.Column>
+  </>
+);
+
+const ImageAndText = () => (
+  <>
+    <Grid.Column width={8}>
+      <Form.Field>
         <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-      </Grid.Column>
-    </Grid.Row>
-  );
-};
+      </Form.Field>
+    </Grid.Column>
+    <Grid.Column width={8}>
+      <input />
+    </Grid.Column>
+  </>
+);
 
 const SectionBar: FC<{}> = () => {
   const [activeItem, setActiveItem] = useState('text_only');
@@ -117,7 +136,11 @@ const SectionBar: FC<{}> = () => {
         activeItem={activeItem}
         handleItemClick={handleItemClick}
       />
-      <SectionRow />
+      <Grid.Row>
+        {activeItem === 'text_only' ? <InputText /> : null}
+        {activeItem === 'left_text' ? <TextAndImage /> : null}
+        {activeItem === 'right_text' ? <ImageAndText /> : null}
+      </Grid.Row>
     </Grid>
   );
 };
