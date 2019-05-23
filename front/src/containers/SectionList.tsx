@@ -17,6 +17,14 @@ const RightImage = () => (
   />
 );
 
+export interface Section {
+  type: enum;
+}
+
+interface SectionList {
+  sections: Section[];
+}
+
 const SectionList: FC<{}> = () => {
   return (
     <Container>
