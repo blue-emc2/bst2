@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC } from 'react';
 import { Form, Container, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import SectionTable from './SectionTable';
 
 const CharacterNameInputForm: FC<{}> = () => (
@@ -21,7 +22,11 @@ const AuthorInputForm: FC<{}> = () => (
   </Form.Field>
 );
 
-const PreviewButton = () => <Button content="プレビューする" />;
+const PreviewButton = () => (
+  <Button basic>
+    <Link to="/preview">プレビュー</Link>
+  </Button>
+);
 
 const StoryForm: FC<{}> = () => {
   return (

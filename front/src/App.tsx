@@ -13,6 +13,7 @@ import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
 import Stories from './components/Stories';
+import Preview from './components/Preview';
 
 const App: FC<{}> = () => (
   <>
@@ -32,6 +33,7 @@ const App: FC<{}> = () => (
         <Route path="/stories" component={Stories} />
         <Route path="/new" component={StoryForm} />
         <Route path="/about" component={About} />
+        <Route path="/preview" component={Preview} />
         <Route path="/" component={Home} />
         <Redirect to="/" />;
       </Switch>
