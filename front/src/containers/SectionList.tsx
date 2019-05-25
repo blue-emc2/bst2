@@ -1,59 +1,56 @@
 import React, { FC } from 'react';
-import { Container, Image, Grid } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
+import TextOnly from '../components/Preview/TextOnly';
+import HalfSection from '../components/Preview/HalfSection';
 
-const LeftImage = () => (
-  <Image
-    floated="left"
-    size="large"
-    src="https://react.semantic-ui.com/images/wireframe/image.png"
-  />
-);
-
-const RightImage = () => (
-  <Image
-    floated="right"
-    size="big"
-    src="https://react.semantic-ui.com/images/wireframe/image.png"
-  />
-);
+export enum LayoutType {
+  Text,
+  LeftText,
+  RightText,
+}
 
 export interface Section {
-  type: enum;
+  id: number;
+  type: LayoutType;
+  text: string;
+  image?: string;
 }
 
 interface SectionList {
   sections: Section[];
 }
 
-const SectionList: FC<{}> = () => {
+const SectionList: FC<SectionList> = ({ sections }) => {
+  const list = sections.map((s: Section) => {
+    if (s.type === LayoutType.Text) {
+      return <TextOnly text={s.text} key={s.id} />;
+    }
+    if (s.type === LayoutType.LeftText) {
+      return (
+        <HalfSection
+          textPosition={LayoutType.LeftText}
+          text={s.text}
+          key={s.id}
+        />
+      );
+    }
+    if (s.type === LayoutType.RightText) {
+      return (
+        <HalfSection
+          textPosition={LayoutType.RightText}
+          text={s.text}
+          key={s.id}
+        />
+      );
+    }
+
+    return [];
+  });
+
   return (
     <Container>
       <Grid>
-        <Grid.Row>
-          <Container text>text only</Container>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <Container text>
-              <p>left text</p>
-            </Container>
-          </Grid.Column>
-          <Grid.Column width={8}>
-            <RightImage />
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <LeftImage />
-          </Grid.Column>
-          <Grid.Column width={8}>
-            <Container text>
-              <p>right text</p>
-            </Container>
-          </Grid.Column>
-        </Grid.Row>
+        <Grid.Row>{list}</Grid.Row>
       </Grid>
     </Container>
   );
