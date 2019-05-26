@@ -44,12 +44,13 @@
     ]
   },
   "devDependencies": {
+    "@types/react-redux": "^7.0.9",
     "@types/react-router": "^4.4.5",
     "@types/react-router-dom": "^4.3.2",
     "@types/redux-form": "^8.1.1",
-    "@types/react-redux": "^7.0.9",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "cypress": "^3.3.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-import": "^2.17.2",
