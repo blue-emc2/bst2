@@ -44,7 +44,9 @@ const Preview: FC<{}> = () => {
   return (
     <>
       <Container text style={{ marginTop: '7em' }}>
-        <Header as="h1">Sticky Example</Header>
+        <Header as="h1" data-test="charactername">
+          Sticky Example
+        </Header>
       </Container>
 
       <Container text>

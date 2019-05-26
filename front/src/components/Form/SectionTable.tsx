@@ -26,13 +26,17 @@ const RowEventButton: FC<RowEventButtonProps> = ({
   </Button>
 );
 
-const InputText = () => (
-  <GridColumn width={16}>
-    <Form.Field>
-      <input />
-    </Form.Field>
-  </GridColumn>
-);
+const InputText = (props: { index: number }) => {
+  const { index } = props;
+
+  return (
+    <GridColumn width={16}>
+      <Form.Field>
+        <input name={`text${index}`} />
+      </Form.Field>
+    </GridColumn>
+  );
+};
 
 const TextAndImage = () => (
   <>
@@ -62,18 +66,20 @@ const ImageAndText = () => (
 
 interface RowProps {
   activeItem: string;
+  index: number;
 }
 
-const InputlayoutRow = ({ activeItem }: RowProps) => (
+const InputlayoutRow = ({ activeItem, index }: RowProps) => (
   <Grid.Row>
-    {activeItem === 'text_only' ? <InputText /> : null}
+    {activeItem === 'text_only' ? <InputText index={index} /> : null}
     {activeItem === 'left_text' ? <TextAndImage /> : null}
     {activeItem === 'right_text' ? <ImageAndText /> : null}
   </Grid.Row>
 );
 
-interface MenuRowProps extends RowProps {
+interface MenuRowProps {
   handleItemClick: (e: SyntheticEvent, activeItem: string) => void;
+  activeItem: string;
 }
 
 const InputLayoutChangeMenuRow: FC<MenuRowProps> = ({
@@ -112,7 +118,10 @@ const InputLayoutChangeMenuRow: FC<MenuRowProps> = ({
   );
 };
 
-const SectionBar: FC<{}> = () => {
+interface SectionBarProps {
+  index: number;
+}
+const SectionBar: FC<SectionBarProps> = ({ index }) => {
   const [activeItem, setActiveItem] = useState('text_only');
 
   const handleItemClick = (e: SyntheticEvent, item: string) => {
@@ -126,7 +135,7 @@ const SectionBar: FC<{}> = () => {
         activeItem={activeItem}
         handleItemClick={handleItemClick}
       />
-      <InputlayoutRow activeItem={activeItem} />
+      <InputlayoutRow activeItem={activeItem} index={index} />
     </Grid>
   );
 };
@@ -154,7 +163,7 @@ const SectionTable: FC<{}> = () => {
     <>
       <Grid celled="internally" columns={2}>
         {Array.from(Array(size).keys()).map((i: number) => (
-          <SectionBar key={i} />
+          <SectionBar key={i} index={i} />
         ))}
       </Grid>
       <Segment textAlign="right">

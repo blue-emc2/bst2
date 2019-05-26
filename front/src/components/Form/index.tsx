@@ -8,7 +8,7 @@ const CharacterNameInputForm: FC<{}> = () => (
   <Form.Field>
     <label>
       キャラクター名
-      <input type="text" placeholder="キャラクター名" />
+      <input type="text" placeholder="キャラクター名" name="charactername" />
     </label>
   </Form.Field>
 );
@@ -17,7 +17,7 @@ const AuthorInputForm: FC<{}> = () => (
   <Form.Field>
     <label>
       作者
-      <input type="text" placeholder="作者" />
+      <input type="text" placeholder="作者" name="username" />
     </label>
   </Form.Field>
 );
