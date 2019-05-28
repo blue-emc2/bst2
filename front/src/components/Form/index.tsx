@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, SyntheticEvent } from 'react';
 import { Form, Container, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { useLayoutStore } from '../../containers/App';
 
@@ -24,23 +24,25 @@ const AuthorInputForm: FC<{}> = () => (
 );
 
 const PreviewButton: FC<{}> = () => {
-  const store = useLayoutStore();
-
-  const handleClick = (e: SyntheticEvent) => {
-    store({});
-  };
-
   return (
-    <Button basic onClick={e => handleClick(e)}>
-      <Link to="/preview">プレビュー</Link>
+    <Button basic type="submit">
+      プレビュー
     </Button>
   );
 };
 
-const StoryForm: FC<{}> = () => {
+const StoryForm: FC<RouteComponentProps> = ({ history }) => {
+  const store = useLayoutStore();
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    store(e.target);
+    history.push('/preview');
+  };
+
   return (
     <Container style={{ marginTop: '7em' }}>
-      <Form>
+      <Form onSubmit={e => handleSubmit(e)}>
         <CharacterNameInputForm />
         <AuthorInputForm />
         <SectionTable />
@@ -50,4 +52,4 @@ const StoryForm: FC<{}> = () => {
   );
 };
 
-export default StoryForm;
+export default withRouter(StoryForm);
