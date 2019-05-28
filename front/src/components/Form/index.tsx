@@ -1,27 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, SyntheticEvent } from 'react';
-import { Form, Container, Button } from 'semantic-ui-react';
+import React, { FC, SyntheticEvent, useState, ChangeEvent } from 'react';
+import { Form, Container, Button, Input } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { useLayoutStore } from '../../containers/App';
-
-const CharacterNameInputForm: FC<{}> = () => (
-  <Form.Field>
-    <label>
-      キャラクター名
-      <input type="text" placeholder="キャラクター名" name="charactername" />
-    </label>
-  </Form.Field>
-);
-
-const AuthorInputForm: FC<{}> = () => (
-  <Form.Field>
-    <label>
-      作者
-      <input type="text" placeholder="作者" name="username" />
-    </label>
-  </Form.Field>
-);
 
 const PreviewButton: FC<{}> = () => {
   return (
@@ -32,7 +14,15 @@ const PreviewButton: FC<{}> = () => {
 };
 
 const StoryForm: FC<RouteComponentProps> = ({ history }) => {
+  const [personalData, setPersonalData] = useState({});
   const store = useLayoutStore();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPersonalData({
+      ...personalData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -43,8 +33,20 @@ const StoryForm: FC<RouteComponentProps> = ({ history }) => {
   return (
     <Container style={{ marginTop: '7em' }}>
       <Form onSubmit={e => handleSubmit(e)}>
-        <CharacterNameInputForm />
-        <AuthorInputForm />
+        <Form.Field
+          control={Input}
+          name="charactername"
+          label="キャラクター名"
+          placeholder="キャラクター名"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        />
+        <Form.Field
+          control={Input}
+          name="username"
+          label="作者"
+          placeholder="作者"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+        />
         <SectionTable />
         <PreviewButton />
       </Form>
