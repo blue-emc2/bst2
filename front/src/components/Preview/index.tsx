@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Container, Header } from 'semantic-ui-react';
 import SectionList, { Section, LayoutType } from '../../containers/SectionList';
+import { LayoutProps } from '../../containers/App';
 
-const Preview: FC<{}> = () => {
+const Preview: FC<LayoutProps> = ({ charactername }) => {
   const sections: Section[] = [
     {
       id: 1,
@@ -45,7 +46,7 @@ const Preview: FC<{}> = () => {
     <>
       <Container text style={{ marginTop: '7em' }}>
         <Header as="h1" data-test="charactername">
-          Sticky Example
+          {charactername}
         </Header>
       </Container>
 

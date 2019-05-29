@@ -14,8 +14,9 @@ import About from './components/About';
 import StoryForm from './components/Form';
 import Stories from './components/Stories';
 import Preview from './components/Preview';
+import { LayoutStoreProps } from './containers/App';
 
-const App: FC<{}> = () => (
+const App: FC<LayoutStoreProps> = ({ layout, store }) => (
   <>
     <Menu fixed="top" size="large">
       <Container>
@@ -31,9 +32,9 @@ const App: FC<{}> = () => (
     <main>
       <Switch>
         <Route path="/stories" component={Stories} />
-        <Route path="/new" component={StoryForm} />
+        <Route path="/new" render={() => <StoryForm store={store} />} />
         <Route path="/about" component={About} />
-        <Route path="/preview" component={Preview} />
+        <Route path="/preview" render={() => <Preview {...layout} />} />
         <Route path="/" component={Home} />
         <Redirect to="/" />;
       </Switch>
