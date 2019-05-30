@@ -15,10 +15,33 @@ import StoryForm from './components/Form';
 import Stories from './components/Stories';
 import Preview from './components/Preview';
 
+// ---------------------------------------
+// 共通interface定義
+// 本当は型定義ファイルが良いのだろうが
+// 作るのがめんどくさそうなのでここに定義する
+export enum LayoutType {
+  Text,
+  LeftText,
+  RightText,
+}
+
 export interface LayoutProps {
   charactername: string;
   username: string;
 }
+
+export interface SectionListProp {
+  sections: SectionProps[];
+}
+
+export interface SectionProps {
+  id: number;
+  type: LayoutType;
+  text: string;
+  image?: string;
+}
+
+// ---------------------------------------
 
 const App: FC<{}> = () => {
   const initialValue = {

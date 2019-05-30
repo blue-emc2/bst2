@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
-import { LayoutType } from '../../containers/SectionList';
+import { LayoutType } from '../../App';
 
 const HalfSection = (props: { textPosition: LayoutType; text: string }) => {
   const { textPosition, text } = props;
