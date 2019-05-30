@@ -25,7 +25,7 @@ export enum LayoutType {
   RightText,
 }
 
-export interface LayoutProps {
+export interface LayoutProps extends SectionListProp {
   charactername: string;
   username: string;
 }
@@ -47,13 +47,25 @@ const App: FC<{}> = () => {
   const initialValue = {
     charactername: '',
     username: '',
+    sections: [
+      {
+        id: 1,
+        type: LayoutType.Text,
+        text: '',
+      },
+    ],
   };
   const [layout, setLayout] = useState<LayoutProps>(initialValue);
 
-  const handleOnSubmit = ({ charactername, username }: LayoutProps) => {
+  const handleOnSubmit = ({
+    charactername,
+    username,
+    sections,
+  }: LayoutProps) => {
     setLayout({
       charactername,
       username,
+      sections,
     });
   };
 

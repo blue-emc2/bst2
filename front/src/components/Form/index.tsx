@@ -3,7 +3,7 @@ import React, { FC, FormEvent } from 'react';
 import { Form, Container, Button, Input } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
-import { LayoutProps } from '../../App';
+import { LayoutProps, LayoutType } from '../../App';
 
 const PreviewButton = () => {
   return (
@@ -20,6 +20,17 @@ type FromProps = {
 const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const layout: LayoutProps = {
+      charactername: '',
+      username: '',
+      sections: [
+        {
+          id: 1,
+          type: LayoutType.Text,
+          text: '',
+        },
+      ],
+    };
     const form = new FormData(e.target as HTMLFormElement);
     onPreview({
       charactername: form.get('charactername') as string,
