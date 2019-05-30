@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './App.css';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import {
@@ -14,47 +14,69 @@ import About from './components/About';
 import StoryForm from './components/Form';
 import Stories from './components/Stories';
 import Preview from './components/Preview';
-import { LayoutStoreProps } from './containers/App';
 
-const App: FC<LayoutStoreProps> = ({ layout, store }) => (
-  <>
-    <Menu fixed="top" size="large">
-      <Container>
-        <Menu.Item as="a" active>
-          Home
-        </Menu.Item>
-        <Menu.Item position="right">
-          <Button as="a">Log in</Button>
-        </Menu.Item>
-      </Container>
-    </Menu>
+export interface LayoutProps {
+  charactername: string;
+  username: string;
+}
 
-    <main>
-      <Switch>
-        <Route path="/stories" component={Stories} />
-        <Route path="/new" render={() => <StoryForm store={store} />} />
-        <Route path="/about" component={About} />
-        <Route path="/preview" render={() => <Preview {...layout} />} />
-        <Route path="/" component={Home} />
-        <Redirect to="/" />;
-      </Switch>
-    </main>
+const App: FC<{}> = () => {
+  const initialValue = {
+    charactername: '',
+    username: '',
+  };
+  const [layout, setLayout] = useState<LayoutProps>(initialValue);
 
-    <footer>
-      <Segment inverted vertical style={{ padding: '5em 0em' }}>
+  const handleOnSubmit = ({ charactername, username }: LayoutProps) => {
+    setLayout({
+      charactername,
+      username,
+    });
+  };
+
+  return (
+    <>
+      <Menu fixed="top" size="large">
         <Container>
-          <Header inverted as="h4" content="About" />
-          <List link inverted>
-            <List.Item>
-              <Link to="/about">bstとは</Link>
-            </List.Item>
-            <List.Item as="a">作者</List.Item>
-            <List.Item as="a">問い合わせ</List.Item>
-          </List>
+          <Menu.Item as="a" active>
+            Home
+          </Menu.Item>
+          <Menu.Item position="right">
+            <Button as="a">Log in</Button>
+          </Menu.Item>
         </Container>
-      </Segment>
-    </footer>
-  </>
-);
+      </Menu>
+
+      <main>
+        <Switch>
+          <Route path="/stories" component={Stories} />
+          <Route
+            path="/new"
+            render={() => <StoryForm onPreview={handleOnSubmit} />}
+          />
+          <Route path="/about" component={About} />
+          <Route path="/preview" render={() => <Preview {...layout} />} />
+          <Route path="/" component={Home} />
+          <Redirect to="/" />;
+        </Switch>
+      </main>
+
+      <footer>
+        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Header inverted as="h4" content="About" />
+            <List link inverted>
+              <List.Item>
+                <Link to="/about">bstとは</Link>
+              </List.Item>
+              <List.Item as="a">作者</List.Item>
+              <List.Item as="a">問い合わせ</List.Item>
+            </List>
+          </Container>
+        </Segment>
+      </footer>
+    </>
+  );
+};
 
 export default App;

@@ -13,7 +13,7 @@ describe('/preview', () => {
     beforeEach(() => {
       cy.get('input[name=charactername]').type(charactername);
       cy.get('input[name=username]').type(username);
-      cy.get('input[name=text0]').type(text0);
+      cy.get('.field > input').type(text0);
       cy.contains('プレビュー').click();
     });
 

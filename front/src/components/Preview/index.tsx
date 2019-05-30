@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Container, Header } from 'semantic-ui-react';
 import SectionList, { Section, LayoutType } from '../../containers/SectionList';
-import { LayoutProps } from '../../containers/App';
+import { LayoutProps } from '../../App';
 
-const Preview: FC<LayoutProps> = ({ charactername }) => {
+const Preview: FC<LayoutProps> = ({ charactername, username }) => {
   const sections: Section[] = [
     {
       id: 1,
@@ -51,7 +51,9 @@ const Preview: FC<LayoutProps> = ({ charactername }) => {
       </Container>
 
       <Container text>
-        <Header as="h1">Sticky Example</Header>
+        <Header as="h1" data-test="username">
+          {username}
+        </Header>
       </Container>
 
       <SectionList sections={sections} />
