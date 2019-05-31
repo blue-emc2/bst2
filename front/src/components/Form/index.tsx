@@ -1,34 +1,62 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC } from 'react';
-import { Form, Container, Button } from 'semantic-ui-react';
+import React, { FC, FormEvent } from 'react';
+import { Form, Container, Button, Input } from 'semantic-ui-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
+import { LayoutProps, LayoutType } from '../../App';
 
-const CharacterNameInputForm: FC<{}> = () => (
-  <Form.Field>
-    <label>
-      キャラクター名
-      <input type="text" placeholder="キャラクター名" />
-    </label>
-  </Form.Field>
-);
+const PreviewButton = () => {
+  return (
+    <Button basic type="submit">
+      プレビュー
+    </Button>
+  );
+};
 
-const AuthorInputForm: FC<{}> = () => (
-  <Form.Field>
-    <label>
-      作者
-      <input type="text" placeholder="作者" />
-    </label>
-  </Form.Field>
-);
+type FromProps = {
+  onPreview: ({ charactername }: LayoutProps) => void;
+} & RouteComponentProps;
 
-const PreviewButton = () => <Button content="プレビューする" />;
+const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const layout: LayoutProps = {
+      charactername: '',
+      username: '',
+      sections: [],
+    };
+    const form = new FormData(e.target as HTMLFormElement);
+    form.forEach((value, name) => {
+      if (name === 'charactername' || name === 'username') {
+        layout[name] = value as string;
+      }
 
-const StoryForm: FC<{}> = () => {
+      if (/section/.test(name)) {
+        layout.sections.push({
+          type: LayoutType.Text,
+          text: value as string,
+        });
+      }
+    });
+    onPreview(layout);
+    history.push('/preview');
+  };
+
   return (
     <Container style={{ marginTop: '7em' }}>
-      <Form>
-        <CharacterNameInputForm />
-        <AuthorInputForm />
+      <Form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+        <Form.Field
+          control={Input}
+          name="charactername"
+          label="キャラクター名"
+          placeholder="キャラクター名"
+        />
+        <Form.Field
+          control={Input}
+          name="username"
+          label="作者"
+          placeholder="作者"
+        />
         <SectionTable />
         <PreviewButton />
       </Form>
@@ -36,4 +64,4 @@ const StoryForm: FC<{}> = () => {
   );
 };
 
-export default StoryForm;
+export default withRouter(StoryForm);

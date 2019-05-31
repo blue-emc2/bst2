@@ -1,4 +1,10 @@
-import React, { FC, useState, SyntheticEvent } from 'react';
+import React, {
+  FC,
+  useState,
+  SyntheticEvent,
+  useReducer,
+  Reducer,
+} from 'react';
 import {
   Grid,
   GridRow,
@@ -10,6 +16,7 @@ import {
   Form,
   Image,
   Segment,
+  Input,
 } from 'semantic-ui-react';
 
 interface RowEventButtonProps {
@@ -17,29 +24,21 @@ interface RowEventButtonProps {
   onClickHandler: () => void;
 }
 
-const RowEventButton: FC<RowEventButtonProps> = ({
-  iconName,
-  onClickHandler = () => {},
-}) => (
-  <Button icon onClick={onClickHandler}>
-    <Icon name={iconName} />
-  </Button>
-);
+interface Props {
+  name: string;
+}
+const InputText = ({ name }: Props) => {
+  return (
+    <GridColumn width={16}>
+      <Form.Field control={Input} name={name} data-cy={name} />
+    </GridColumn>
+  );
+};
 
-const InputText = () => (
-  <GridColumn width={16}>
-    <Form.Field>
-      <input />
-    </Form.Field>
-  </GridColumn>
-);
-
-const TextAndImage = () => (
+const TextAndImage = ({ name }: Props) => (
   <>
     <Grid.Column width={8}>
-      <Form.Field>
-        <input />
-      </Form.Field>
+      <Form.Field control={Input} name={name} data-cy={name} />
     </Grid.Column>
     <Grid.Column width={8}>
       <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
@@ -47,7 +46,7 @@ const TextAndImage = () => (
   </>
 );
 
-const ImageAndText = () => (
+const ImageAndText = ({ name }: Props) => (
   <>
     <Grid.Column width={8}>
       <Form.Field>
@@ -55,111 +54,149 @@ const ImageAndText = () => (
       </Form.Field>
     </Grid.Column>
     <Grid.Column width={8}>
-      <input />
+      <Form.Field control={Input} name={name} data-cy={name} />
     </Grid.Column>
   </>
 );
 
 interface RowProps {
   activeItem: string;
+  name: string;
 }
 
-const InputlayoutRow = ({ activeItem }: RowProps) => (
+const InputlayoutRow = ({ activeItem, name }: RowProps) => (
   <Grid.Row>
-    {activeItem === 'text_only' ? <InputText /> : null}
-    {activeItem === 'left_text' ? <TextAndImage /> : null}
-    {activeItem === 'right_text' ? <ImageAndText /> : null}
+    {activeItem === 'text_only' ? <InputText name={name} /> : null}
+    {activeItem === 'left_text' ? <TextAndImage name={name} /> : null}
+    {activeItem === 'right_text' ? <ImageAndText name={name} /> : null}
   </Grid.Row>
 );
 
-interface MenuRowProps extends RowProps {
-  handleItemClick: (e: SyntheticEvent, activeItem: string) => void;
-}
-
-const InputLayoutChangeMenuRow: FC<MenuRowProps> = ({
-  activeItem,
-  handleItemClick,
-}) => {
+const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
   return (
     <GridRow>
       <GridColumn>
         <Menu>
           <Menu.Item header>レイアウトを選択</Menu.Item>
-          <Menu.Item
-            name="text_only"
-            active={activeItem === 'text_only'}
-            onClick={(e: SyntheticEvent) => handleItemClick(e, 'text_only')}
-          >
-            文章のみ
-          </Menu.Item>
-          <Menu.Item
-            name="left_text"
-            active={activeItem === 'left_text'}
-            onClick={(e: SyntheticEvent) => handleItemClick(e, 'left_text')}
-          >
-            文章と画像
-          </Menu.Item>
-          <Menu.Item
-            name="right_text"
-            active={activeItem === 'right_text'}
-            onClick={(e: SyntheticEvent) => handleItemClick(e, 'right_text')}
-          >
-            画像と文章
-          </Menu.Item>
+          {children}
         </Menu>
       </GridColumn>
     </GridRow>
   );
 };
 
-const SectionBar: FC<{}> = () => {
+interface SectionBarProps {
+  name: string;
+}
+const SectionBar: FC<SectionBarProps> = ({ name }) => {
   const [activeItem, setActiveItem] = useState('text_only');
 
-  const handleItemClick = (e: SyntheticEvent, item: string) => {
+  const handleMenuChange = (e: SyntheticEvent, type: string) => {
     e.preventDefault();
-    setActiveItem(item);
+    setActiveItem(type);
   };
+
+  const menuItems = [
+    { body: '文章のみ', type: 'text_only' },
+    { body: '文章と画像', type: 'left_text' },
+    { body: '画像と文章', type: 'right_text' },
+  ].map((value, index) => (
+    <Menu.Item
+      key={index.toString()}
+      name={value.type}
+      active={activeItem === value.type}
+      onClick={(e: SyntheticEvent) => handleMenuChange(e, value.type)}
+    >
+      {value.body}
+    </Menu.Item>
+  ));
 
   return (
     <Grid divided>
-      <InputLayoutChangeMenuRow
-        activeItem={activeItem}
-        handleItemClick={handleItemClick}
-      />
-      <InputlayoutRow activeItem={activeItem} />
+      <InputLayoutChangeMenu>{menuItems}</InputLayoutChangeMenu>
+      <InputlayoutRow activeItem={activeItem} name={name} />
     </Grid>
   );
 };
 
+// ここのstateは1つ前のイベントのオブジェクト
+const reducer: Reducer<StateType, ActionType> = (state, action) => {
+  switch (action.type) {
+    case 'increment': {
+      const updatedItems = [...state.items];
+      const newId = state.items.length + 1;
+      updatedItems.push({
+        id: newId,
+        name: `section${state.items.length}`,
+      });
+
+      return { ...state, items: updatedItems };
+    }
+    case 'decrement': {
+      const updatedItems = [...state.items].filter(i => i.id !== action.barId);
+
+      return { ...state, items: updatedItems };
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+type ActionType =
+  | { type: 'reset' }
+  | { type: 'decrement'; barId: number }
+  | { type: 'increment' };
+
+interface Item {
+  id: number;
+  name: string;
+}
+interface StateType {
+  items: Item[];
+}
+
 const SectionTable: FC<{}> = () => {
-  const [size, setSize] = useState(1);
-
-  const increment = () => {
-    const newSize = size + 1;
-    if (newSize > 10) {
-      return;
-    }
-    setSize(newSize);
+  const initialState = {
+    items: [
+      {
+        id: 1,
+        name: 'section1',
+      },
+    ],
   };
-
-  const decrement = () => {
-    const newSize = size - 1;
-    if (newSize < 1) {
-      return;
-    }
-    setSize(newSize);
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <>
       <Grid celled="internally" columns={2}>
-        {Array.from(Array(size).keys()).map((i: number) => (
-          <SectionBar key={i} />
+        {state.items.map((item: { id: number }) => (
+          <Segment key={item.id.toString()}>
+            <SectionBar name={`section${item.id}`} />
+
+            {/* TODO: 消すときにホワンとさせたいかも */}
+            <Button
+              icon
+              onClick={(e: SyntheticEvent) => {
+                e.preventDefault();
+                dispatch({ type: 'decrement', barId: item.id });
+              }}
+            >
+              <Icon name="minus circle" />
+            </Button>
+          </Segment>
         ))}
       </Grid>
       <Segment textAlign="right">
-        <RowEventButton iconName="plus circle" onClickHandler={increment} />
-        <RowEventButton iconName="minus circle" onClickHandler={decrement} />
+        <Button
+          icon
+          onClick={(e: SyntheticEvent) => {
+            e.preventDefault();
+            dispatch({ type: 'increment' });
+          }}
+        >
+          <Icon name="plus circle" />
+        </Button>
       </Segment>
     </>
   );

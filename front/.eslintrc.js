@@ -17,6 +17,8 @@ module.exports = {
   ],
   globals: {
     Atomics: 'readonly',
+    cy: 'readonly',
+    Cypress: 'readonly',
     SharedArrayBuffer: 'readonly',
     __DEV__: true,
   },

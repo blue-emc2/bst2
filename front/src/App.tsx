@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './App.css';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import {
@@ -13,45 +13,105 @@ import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
 import Stories from './components/Stories';
+import Preview from './components/Preview';
 
-const App: FC<{}> = () => (
-  <>
-    <Menu fixed="top" size="large">
-      <Container>
-        <Menu.Item as="a" active>
-          Home
-        </Menu.Item>
-        <Menu.Item position="right">
-          <Button as="a">Log in</Button>
-        </Menu.Item>
-      </Container>
-    </Menu>
+// ---------------------------------------
+// 共通interface定義
+// 本当は型定義ファイルが良いのだろうが
+// 作るのがめんどくさそうなのでここに定義する
+export enum LayoutType {
+  Text,
+  LeftText,
+  RightText,
+}
 
-    <main>
-      <Switch>
-        <Route path="/stories" component={Stories} />
-        <Route path="/new" component={StoryForm} />
-        <Route path="/about" component={About} />
-        <Route path="/" component={Home} />
-        <Redirect to="/" />;
-      </Switch>
-    </main>
+export interface LayoutProps extends SectionListProp {
+  charactername: string;
+  username: string;
+}
 
-    <footer>
-      <Segment inverted vertical style={{ padding: '5em 0em' }}>
+export interface SectionListProp {
+  sections: SectionProps[];
+}
+
+export interface SectionProps {
+  id?: number;
+  type: LayoutType;
+  text: string;
+  image?: string;
+}
+
+// ---------------------------------------
+
+const App: FC<{}> = () => {
+  const initialValue = {
+    charactername: '',
+    username: '',
+    sections: [
+      {
+        id: 1,
+        type: LayoutType.Text,
+        text: '',
+      },
+    ],
+  };
+  const [layout, setLayout] = useState<LayoutProps>(initialValue);
+
+  const handleOnSubmit = ({
+    charactername,
+    username,
+    sections,
+  }: LayoutProps) => {
+    setLayout({
+      charactername,
+      username,
+      sections,
+    });
+  };
+
+  return (
+    <>
+      <Menu fixed="top" size="large">
         <Container>
-          <Header inverted as="h4" content="About" />
-          <List link inverted>
-            <List.Item>
-              <Link to="/about">bstとは</Link>
-            </List.Item>
-            <List.Item as="a">作者</List.Item>
-            <List.Item as="a">問い合わせ</List.Item>
-          </List>
+          <Menu.Item as="a" active>
+            Home
+          </Menu.Item>
+          <Menu.Item position="right">
+            <Button as="a">Log in</Button>
+          </Menu.Item>
         </Container>
-      </Segment>
-    </footer>
-  </>
-);
+      </Menu>
+
+      <main>
+        <Switch>
+          <Route path="/stories" component={Stories} />
+          <Route
+            path="/new"
+            render={() => <StoryForm onPreview={handleOnSubmit} />}
+          />
+          <Route path="/about" component={About} />
+          <Route path="/preview" render={() => <Preview {...layout} />} />
+          <Route path="/" component={Home} />
+          <Redirect to="/" />;
+        </Switch>
+      </main>
+
+      <footer>
+        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+          <Container>
+            <Header inverted as="h4" content="About" />
+            <List link inverted>
+              <List.Item>
+                <Link to="/about">bstとは</Link>
+              </List.Item>
+              <List.Item as="a">作者</List.Item>
+              <List.Item as="a">問い合わせ</List.Item>
+            </List>
+          </Container>
+        </Segment>
+      </footer>
+    </>
+  );
+};
 
 export default App;
