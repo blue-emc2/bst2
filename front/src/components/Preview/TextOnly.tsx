@@ -6,7 +6,9 @@ const TextOnly = (props: { text: string }) => {
 
   return (
     <Grid.Column width={16}>
-      <Container text>{text}</Container>
+      <Container {...props} text>
+        {text}
+      </Container>
     </Grid.Column>
   );
 };

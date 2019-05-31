@@ -31,7 +31,7 @@ export interface LayoutProps extends SectionListProp {
 }
 
 export interface SectionListProp {
-  sections?: SectionProps[];
+  sections: SectionProps[];
 }
 
 export interface SectionProps {

@@ -32,12 +32,10 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
       }
 
       if (/section/.test(name)) {
-        layout.sections = [
-          {
-            type: LayoutType.Text,
-            text: value as string,
-          },
-        ];
+        layout.sections.push({
+          type: LayoutType.Text,
+          text: value as string,
+        });
       }
     });
     onPreview(layout);

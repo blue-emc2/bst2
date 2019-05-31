@@ -6,37 +6,39 @@ import { LayoutType, SectionListProp, SectionProps } from '../App';
 
 const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
   const list = sections.map((s: SectionProps, index: number) => {
-    if (s.type === LayoutType.Text) {
-      return (
-        <TextOnly
-          text={s.text}
-          key={index.toString()}
-          data-test={`section${s.id}`}
-        />
-      );
+    switch (s.type) {
+      case LayoutType.Text: {
+        return (
+          <TextOnly
+            text={s.text}
+            key={index.toString()}
+            data-cy={`preview${index}`}
+          />
+        );
+      }
+      case LayoutType.LeftText: {
+        return (
+          <HalfSection
+            textPosition={LayoutType.LeftText}
+            text={s.text}
+            key={index.toString()}
+            data-cy={`preview${index}`}
+          />
+        );
+      }
+      case LayoutType.RightText: {
+        return (
+          <HalfSection
+            textPosition={LayoutType.RightText}
+            text={s.text}
+            key={index.toString()}
+            data-cy={`preview${index}`}
+          />
+        );
+      }
+      default:
+        throw new Error();
     }
-    if (s.type === LayoutType.LeftText) {
-      return (
-        <HalfSection
-          textPosition={LayoutType.LeftText}
-          text={s.text}
-          key={index.toString()}
-          data-test={`section${s.id}`}
-        />
-      );
-    }
-    if (s.type === LayoutType.RightText) {
-      return (
-        <HalfSection
-          textPosition={LayoutType.RightText}
-          text={s.text}
-          key={index.toString()}
-          data-test={`section${s.id}`}
-        />
-      );
-    }
-
-    return [];
   });
 
   return (
