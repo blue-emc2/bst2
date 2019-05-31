@@ -16,6 +16,7 @@ import {
   Form,
   Image,
   Segment,
+  Input,
 } from 'semantic-ui-react';
 
 interface RowEventButtonProps {
@@ -29,9 +30,7 @@ interface Props {
 const InputText = ({ name }: Props) => {
   return (
     <GridColumn width={16}>
-      <Form.Field>
-        <input name={name} />
-      </Form.Field>
+      <Form.Field control={Input} name={name} data-cy={name} />
     </GridColumn>
   );
 };
@@ -39,9 +38,7 @@ const InputText = ({ name }: Props) => {
 const TextAndImage = ({ name }: Props) => (
   <>
     <Grid.Column width={8}>
-      <Form.Field>
-        <input name={name} />
-      </Form.Field>
+      <Form.Field control={Input} name={name} data-cy={name} />
     </Grid.Column>
     <Grid.Column width={8}>
       <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
@@ -57,7 +54,7 @@ const ImageAndText = ({ name }: Props) => (
       </Form.Field>
     </Grid.Column>
     <Grid.Column width={8}>
-      <input name={name} />
+      <Form.Field control={Input} name={name} data-cy={name} />
     </Grid.Column>
   </>
 );
