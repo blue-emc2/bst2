@@ -3,8 +3,8 @@ import { Container, Header } from 'semantic-ui-react';
 import { LayoutProps, SectionProps, LayoutType } from '../../App';
 import SectionList from '../../containers/SectionList';
 
-const Preview: FC<LayoutProps> = ({ charactername, username }) => {
-  const sections: SectionProps[] = [
+const Preview: FC<LayoutProps> = ({ charactername, username, sections }) => {
+  const d: SectionProps[] = [
     {
       id: 1,
       type: LayoutType.Text,

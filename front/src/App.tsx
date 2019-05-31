@@ -31,11 +31,11 @@ export interface LayoutProps extends SectionListProp {
 }
 
 export interface SectionListProp {
-  sections: SectionProps[];
+  sections?: SectionProps[];
 }
 
 export interface SectionProps {
-  id: number;
+  id?: number;
   type: LayoutType;
   text: string;
   image?: string;

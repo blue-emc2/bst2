@@ -26,7 +26,7 @@ describe('/preview', () => {
     });
 
     it('ストーリーが表示されている', () => {
-      cy.get('[name=text0]').should('have.text', text0);
+      cy.get('.sixteen > .ui').should('have.text', text0);
     });
   });
 });

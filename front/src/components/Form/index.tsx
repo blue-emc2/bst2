@@ -23,19 +23,24 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
     const layout: LayoutProps = {
       charactername: '',
       username: '',
-      sections: [
-        {
-          id: 1,
-          type: LayoutType.Text,
-          text: '',
-        },
-      ],
+      sections: [],
     };
     const form = new FormData(e.target as HTMLFormElement);
-    onPreview({
-      charactername: form.get('charactername') as string,
-      username: form.get('username') as string,
+    form.forEach((value, name) => {
+      if (name === 'charactername' || name === 'username') {
+        layout[name] = value as string;
+      }
+
+      if (/section/.test(name)) {
+        layout.sections = [
+          {
+            type: LayoutType.Text,
+            text: value as string,
+          },
+        ];
+      }
     });
+    onPreview(layout);
     history.push('/preview');
   };
 

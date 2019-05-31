@@ -4,17 +4,23 @@ import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
 import { LayoutType, SectionListProp, SectionProps } from '../App';
 
-const SectionList: FC<SectionListProp> = ({ sections }) => {
-  const list = sections.map((s: SectionProps) => {
+const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
+  const list = sections.map((s: SectionProps, index: number) => {
     if (s.type === LayoutType.Text) {
-      return <TextOnly text={s.text} key={s.id} data-test={`section${s.id}`} />;
+      return (
+        <TextOnly
+          text={s.text}
+          key={index.toString()}
+          data-test={`section${s.id}`}
+        />
+      );
     }
     if (s.type === LayoutType.LeftText) {
       return (
         <HalfSection
           textPosition={LayoutType.LeftText}
           text={s.text}
-          key={s.id}
+          key={index.toString()}
           data-test={`section${s.id}`}
         />
       );
@@ -24,7 +30,7 @@ const SectionList: FC<SectionListProp> = ({ sections }) => {
         <HalfSection
           textPosition={LayoutType.RightText}
           text={s.text}
-          key={s.id}
+          key={index.toString()}
           data-test={`section${s.id}`}
         />
       );
