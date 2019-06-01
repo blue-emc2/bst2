@@ -12,7 +12,7 @@ module Api
 
       # GET /stories/1
       def show
-        render json: @story
+        render json: StorySerializer.new(@story).serialized_json
       end
 
       # POST /stories
