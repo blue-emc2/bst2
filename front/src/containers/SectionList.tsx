@@ -7,7 +7,8 @@ import { LayoutType, SectionListProp, SectionProps } from '../App';
 const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
   const list = sections.map((s: SectionProps, index: number) => {
     switch (s.type) {
-      case LayoutType.Text: {
+      case LayoutType.Text:
+      case 'Text': {
         return (
           <TextOnly
             text={s.text}
@@ -16,7 +17,8 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
           />
         );
       }
-      case LayoutType.LeftText: {
+      case LayoutType.LeftText:
+      case 'LeftText': {
         return (
           <HalfSection
             textPosition={LayoutType.LeftText}
@@ -26,7 +28,8 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
           />
         );
       }
-      case LayoutType.RightText: {
+      case LayoutType.RightText:
+      case 'RightText': {
         return (
           <HalfSection
             textPosition={LayoutType.RightText}
@@ -37,7 +40,7 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
         );
       }
       default:
-        throw new Error();
+        throw new Error(`予期しないtypeです ->${s.type}`);
     }
   });
 
