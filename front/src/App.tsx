@@ -12,8 +12,8 @@ import {
 import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
-import Stories from './components/Stories';
 import Preview from './components/Preview';
+import Story from './components/Story';
 
 // ---------------------------------------
 // 共通interface定義
@@ -36,7 +36,7 @@ export interface SectionListProp {
 
 export interface SectionProps {
   id?: number;
-  type: LayoutType;
+  type: LayoutType | string;
   text: string;
   image?: string;
 }
@@ -84,13 +84,13 @@ const App: FC<{}> = () => {
 
       <main>
         <Switch>
-          <Route path="/stories" component={Stories} />
           <Route
             path="/new"
             render={() => <StoryForm onPreview={handleOnSubmit} />}
           />
           <Route path="/about" component={About} />
           <Route path="/preview" render={() => <Preview {...layout} />} />
+          <Route path="/story/:id" component={Story} />
           <Route path="/" component={Home} />
           <Redirect to="/" />;
         </Switch>
