@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Header, Container } from 'semantic-ui-react';
 import { RouteComponentProps, Redirect, withRouter } from 'react-router';
 import { sampleData } from '../../types/storyProps';
+import SectionList from '../../containers/SectionList';
 
 type StoryProps = {} & RouteComponentProps<{ id: string }>;
 
@@ -24,7 +25,7 @@ const Story: FC<StoryProps> = ({ history, location, match }) => {
         </Header>
       </Container>
 
-      {/* <SectionList sections={sections} /> */}
+      <SectionList sections={sampleData[target].layout.sections} />
     </>
   ) : (
     <Redirect to="/" />
