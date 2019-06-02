@@ -12,7 +12,9 @@ RSpec.describe 'Stories', type: :request do
     let(:json) { JSON.parse(response.body) }
 
     before do
-      story = create(:story, character_name: "Yoshi'p Sampo", user_name: "Yoshi")
+      sections = create_list(:section, 3)
+      story = create(:story, character_name: "Yoshi'p Sampo", user_name: 'Yoshi', sections: sections)
+
       get api_v1_story_path(story.id)
     end
 
@@ -26,11 +28,11 @@ RSpec.describe 'Stories', type: :request do
       end
 
       it 'ユーザー名を返す' do
-        expect(json['data']['attributes']['user_name']).to eq "Yoshi"
+        expect(json['data']['attributes']['user_name']).to eq 'Yoshi'
       end
 
       it 'テキストを返す' do
-        expect(json['data']['attributes']['sections']).to match_array([])
+        expect(json['data']['relationships']['sections']['data'].size).to eq 3
       end
     end
   end
