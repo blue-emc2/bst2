@@ -31,8 +31,12 @@ RSpec.describe 'Stories', type: :request do
         expect(json['data']['attributes']['user_name']).to eq 'Yoshi'
       end
 
+      it 'レイアウトタイプを返す' do
+        expect(json['data']['attributes']['sections'][0]['layout_type']).to eq 'Text'
+      end
+
       it 'テキストを返す' do
-        expect(json['data']['relationships']['sections']['data'].size).to eq 3
+        expect(json['data']['attributes']['sections'][0]['body']).to eq '親譲りの無鉄砲で小供の時から損ばかりして居る。'
       end
     end
   end
