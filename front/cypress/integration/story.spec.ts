@@ -2,7 +2,6 @@ describe('/preview', () => {
   const baseUrl = Cypress.env('baseUrl');
 
   // TODO: 今はテストデータを表示しているが、サーバーから取るようにしたらstubとかにしないといけない
-
   describe('存在するストーリーにアクセスしたとき', () => {
     const charactername = 'アムロ・レイ';
     const username = 'hoge';
@@ -33,13 +32,23 @@ describe('/preview', () => {
     });
   });
 
-  describe('存在しないストーリーにアクセスしたとき', () => {
-    beforeEach(() => {
-      cy.visit(`${baseUrl}/story/999`);
-    });
+  // TODO: バックエンドと通信できるようになったらエラーケースを書く
+  // describe('存在しないストーリーにアクセスしたとき', () => {
+  //   it('Homeに戻される', () => {
+  //     cy.server();
+  //     cy.route({
+  //       method: 'GET',
+  //       url: '/story/999',
+  //       status: 404,
+  //       response: {
+  //         errors: {
+  //           status: 404,
+  //         },
+  //       },
+  //     });
 
-    it('Homeに戻される', () => {
-      cy.location('pathname').should('eq', '/');
-    });
-  });
+  //     cy.visit(`${baseUrl}/story/999`);
+  //     cy.location('pathname').should('eq', '/');
+  //   });
+  // });
 });

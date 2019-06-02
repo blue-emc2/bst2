@@ -8,27 +8,22 @@ type StoryProps = {} & RouteComponentProps<{ id: string }>;
 
 // TODO: このコンポーネントはPreview/indexと大体同じなので共通化したくなるが、APIとの連携が終わってからにする
 const Story: FC<StoryProps> = ({ history, location, match }) => {
-  const stories = Object.keys(sampleData);
-  const target = match.params.id;
-
-  return stories.includes(target) ? (
+  return (
     <>
       <Container text style={{ marginTop: '7em' }}>
         <Header as="h1" data-cy="charactername">
-          {sampleData[target].layout.charactername}
+          {sampleData.data.charactername}
         </Header>
       </Container>
 
       <Container text>
         <Header as="h1" data-cy="username">
-          {sampleData[target].layout.username}
+          {sampleData.data.username}
         </Header>
       </Container>
 
-      <SectionList sections={sampleData[target].layout.sections} />
+      <SectionList sections={sampleData.data.sections} />
     </>
-  ) : (
-    <Redirect to="/" />
   );
 };
 
