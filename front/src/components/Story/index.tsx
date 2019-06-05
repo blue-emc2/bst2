@@ -20,6 +20,7 @@ const useFetchStroy = (id: string) => {
     },
   };
   const [state, setState] = useState<API>(initialValue);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchStroy = async () => {
@@ -36,11 +37,12 @@ const useFetchStroy = (id: string) => {
         setState({ loaded: true, data });
       })
       .catch(err => {
-        console.info(err);
+        // TODO: エラーハンドリングは一旦これで
+        setIsError(true);
       });
   }, [id]);
 
-  return state;
+  return { loaded: state.loaded, data: state.data, error: isError };
 };
 
 // TODO: このコンポーネントはPreview/indexと大体同じなので共通化したくなるが、APIとの連携が終わってからにする
@@ -49,9 +51,11 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({
   location,
   match,
 }) => {
-  const { loaded, data } = useFetchStroy(match.params.id);
+  const { loaded, data, error } = useFetchStroy(match.params.id);
 
-  return (
+  return error ? (
+    <Redirect to="/" />
+  ) : (
     <>
       {loaded ? (
         <>
