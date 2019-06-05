@@ -6,19 +6,6 @@ import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
 
-const fetchStory = (id: string) => {
-  return new Promise((resolve: (value: API) => void) => {
-    axios.get(`http://localhost:5000/api/v1/stories/${id}`).then(
-      response => {
-        resolve(response.data as API);
-      },
-      err => {
-        console.info(err);
-      },
-    );
-  });
-};
-
 const useFetchStroy = (id: string) => {
   const initialValue = {
     loaded: false,
@@ -35,12 +22,22 @@ const useFetchStroy = (id: string) => {
   const [state, setState] = useState<API>(initialValue);
 
   useEffect(() => {
-    const f = async () => {
-      const data = await fetchStory(id);
-      data.loaded = true; // なんか違う気がするが一旦これで
-      setState({ ...data });
+    const fetchStroy = async () => {
+      const result = await axios.get<API>(
+        `http://localhost:5000/api/v1/stories/${id}`,
+      );
+
+      return result;
     };
-    f();
+
+    fetchStroy()
+      .then(response => {
+        const { data } = response.data;
+        setState({ loaded: true, data });
+      })
+      .catch(err => {
+        console.info(err);
+      });
   }, [id]);
 
   return state;
