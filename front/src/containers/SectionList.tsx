@@ -2,16 +2,17 @@ import React, { FC } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
-import { LayoutType, SectionListProp, SectionProps } from '../App';
+import { LayoutType, SectionListProp } from '../App';
+import { Section } from '../types/ApiProps';
 
 const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
-  const list = sections.map((s: SectionProps, index: number) => {
-    switch (s.type) {
+  const list = sections.map((s: Section, index: number) => {
+    switch (s.layoutType) {
       case LayoutType.Text:
       case 'Text': {
         return (
           <TextOnly
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
@@ -22,7 +23,7 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
         return (
           <HalfSection
             textPosition={LayoutType.LeftText}
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
@@ -33,14 +34,14 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
         return (
           <HalfSection
             textPosition={LayoutType.RightText}
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
         );
       }
       default:
-        throw new Error(`予期しないtypeです ->${s.type}`);
+        throw new Error(`予期しないtypeです ->${s.layoutType}`);
     }
   });
 

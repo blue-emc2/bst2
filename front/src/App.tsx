@@ -14,6 +14,7 @@ import About from './components/About';
 import StoryForm from './components/Form';
 import Preview from './components/Preview';
 import Story from './components/Story';
+import { Section } from './types/ApiProps';
 
 // ---------------------------------------
 // 共通interface定義
@@ -31,14 +32,7 @@ export interface LayoutProps extends SectionListProp {
 }
 
 export interface SectionListProp {
-  sections: SectionProps[];
-}
-
-export interface SectionProps {
-  id?: number;
-  type: LayoutType | string;
-  text: string;
-  image?: string;
+  sections: Section[];
 }
 
 // ---------------------------------------
@@ -50,8 +44,8 @@ const App: FC<{}> = () => {
     sections: [
       {
         id: 1,
-        type: LayoutType.Text,
-        text: '',
+        layoutType: LayoutType.Text,
+        body: '',
       },
     ],
   };
