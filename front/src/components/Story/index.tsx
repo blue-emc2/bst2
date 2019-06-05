@@ -6,9 +6,9 @@ import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
 
-const fetchStory = () => {
+const fetchStory = (id: string) => {
   return new Promise((resolve: (value: API) => void) => {
-    axios.get('http://localhost:5000/api/v1/stories/1').then(
+    axios.get(`http://localhost:5000/api/v1/stories/${id}`).then(
       response => {
         resolve(response.data as API);
       },
@@ -19,7 +19,7 @@ const fetchStory = () => {
   });
 };
 
-const useFetchStroy = () => {
+const useFetchStroy = (id: string) => {
   const initialValue = {
     loaded: false,
     data: {
@@ -36,12 +36,12 @@ const useFetchStroy = () => {
 
   useEffect(() => {
     const f = async () => {
-      const data = await fetchStory();
+      const data = await fetchStory(id);
       data.loaded = true; // なんか違う気がするが一旦これで
       setState({ ...data });
     };
     f();
-  }, []);
+  }, [id]);
 
   return state;
 };
@@ -52,7 +52,7 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({
   location,
   match,
 }) => {
-  const { loaded, data } = useFetchStroy();
+  const { loaded, data } = useFetchStroy(match.params.id);
 
   return (
     <>
