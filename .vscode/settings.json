@@ -31,5 +31,6 @@
     "files.trimTrailingWhitespace": false
   },
   "eslint.run": "onSave",
-  "eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "ruby.format": "standard"
 }
