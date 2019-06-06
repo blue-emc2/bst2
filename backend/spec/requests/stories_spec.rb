@@ -16,6 +16,7 @@ RSpec.describe 'Stories', type: :request do
     end
 
     it 'キャラクター名がある' do
+      puts "json=#{json}"
       expect(json['data']['attributes']['characterName']).to eq "Yoshi'p Sampo"
     end
   end

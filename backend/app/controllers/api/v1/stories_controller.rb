@@ -7,7 +7,7 @@ module Api
       def index
         @stories = Story.all
 
-        render json: @stories
+        render json: StoriesSerializer.new(@stories, is_collection: true).serialized_json
       end
 
       # GET /stories/1
