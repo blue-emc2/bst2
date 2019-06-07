@@ -6,6 +6,7 @@ class StoriesSerializer
   attribute :userName, &:user_name
 
   attribute :body do |object|
-    object.sections.detect { |section| section.text.present? }
+    section = object.sections.detect { |section| section.text.present? }
+    section.text.body
   end
 end
