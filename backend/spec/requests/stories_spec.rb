@@ -2,18 +2,6 @@ require "rails_helper"
 
 RSpec.describe "Stories", type: :request do
   let(:json) { JSON.parse(response.body) }
-  let(:text1) { create(:text, body: text_body_1) }
-  let(:text2) { create(:text, body: text_body_2) }
-  let(:text3) { create(:text, body: text_body_3) }
-  let(:text4) { create(:text, body: text_body_4) }
-
-  let(:section1) { create(:section, layout_type: "Text", text: text1) }
-  let(:section2) { create(:section, layout_type: "Text", text: text2) }
-  let(:section3) { create(:section, layout_type: "Text", text: text3) }
-  let(:section4) { create(:section, layout_type: "Text", text: text4) }
-
-  let(:sections1) { [section1, section2] }
-  let(:sections2) { [section3, section4] }
 
   describe "GET /stories" do
     let(:character_name1) { "Yoshi'p Sampo" }
@@ -27,8 +15,14 @@ RSpec.describe "Stories", type: :request do
     let(:text_body_4) { "好きでこうなったのではない。" }
 
     before do
-      create(:story, character_name: character_name1, user_name: user_name1, sections: sections1)
-      create(:story, character_name: character_name2, user_name: user_name2, sections: sections2)
+      sections = []
+      4.times do |i|
+        t = create(:text, body: send("text_body_#{i + 1}"))
+        sections << create(:section, layout_type: "Text", text: t)
+      end
+
+      create(:story, character_name: character_name1, user_name: user_name1, sections: sections[0..1])
+      create(:story, character_name: character_name2, user_name: user_name2, sections: sections[2..3])
       get api_v1_stories_path
     end
 
