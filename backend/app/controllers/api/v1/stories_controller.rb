@@ -1,6 +1,10 @@
 module Api
   module V1
     class StoriesController < ApplicationController
+      rescue_from ActiveRecord::RecordNotFound do |exception|
+        head :not_found
+      end
+
       before_action :set_story, only: %i[show update destroy]
 
       # GET /stories

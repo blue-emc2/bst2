@@ -62,7 +62,15 @@ RSpec.describe "Stories", type: :request do
   describe "GET #show" do
     context "idがあるとき" do
       before do
-        sections = create_list(:section, 3)
+        t1 = create(:text, body: "吾輩（わがはい）は猫である。名前はまだ無い。")
+        t2 = create(:text, body: "どこで生れたかとんと見当（けんとう）がつかぬ。")
+        t3 = create(:text, body: "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。")
+
+        sections = [
+          create(:section, layout_type: "Text", text: t1),
+          create(:section, layout_type: "Text", text: t2),
+          create(:section, layout_type: "Text", text: t3),
+        ]
         story = create(:story, character_name: "Yoshi'p Sampo", user_name: "Yoshi", sections: sections)
 
         get api_v1_story_path(story.id)
@@ -85,7 +93,9 @@ RSpec.describe "Stories", type: :request do
       end
 
       it "テキストを返す" do
-        expect(json["data"]["attributes"]["sections"][0]["body"]).to eq "親譲りの無鉄砲で小供の時から損ばかりして居る。"
+        expect(json["data"]["attributes"]["sections"][0]["body"]).to eq "吾輩（わがはい）は猫である。名前はまだ無い。"
+        expect(json["data"]["attributes"]["sections"][1]["body"]).to eq "どこで生れたかとんと見当（けんとう）がつかぬ。"
+        expect(json["data"]["attributes"]["sections"][2]["body"]).to eq "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。"
       end
     end
 
