@@ -6,10 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# sections = Section.create([{ layout_type: "Text" }, { layout_type: "Text" }, { layout_type: "Text" }])
+t1 = Text.create(body: "吾輩（わがはい）は猫である。名前はまだ無い。")
+t2 = Text.create(body: "どこで生れたかとんと見当（けんとう）がつかぬ。")
+t3 = Text.create(body: "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。")
 
-# sections.each do |s|
-#   Text.create(body: "小学校に居る時分学校の二階から飛び降りて一週間程腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。")
-# end
+sections = [
+  Section.create(layout_type: "Text", text: t1),
+  Section.create(layout_type: "Text", text: t2),
+  Section.create(layout_type: "Text", text: t3),
+]
 
-# Story.create(character_name: "Yoshi'p Sampo", user_name: "Yoshi", sections: sections)
+Story.create(character_name: "Yoshi'p Sampo", user_name: "Yoshi", sections: sections)
