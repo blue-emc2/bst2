@@ -32,5 +32,5 @@
   },
   "eslint.run": "onSave",
   "eslint.packageManager": "yarn",
-  "ruby.format": "standard"
+  "ruby.format": "rufo"
 }
