@@ -27,8 +27,8 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    tsconfigRootDir: '/Users/yamazaki/dev/bst2/front',
-    project: './tsconfig.json',
+    tsconfigRootDir: '/Users/yamazaki/dev/bst2',
+    project: 'front/tsconfig.json',
     sourceType: 'module',
   },
   plugins: [
