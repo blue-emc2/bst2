@@ -28,7 +28,7 @@ module.exports = {
       jsx: true,
     },
     tsconfigRootDir: '/Users/yamazaki/dev/bst2',
-    project: 'front/tsconfig.json',
+    project: './front/tsconfig.json',
     sourceType: 'module',
   },
   plugins: [
