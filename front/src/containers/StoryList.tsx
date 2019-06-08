@@ -27,7 +27,7 @@ const StoryList: FC<StoryListProps> = ({ stories }) => {
   return (
     <>
       <Card.Group>
-        {stories.slice(begin, end).map(s => (
+        {stories.slice(begin, end).map((s, index) => (
           <Card
             key={s.id}
             header={s.header}
@@ -35,6 +35,7 @@ const StoryList: FC<StoryListProps> = ({ stories }) => {
             meta={s.meta ? s.meta : '???'}
             image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
             href="/stories"
+            data-cy={`story_card${index}`}
           />
         ))}
       </Card.Group>
