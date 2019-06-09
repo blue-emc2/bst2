@@ -9,14 +9,14 @@ import { Datum } from '../../types/StoriesIndexApiProps';
 const useFetchStoriesIndex = () => {
   const [loaded, setLoaded] = useState(false);
   const [stories, setStories] = useState<Datum[]>([]);
-  const getStories = StoriesIndexApi();
 
   useEffect(() => {
+    const getStories = StoriesIndexApi();
     getStories().then(response => {
       setStories(response);
       setLoaded(true);
     });
-  }, [getStories]);
+  }, []);
 
   return {
     loaded,
