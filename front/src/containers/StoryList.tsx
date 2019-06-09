@@ -1,5 +1,5 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
-import { Card, Pagination, PaginationProps } from 'semantic-ui-react';
+import { Image, Card, Pagination, PaginationProps } from 'semantic-ui-react';
 import { StroiesIndexAPIProps } from '../types/StoriesIndexApiProps';
 
 const PER_PAGE_CARD_MAX_COUNT = 6;
@@ -21,11 +21,12 @@ const StoryList: FC<StroiesIndexAPIProps> = ({ data }) => {
     <>
       <Card.Group>
         {data.slice(begin, end).map((s, index) => (
-          <Card
-            key={s ? s.id : '0'}
-            image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-            href="/stories"
-          >
+          <Card key={s ? s.id : '0'} href="/stories">
+            <Image
+              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              wrapped
+              ui={false}
+            />
             <Card.Content>
               <Card.Header data-cy={`story_card_header${index}`}>
                 {s ? s.attributes.characterName : '???'}
