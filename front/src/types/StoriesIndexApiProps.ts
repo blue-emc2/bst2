@@ -1,9 +1,9 @@
 // 似てるけど微妙に異なるJSONのinterfaceはどう共通化するのがいいのかな
-export interface StroyIndexAPI {
+export interface StroiesIndexAPIProps {
   data: Datum[];
 }
 
-interface Datum {
+export interface Datum {
   id: string;
   type: string;
   attributes: Attributes;
