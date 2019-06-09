@@ -23,13 +23,21 @@ const StoryList: FC<StroiesIndexAPIProps> = ({ data }) => {
         {data.slice(begin, end).map((s, index) => (
           <Card
             key={s ? s.id : '0'}
-            header={s ? s.attributes.characterName : '???'}
-            description={s ? s.attributes.body : '???'}
-            meta={s ? s.attributes.userName : '???'}
             image="https://react.semantic-ui.com/images/avatar/large/matthew.png"
             href="/stories"
-            data-cy={`story_card${index}`}
-          />
+          >
+            <Card.Content>
+              <Card.Header data-cy={`story_card_header${index}`}>
+                {s ? s.attributes.characterName : '???'}
+              </Card.Header>
+              <Card.Meta data-cy={`story_card_meta${index}`}>
+                {s ? s.attributes.userName : '???'}
+              </Card.Meta>
+              <Card.Description data-cy={`story_card_desc${index}`}>
+                {s ? s.attributes.body : '???'}
+              </Card.Description>
+            </Card.Content>
+          </Card>
         ))}
       </Card.Group>
       <Pagination

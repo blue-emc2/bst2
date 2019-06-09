@@ -10,12 +10,24 @@ describe('/home', () => {
     cy.location('pathname').should('eq', '/home');
   });
 
-  it('ストーリーカードがある', () => {
-    cy.get('[data-cy=story_card0]').should('have.class', 'card');
-    // cy.get('[data-cy=story_card1]').should('have.class', 'card');
+  it('キャラ名が表示されている', () => {
+    cy.get('[data-cy=story_card_header0]').should('have.text', "Yoshi'p Sampo");
+    cy.get('[data-cy=story_card_header1]').should('have.text', 'マリオ');
   });
 
-  it('キャラ名が表示されている', () => {
-    cy.get('[data-cy=story_card0]').should('have.text', "Yoshi'p Sampo");
+  it('作者が表示されている', () => {
+    cy.get('[data-cy=story_card_meta0]').should('have.text', 'Yoshi');
+    cy.get('[data-cy=story_card_meta1]').should('have.text', '宮本茂');
+  });
+
+  it('bodyが表示されている', () => {
+    cy.get('[data-cy=story_card_desc0]').should(
+      'have.text',
+      '吾輩（わがはい）は猫である。名前はまだ無い。',
+    );
+    cy.get('[data-cy=story_card_desc1]').should(
+      'have.text',
+      '帽子とオーバーオールを着用し、鼻の下に髭を生やしている。こうしたデザインは、16x16のドット...',
+    );
   });
 });
