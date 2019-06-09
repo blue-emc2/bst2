@@ -11,6 +11,11 @@ describe('/home', () => {
   });
 
   it('ストーリーカードがある', () => {
-    cy.get('[data-cy=story_card0').should('have.class', 'card');
+    cy.get('[data-cy=story_card0]').should('have.class', 'card');
+    // cy.get('[data-cy=story_card1]').should('have.class', 'card');
+  });
+
+  it('キャラ名が表示されている', () => {
+    cy.get('[data-cy=story_card0]').should('have.text', "Yoshi'p Sampo");
   });
 });
