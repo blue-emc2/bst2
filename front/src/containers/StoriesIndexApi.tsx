@@ -11,7 +11,9 @@ export const StoriesIndexApi = (optionConfig?: ApiConfig) => {
   const instance = axios.create(config);
   const getStories = async () => {
     try {
-      const response = await instance.get<StroiesIndexAPIProps>('/stories');
+      const response = await instance.get<StroiesIndexAPIProps>('/stories', {
+        timeout: config.timeout,
+      });
 
       if (response.status !== 200) {
         throw new Error('Server Error');

@@ -1,5 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Container,
+  Header,
+  Icon,
+  Segment,
+  Message,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import StroyList from '../../containers/StoryList';
 import Spinner from '../Spinner';
@@ -9,23 +16,29 @@ import { Datum } from '../../types/StoriesIndexApiProps';
 const useFetchStoriesIndex = () => {
   const [loaded, setLoaded] = useState(false);
   const [stories, setStories] = useState<Datum[]>([]);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const getStories = StoriesIndexApi();
-    getStories().then(response => {
-      setStories(response);
-      setLoaded(true);
-    });
+    getStories()
+      .then(response => {
+        setStories(response);
+        setLoaded(true);
+      })
+      .catch(() => {
+        setIsError(true);
+      });
   }, []);
 
   return {
     loaded,
     data: stories,
+    isError,
   };
 };
 
 const Home: FC<{}> = () => {
-  const { loaded, data } = useFetchStoriesIndex();
+  const { loaded, data, isError } = useFetchStoriesIndex();
 
   return (
     <>
@@ -44,7 +57,13 @@ const Home: FC<{}> = () => {
         </Container>
       </Segment>
 
-      {loaded ? <StroyList data={data} /> : <Spinner />}
+      {isError ? (
+        <Message negative>
+          現在エラーが発生しています。しばらくお待ち下さいmm
+        </Message>
+      ) : (
+        <>{loaded ? <StroyList data={data} /> : <Spinner />}</>
+      )}
     </>
   );
 };
