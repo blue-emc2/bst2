@@ -1,3 +1,6 @@
+require "active_support"
+require "active_support/core_ext/string/filters"
+
 class StoriesSerializer
   include FastJsonapi::ObjectSerializer
 
@@ -7,6 +10,6 @@ class StoriesSerializer
 
   attribute :body do |object|
     section = object.sections.detect { |section| section.text.present? }
-    section.text.body
+    section.text.body.truncate(50)
   end
 end
