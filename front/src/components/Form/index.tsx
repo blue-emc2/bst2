@@ -46,6 +46,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
     <Container style={{ marginTop: '7em' }}>
       <Form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
         <Form.Field
+          required
           control={Input}
           name="charactername"
           label="キャラクター名"
