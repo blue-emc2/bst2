@@ -30,4 +30,9 @@ describe('/home', () => {
       '帽子とオーバーオールを着用し、鼻の下に髭を生やしている。こうしたデザインは、16x16のドット...',
     );
   });
+
+  it('詳細画面に遷移できる', () => {
+    cy.get('[data-cy=story_card0]').click();
+    cy.location('pathname').should('eq', `/story/1`);
+  });
 });

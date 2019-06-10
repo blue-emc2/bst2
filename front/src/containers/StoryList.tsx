@@ -1,10 +1,13 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
 import { Image, Card, Pagination, PaginationProps } from 'semantic-ui-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { StroiesIndexAPIProps } from '../types/StoriesIndexApiProps';
 
 const PER_PAGE_CARD_MAX_COUNT = 6;
 
-const StoryList: FC<StroiesIndexAPIProps> = ({ data }) => {
+type StroryListProps = StroiesIndexAPIProps & RouteComponentProps;
+
+const StoryList: FC<StroryListProps> = ({ data, history }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const begin = (currentPage - 1) * PER_PAGE_CARD_MAX_COUNT;
   const end = currentPage * PER_PAGE_CARD_MAX_COUNT;
@@ -17,11 +20,21 @@ const StoryList: FC<StroiesIndexAPIProps> = ({ data }) => {
     setCurrentPage(page);
   };
 
+  const handleCardClick = (id: string) => {
+    history.push(`/story/${id}`);
+  };
+
   return (
     <>
       <Card.Group>
         {data.slice(begin, end).map((s, index) => (
-          <Card key={s ? s.id : '0'} href="/stories">
+          <Card
+            key={s ? s.id : '0'}
+            onClick={() => {
+              handleCardClick(s.id);
+            }}
+            data-cy={`story_card${index}`}
+          >
             <Image
               src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
               wrapped
@@ -55,4 +68,4 @@ const StoryList: FC<StroiesIndexAPIProps> = ({ data }) => {
   );
 };
 
-export default StoryList;
+export default withRouter(StoryList);
