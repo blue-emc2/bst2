@@ -50,8 +50,8 @@ const Home: FC<{}> = () => {
       >
         <Container text>
           <Header as="h1" inverted content="back story" />
-          <Button primary inverted size="huge">
-            <Link to="/new">ストーリーを書いてみる</Link>
+          <Button primary inverted size="huge" as={Link} to="/new">
+            ストーリーを書いてみる
             <Icon name="arrow right" />
           </Button>
         </Container>
