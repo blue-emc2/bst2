@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_103528) do
   enable_extension "plpgsql"
 
   create_table "sections", force: :cascade do |t|
-    t.string "layout_type", default: "", null: false
+    t.string "layout_type", null: false
     t.bigint "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 2019_06_07_103528) do
     t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "character_name", default: "", null: false
-    t.string "user_name", default: ""
+    t.string "character_name", null: false
+    t.string "user_name"
   end
 
   create_table "texts", force: :cascade do |t|
-    t.string "body", default: "", null: false
+    t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
