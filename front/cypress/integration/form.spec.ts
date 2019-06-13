@@ -36,4 +36,31 @@ describe('stories#create request', () => {
       cy.location('pathname').should('eq', newUrl);
     });
   });
+
+  describe('入力した内容で登録が成功する', () => {
+    // eslint-disable-next-line no-undef
+    before(() => {
+      cy.visit(`${baseUrl}/new`);
+      cy.get('input[name=charactername]').type('a');
+      cy.get('input[name=username]').type('b');
+      cy.get('[data-cy=section1] > input').type('c');
+      cy.get('.form > .right > .ui').click();
+      cy.get('[data-cy=section2] > input').type('d');
+      cy.contains('プレビュー').click();
+      cy.contains('公開する').click();
+    });
+
+    it('キャラクター名が表示されている', () => {
+      cy.get('[data-test=charactername]').should('have.text', 'a');
+    });
+
+    it('作者が表示されている', () => {
+      cy.get('[data-test=username]').should('have.text', 'b');
+    });
+
+    it('ストーリーが表示されている', () => {
+      cy.get('[data-cy=preview0]').should('have.text', 'c');
+      cy.get('[data-cy=preview1]').should('have.text', 'd');
+    });
+  });
 });
