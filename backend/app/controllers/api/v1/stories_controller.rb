@@ -21,8 +21,7 @@ module Api
 
       # POST /stories
       def create
-        @story = Story.new(story_params)
-
+        @story = StoryForm.new(story_params)
         if @story.save
           render json: @story.id, status: :created
         else
@@ -53,7 +52,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def story_params
-        params.require(:story).permit(:title, :published)
+        params.require(:story).permit({ sections: [:layout_type, { text: [:body] }] }, :character_name, :user_name)
       end
     end
   end
