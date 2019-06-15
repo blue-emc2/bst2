@@ -9,18 +9,18 @@ describe('stories#create request', () => {
       method: 'POST',
       body: {
         story: {
-          character_name: 'ルイージ',
-          user_name: '宮本茂',
+          characterName: 'ルイージ',
+          userName: '宮本茂',
           sections: [
             {
-              layout_type: 'Text',
+              layoutType: 'Text',
               text: {
                 body:
                   '任天堂の看板キャラクター「マリオ」の双子の弟。兄のマリオより長身で痩せ型、カイゼル髭、シャツ・帽子が緑でオーバーオールが紺色、帽子のマークが「L」であるといった相違点がある。',
               },
             },
             {
-              layout_type: 'Text',
+              layoutType: 'Text',
               text: {
                 body: '性格はマリオより穏やかで物静か。',
               },
@@ -50,12 +50,16 @@ describe('stories#create request', () => {
       cy.contains('公開する').click();
     });
 
+    it('/story/:idに遷移している', () => {
+      cy.location('pathname').should('include', '/story/');
+    });
+
     it('キャラクター名が表示されている', () => {
-      cy.get('[data-test=charactername]').should('have.text', 'a');
+      cy.get('[data-cy=charactername]').should('have.text', 'a');
     });
 
     it('作者が表示されている', () => {
-      cy.get('[data-test=username]').should('have.text', 'b');
+      cy.get('[data-cy=username]').should('have.text', 'b');
     });
 
     it('ストーリーが表示されている', () => {
