@@ -7,9 +7,10 @@ class StoryForm
   validates :character_name, presence: true
 
   def initialize(params)
-    @character_name = params[:character_name]
-    @user_name = params[:user_name]
-    @sections = params[:sections]
+    p = params.transform_keys { |k| k.underscore }
+    @character_name = p[:character_name]
+    @user_name = p[:user_name]
+    @sections = sections_underscoreize(p[:sections])
   end
 
   def save
@@ -34,5 +35,11 @@ class StoryForm
     end
 
     true
+  end
+
+  private
+
+  def sections_underscoreize(sections)
+    sections.map { |section| section.transform_keys { |k| k.underscore } }
   end
 end

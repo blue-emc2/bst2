@@ -1,10 +1,60 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Container, Header, Segment, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { LayoutProps } from '../../App';
 import SectionList from '../../containers/SectionList';
+import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 
-const Preview: FC<LayoutProps> = ({ charactername, username, sections }) => {
+type routerWithLayoutProps = RouteComponentProps & LayoutProps;
+
+const Deliver: FC<routerWithLayoutProps> = ({
+  history,
+  charactername,
+  username,
+  sections,
+}) => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loading) {
+      const createStroies = StroiesCreateApi(charactername, username, sections);
+      createStroies()
+        .then(response => {
+          const id = response.data as number;
+          history.replace(`/story/${id}`);
+        })
+        .catch(reason => {
+          console.info(reason);
+        });
+    }
+  }, [charactername, history, loading, sections, username]);
+
+  const handleClick = () => {
+    setLoading(true);
+  };
+
+  return (
+    <>
+      {loading ? (
+        <Button basic loading>
+          登録中...
+        </Button>
+      ) : (
+        <Button onClick={handleClick}>公開する</Button>
+      )}
+    </>
+  );
+};
+
+// TODO: まとめて受け取れないか？
+const Preview: FC<routerWithLayoutProps> = ({
+  history,
+  location,
+  match,
+  charactername,
+  username,
+  sections,
+}) => {
   return (
     <>
       <Container text style={{ marginTop: '7em' }}>
@@ -22,12 +72,17 @@ const Preview: FC<LayoutProps> = ({ charactername, username, sections }) => {
       <SectionList sections={sections} />
 
       <Segment>
-        <Button>
-          <Link to="/story/1">公開する</Link>
-        </Button>
+        <Deliver
+          history={history}
+          location={location}
+          match={match}
+          charactername={charactername}
+          username={username}
+          sections={sections}
+        />
       </Segment>
     </>
   );
 };
 
-export default Preview;
+export default withRouter(Preview);

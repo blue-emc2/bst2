@@ -21,9 +21,9 @@ module Api
 
       # POST /stories
       def create
-        @story = StoryForm.new(story_params)
-        if @story.save
-          render json: @story.id, status: :created
+        @story_form = StoryForm.new(story_params)
+        if @story_form.save
+          render json: @story_form.id, status: :created, location: api_v1_story_url(@story_form.id)
         else
           render json: @story.errors, status: :unprocessable_entity
         end
@@ -52,7 +52,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def story_params
-        params.require(:story).permit({ sections: [:layout_type, { text: [:body] }] }, :character_name, :user_name)
+        params.require(:story).permit({ sections: [:layoutType, { text: [:body] }] }, :characterName, :userName)
       end
     end
   end

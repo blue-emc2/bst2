@@ -21,9 +21,9 @@ import { Section } from './types/ApiProps';
 // 本当は型定義ファイルが良いのだろうが
 // 作るのがめんどくさそうなのでここに定義する
 export enum LayoutType {
-  Text,
-  LeftText,
-  RightText,
+  Text = 'Text',
+  LeftText = 'LeftText',
+  RightText = 'RightText',
 }
 
 export interface LayoutProps extends SectionListProp {
