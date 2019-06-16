@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { Section } from '../types/ApiProps';
 import { ApiConfig, DEFAULT_API_CONFIG } from './APIConfig';
+import { SectionForRequest } from '../types/StoryCreateApiProps';
+import { LayoutProps } from '../App';
 
 export const StroiesCreateApi = (
-  charactername: string,
-  username: string,
-  sections: Section[],
+  data: LayoutProps,
   optionConfig?: ApiConfig,
 ) => {
   const config = {
@@ -14,29 +13,29 @@ export const StroiesCreateApi = (
   };
 
   // sectionが送信用のパラメーターになっていなかった。設計ミスで受信用と送信用でバラバラになってしまった。
-  const sectionForRequest: any[] = [];
+  const sectionForRequest: SectionForRequest[] = [];
 
-  sections.forEach(value => {
-    const data = {
+  data.sections.forEach(value => {
+    const params: any = {
       layoutType: value.layoutType,
       text: {
         body: value.body,
       },
     };
-    sectionForRequest.push(data);
+    sectionForRequest.push(params);
   });
 
   const instance = axios.create(config);
   const createStroies = async () => {
     try {
-      const data = {
+      const params = {
         story: {
-          characterName: charactername,
-          userName: username,
+          characterName: data.characterName,
+          userName: data.userName,
           sections: sectionForRequest,
         },
       };
-      const response = await instance.post('/stories', data, {
+      const response = await instance.post('/stories', params, {
         timeout: config.timeout,
       });
 
