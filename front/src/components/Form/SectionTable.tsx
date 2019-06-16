@@ -10,7 +10,6 @@ import {
   GridRow,
   GridColumn,
   Menu,
-  SemanticICONS,
   Button,
   Icon,
   Form,
@@ -18,46 +17,7 @@ import {
   Segment,
   Input,
 } from 'semantic-ui-react';
-
-interface RowEventButtonProps {
-  iconName: SemanticICONS;
-  onClickHandler: () => void;
-}
-
-interface Props {
-  name: string;
-}
-const InputText = ({ name }: Props) => {
-  return (
-    <GridColumn width={16}>
-      <Form.Field control={Input} name={name} data-cy={name} />
-    </GridColumn>
-  );
-};
-
-const TextAndImage = ({ name }: Props) => (
-  <>
-    <Grid.Column width={8}>
-      <Form.Field control={Input} name={name} data-cy={name} />
-    </Grid.Column>
-    <Grid.Column width={8}>
-      <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-    </Grid.Column>
-  </>
-);
-
-const ImageAndText = ({ name }: Props) => (
-  <>
-    <Grid.Column width={8}>
-      <Form.Field>
-        <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-      </Form.Field>
-    </Grid.Column>
-    <Grid.Column width={8}>
-      <Form.Field control={Input} name={name} data-cy={name} />
-    </Grid.Column>
-  </>
-);
+import Box, { FillTypeEnum, InputTypeEnum } from './Box';
 
 interface RowProps {
   activeItem: string;
@@ -66,9 +26,25 @@ interface RowProps {
 
 const InputlayoutRow = ({ activeItem, name }: RowProps) => (
   <Grid.Row>
-    {activeItem === 'text_only' ? <InputText name={name} /> : null}
-    {activeItem === 'left_text' ? <TextAndImage name={name} /> : null}
-    {activeItem === 'right_text' ? <ImageAndText name={name} /> : null}
+    {activeItem === 'text_only' ? (
+      <Box name={name} type={FillTypeEnum.FILL} />
+    ) : null}
+    {activeItem === 'left_text' ? (
+      <Box
+        name={name}
+        type={FillTypeEnum.SEPARATE}
+        left={InputTypeEnum.Text}
+        right={InputTypeEnum.Image}
+      />
+    ) : null}
+    {activeItem === 'right_text' ? (
+      <Box
+        name={name}
+        type={FillTypeEnum.SEPARATE}
+        left={InputTypeEnum.Image}
+        right={InputTypeEnum.Text}
+      />
+    ) : null}
   </Grid.Row>
 );
 
