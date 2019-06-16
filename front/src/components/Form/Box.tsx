@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Grid, Form, Input } from 'semantic-ui-react';
+import InputImage from './InputImage';
 
 export enum FillTypeEnum {
   FILL = 'fill',
@@ -18,16 +19,12 @@ export interface BoxProps {
   right?: InputTypeEnum;
 }
 
-interface InputProp {
+export interface InputProp {
   name: string;
 }
 
 const InputText: FC<InputProp> = ({ name }) => (
   <Form.Field control={Input} name={name} data-cy={name} />
-);
-
-const InputImage: FC<InputProp> = ({ name }) => (
-  <Form.Field control={Input} type="file" name={name} data-cy={name} />
 );
 
 const Box: FC<BoxProps> = ({ name, type, left, right }) => {
