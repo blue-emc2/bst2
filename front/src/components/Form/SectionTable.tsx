@@ -12,10 +12,7 @@ import {
   Menu,
   Button,
   Icon,
-  Form,
-  Image,
   Segment,
-  Input,
 } from 'semantic-ui-react';
 import Box, { FillTypeEnum, InputTypeEnum } from './Box';
 
