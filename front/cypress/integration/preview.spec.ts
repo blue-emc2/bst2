@@ -13,8 +13,8 @@ describe('/preview', () => {
       '親類のものから西洋製のナイフを貰つて奇麗な刃を日に翳して、友達に見せて居たら、';
 
     beforeEach(() => {
-      cy.get('input[name=charactername]').type(charactername);
-      cy.get('input[name=username]').type(username);
+      cy.get('input[name=characterName]').type(charactername);
+      cy.get('input[name=userName]').type(username);
       cy.get('[data-cy=section1] > input').type(text0);
       cy.get('.form > .right > .ui').click();
       cy.get('[data-cy=section2] > input').type(text1);

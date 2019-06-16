@@ -41,8 +41,8 @@ describe('stories#create request', () => {
     // eslint-disable-next-line no-undef
     before(() => {
       cy.visit(`${baseUrl}/new`);
-      cy.get('input[name=charactername]').type('a');
-      cy.get('input[name=username]').type('b');
+      cy.get('input[name=characterName]').type('a');
+      cy.get('input[name=userName]').type('b');
       cy.get('[data-cy=section1] > input').type('c');
       cy.get('.form > .right > .ui').click();
       cy.get('[data-cy=section2] > input').type('d');

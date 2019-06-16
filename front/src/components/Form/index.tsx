@@ -49,13 +49,13 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
         <Form.Field
           required
           control={Input}
-          name="charactername"
+          name="characterName"
           label="キャラクター名"
           placeholder="キャラクター名"
         />
         <Form.Field
           control={Input}
-          name="username"
+          name="userName"
           label="作者"
           placeholder="作者"
         />
