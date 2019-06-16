@@ -14,7 +14,7 @@ import About from './components/About';
 import StoryForm from './components/Form';
 import Preview from './components/Preview';
 import Story from './components/Story';
-import { Section } from './types/ApiProps';
+import { SectionForLayout } from './types/ApiProps';
 
 // ---------------------------------------
 // 共通interface定義
@@ -27,20 +27,20 @@ export enum LayoutType {
 }
 
 export interface LayoutProps extends SectionListProp {
-  charactername: string;
-  username: string;
+  characterName: string;
+  userName: string;
 }
 
 export interface SectionListProp {
-  sections: Section[];
+  sections: SectionForLayout[];
 }
 
 // ---------------------------------------
 
 const App: FC<{}> = () => {
   const initialValue = {
-    charactername: '',
-    username: '',
+    characterName: '',
+    userName: '',
     sections: [
       {
         id: 1,
@@ -52,13 +52,13 @@ const App: FC<{}> = () => {
   const [layout, setLayout] = useState<LayoutProps>(initialValue);
 
   const handleOnSubmit = ({
-    charactername,
-    username,
+    characterName,
+    userName,
     sections,
   }: LayoutProps) => {
     setLayout({
-      charactername,
-      username,
+      characterName,
+      userName,
       sections,
     });
   };

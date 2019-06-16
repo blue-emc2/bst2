@@ -7,17 +7,18 @@ import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 
 type routerWithLayoutProps = RouteComponentProps & LayoutProps;
 
-const Deliver: FC<routerWithLayoutProps> = ({
-  history,
-  charactername,
-  username,
-  sections,
-}) => {
+const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
   const [loading, setLoading] = useState(false);
+  const { history, characterName, userName, sections } = args;
 
   useEffect(() => {
     if (loading) {
-      const createStroies = StroiesCreateApi(charactername, username, sections);
+      const data: LayoutProps = {
+        characterName,
+        userName,
+        sections,
+      };
+      const createStroies = StroiesCreateApi(data);
       createStroies()
         .then(response => {
           const id = response.data as number;
@@ -27,7 +28,7 @@ const Deliver: FC<routerWithLayoutProps> = ({
           console.info(reason);
         });
     }
-  }, [charactername, history, loading, sections, username]);
+  }, [characterName, history, loading, sections, userName]);
 
   const handleClick = () => {
     setLoading(true);
@@ -47,39 +48,27 @@ const Deliver: FC<routerWithLayoutProps> = ({
 };
 
 // TODO: まとめて受け取れないか？
-const Preview: FC<routerWithLayoutProps> = ({
-  history,
-  location,
-  match,
-  charactername,
-  username,
-  sections,
-}) => {
+const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
+  const { characterName, userName, sections } = args;
+
   return (
     <>
       <Container text style={{ marginTop: '7em' }}>
         <Header as="h1" data-test="charactername">
-          {charactername}
+          {characterName}
         </Header>
       </Container>
 
       <Container text>
         <Header as="h1" data-test="username">
-          {username}
+          {userName}
         </Header>
       </Container>
 
       <SectionList sections={sections} />
 
       <Segment>
-        <Deliver
-          history={history}
-          location={location}
-          match={match}
-          charactername={charactername}
-          username={username}
-          sections={sections}
-        />
+        <Deliver {...args} />
       </Segment>
     </>
   );
