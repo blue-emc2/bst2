@@ -32,5 +32,8 @@
   },
   "eslint.run": "onSave",
   "eslint.packageManager": "yarn",
-  "ruby.format": "standard"
+  "[ruby]": {
+    "ruby.format": "rufo",
+  },
+  "editor.tabSize": 2
 }

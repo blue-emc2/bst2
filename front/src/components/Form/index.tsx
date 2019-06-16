@@ -14,20 +14,21 @@ const PreviewButton = () => {
 };
 
 type FromProps = {
-  onPreview: ({ charactername }: LayoutProps) => void;
+  onPreview: ({ characterName }: LayoutProps) => void;
 } & RouteComponentProps;
 
 const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // 送信用のパラメーターを作成する
     const layout: LayoutProps = {
-      charactername: '',
-      username: '',
+      characterName: '',
+      userName: '',
       sections: [],
     };
     const form = new FormData(e.target as HTMLFormElement);
     form.forEach((value, name) => {
-      if (name === 'charactername' || name === 'username') {
+      if (name === 'characterName' || name === 'userName') {
         layout[name] = value as string;
       }
 
@@ -46,14 +47,15 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
     <Container style={{ marginTop: '7em' }}>
       <Form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
         <Form.Field
+          required
           control={Input}
-          name="charactername"
+          name="characterName"
           label="キャラクター名"
           placeholder="キャラクター名"
         />
         <Form.Field
           control={Input}
-          name="username"
+          name="userName"
           label="作者"
           placeholder="作者"
         />

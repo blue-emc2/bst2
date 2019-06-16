@@ -36,7 +36,7 @@ const useFetchStroy = (id: string) => {
         const { data } = response.data;
         setState({ loaded: true, data });
       })
-      .catch(err => {
+      .catch(() => {
         // TODO: エラーハンドリングは一旦これで
         setIsError(true);
       });
@@ -46,11 +46,7 @@ const useFetchStroy = (id: string) => {
 };
 
 // TODO: このコンポーネントはPreview/indexと大体同じなので共通化したくなるが、APIとの連携が終わってからにする
-const Story: FC<RouteComponentProps<{ id: string }>> = ({
-  history,
-  location,
-  match,
-}) => {
+const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
   const { loaded, data, error } = useFetchStroy(match.params.id);
 
   return error ? (

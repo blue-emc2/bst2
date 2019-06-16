@@ -14,12 +14,12 @@ export interface Data {
 export interface Attributes {
   characterName: string;
   userName: string;
-  sections: Section[];
+  sections: SectionForLayout[];
 }
 
 // LayoutTypeは変換したい
 
-export interface Section {
+export interface SectionForLayout {
   id?: number;
   layoutType: LayoutType | string;
   body: string;

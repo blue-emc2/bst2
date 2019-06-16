@@ -1,18 +1,44 @@
-import React, { FC } from 'react';
-import { Button, Container, Header, Icon, Segment } from 'semantic-ui-react';
+import React, { FC, useState, useEffect } from 'react';
+import {
+  Button,
+  Container,
+  Header,
+  Icon,
+  Segment,
+  Message,
+} from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import StroyList, { Story } from '../../containers/StoryList';
+import StroyList from '../../containers/StoryList';
+import Spinner from '../Spinner';
+import { StoriesIndexApi } from '../../containers/StoriesIndexApi';
+import { Datum } from '../../types/StoriesIndexApiProps';
+
+const useFetchStoriesIndex = () => {
+  const [loaded, setLoaded] = useState(false);
+  const [stories, setStories] = useState<Datum[]>([]);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    const getStories = StoriesIndexApi();
+    getStories()
+      .then(response => {
+        setStories(response);
+        setLoaded(true);
+      })
+      .catch(() => {
+        setIsError(true);
+      });
+  }, []);
+
+  return {
+    loaded,
+    data: stories,
+    isError,
+  };
+};
 
 const Home: FC<{}> = () => {
-  const a = Array.from(Array(13).keys());
-  const stories = a.map(
-    (n: number): Story => ({
-      id: n,
-      header: 'Matthew',
-      meta: 'author',
-      description: 'Matthew is a musician living in Nashville.',
-    }),
-  );
+  const { loaded, data, isError } = useFetchStoriesIndex();
 
   return (
     <>
@@ -24,14 +50,20 @@ const Home: FC<{}> = () => {
       >
         <Container text>
           <Header as="h1" inverted content="back story" />
-          <Button primary inverted size="huge">
-            <Link to="/new">ストーリーを書いてみる</Link>
+          <Button primary inverted size="huge" as={Link} to="/new">
+            ストーリーを書いてみる
             <Icon name="arrow right" />
           </Button>
         </Container>
       </Segment>
 
-      <StroyList stories={stories} />
+      {isError ? (
+        <Message negative>
+          現在エラーが発生しています。しばらくお待ち下さいmm
+        </Message>
+      ) : (
+        <>{loaded ? <StroyList data={data} /> : <Spinner />}</>
+      )}
     </>
   );
 };

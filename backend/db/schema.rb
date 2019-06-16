@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_02_023254) do
+ActiveRecord::Schema.define(version: 2019_06_07_103528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "sections", force: :cascade do |t|
-    t.string "layout_type", default: "", null: false
+    t.string "layout_type", null: false
     t.bigint "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "text_id"
     t.index ["story_id"], name: "index_sections_on_story_id"
+    t.index ["text_id"], name: "index_sections_on_text_id"
   end
 
   create_table "stories", force: :cascade do |t|
@@ -28,16 +30,14 @@ ActiveRecord::Schema.define(version: 2019_06_02_023254) do
     t.boolean "published"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "character_name", default: "", null: false
-    t.string "user_name", default: ""
+    t.string "character_name", null: false
+    t.string "user_name"
   end
 
   create_table "texts", force: :cascade do |t|
-    t.string "body", default: "", null: false
-    t.bigint "section_id"
+    t.string "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["section_id"], name: "index_texts_on_section_id"
   end
 
 end

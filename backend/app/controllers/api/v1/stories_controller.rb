@@ -1,13 +1,17 @@
 module Api
   module V1
     class StoriesController < ApplicationController
+      rescue_from ActiveRecord::RecordNotFound do |exception|
+        head :not_found
+      end
+
       before_action :set_story, only: %i[show update destroy]
 
       # GET /stories
       def index
         @stories = Story.all
 
-        render json: @stories
+        render json: StoriesSerializer.new(@stories, is_collection: true).serialized_json
       end
 
       # GET /stories/1
@@ -17,10 +21,9 @@ module Api
 
       # POST /stories
       def create
-        @story = Story.new(story_params)
-
-        if @story.save
-          render json: @story, status: :created, location: @story
+        @story_form = StoryForm.new(story_params)
+        if @story_form.save
+          render json: @story_form.id, status: :created, location: api_v1_story_url(@story_form.id)
         else
           render json: @story.errors, status: :unprocessable_entity
         end
@@ -49,7 +52,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def story_params
-        params.require(:story).permit(:title, :published)
+        params.require(:story).permit({ sections: [:layoutType, { text: [:body] }] }, :characterName, :userName)
       end
     end
   end

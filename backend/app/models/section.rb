@@ -1,4 +1,4 @@
 class Section < ApplicationRecord
+  belongs_to :text
   belongs_to :story
-  has_one :text
 end

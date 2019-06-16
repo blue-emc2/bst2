@@ -3,10 +3,10 @@ import { Container, Grid } from 'semantic-ui-react';
 import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
 import { LayoutType, SectionListProp } from '../App';
-import { Section } from '../types/ApiProps';
+import { SectionForLayout } from '../types/ApiProps';
 
 const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
-  const list = sections.map((s: Section, index: number) => {
+  const list = sections.map((s: SectionForLayout, index: number) => {
     switch (s.layoutType) {
       case LayoutType.Text:
       case 'Text': {

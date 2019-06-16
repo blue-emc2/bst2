@@ -6,8 +6,8 @@ export interface StoryProps {
 
 export const sampleData: StoryProps = {
   data: {
-    charactername: 'アムロ・レイ',
-    username: 'hoge',
+    characterName: 'アムロ・レイ',
+    userName: 'hoge',
     sections: [
       {
         layoutType: 'Text',
