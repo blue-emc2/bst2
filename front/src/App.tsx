@@ -67,7 +67,7 @@ const App: FC<{}> = () => {
     <>
       <Menu fixed="top" size="large">
         <Container>
-          <Menu.Item as="a" active>
+          <Menu.Item as={Link} to="/home" active data-cy="home">
             Home
           </Menu.Item>
           <Menu.Item position="right">

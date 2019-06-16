@@ -35,4 +35,14 @@ describe('/home', () => {
     cy.get('[data-cy=story_card0]').click();
     cy.location('pathname').should('eq', `/story/1`);
   });
+
+  it('Homeに遷移できる', () => {
+    cy.visit(`${baseUrl}/new`);
+    cy.get('[data-cy=home]').click();
+    cy.location('pathname').should('eq', `/home`);
+
+    cy.visit(`${baseUrl}/story/1`);
+    cy.get('[data-cy=home]').click();
+    cy.location('pathname').should('eq', `/home`);
+  });
 });
