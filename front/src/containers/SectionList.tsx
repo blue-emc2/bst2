@@ -3,45 +3,42 @@ import { Container, Grid } from 'semantic-ui-react';
 import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
 import { LayoutType, SectionListProp } from '../App';
-import { SectionForLayout } from '../types/ApiProps';
+import { Section, TextPosition } from '../types/LayoutProps';
 
 const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
-  const list = sections.map((s: SectionForLayout, index: number) => {
-    switch (s.layoutType) {
-      case LayoutType.Text:
-      case 'Text': {
+  const list = sections.map((s: Section, index: number) => {
+    switch (s.textPosition) {
+      case TextPosition.CENTER: {
         return (
           <TextOnly
-            text={s.body}
+            text={s.text}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
         );
       }
-      case LayoutType.LeftText:
-      case 'LeftText': {
+      case TextPosition.LEFT: {
         return (
           <HalfSection
             textPosition={LayoutType.LeftText}
-            text={s.body}
+            text={s.text}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
         );
       }
-      case LayoutType.RightText:
-      case 'RightText': {
+      case TextPosition.RIGHT: {
         return (
           <HalfSection
             textPosition={LayoutType.RightText}
-            text={s.body}
+            text={s.text}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
         );
       }
       default:
-        throw new Error(`予期しないtypeです ->${s.layoutType}`);
+        throw new Error(`予期しないtypeです ->${s.textPosition}`);
     }
   });
 

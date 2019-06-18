@@ -1,4 +1,5 @@
 import { LayoutType } from '../App';
+import { Section } from './LayoutProps';
 
 export interface API {
   data: Data;
@@ -14,7 +15,7 @@ export interface Data {
 export interface Attributes {
   characterName: string;
   userName: string;
-  sections: SectionForLayout[];
+  sections: Section[];
 }
 
 // LayoutTypeは変換したい
@@ -22,6 +23,6 @@ export interface Attributes {
 export interface SectionForLayout {
   id?: number;
   layoutType: LayoutType | string;
-  body: string;
+  text: string;
   image?: string;
 }

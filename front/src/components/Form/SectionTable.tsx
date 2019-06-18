@@ -14,7 +14,8 @@ import {
   Icon,
   Segment,
 } from 'semantic-ui-react';
-import Box, { FillTypeEnum, InputTypeEnum } from './Box';
+import Box, { InputTypeEnum } from './Box';
+import { TextPosition } from '../../types/LayoutProps';
 
 interface RowProps {
   activeItem: string;
@@ -24,12 +25,12 @@ interface RowProps {
 const InputlayoutRow = ({ activeItem, name }: RowProps) => (
   <Grid.Row>
     {activeItem === 'text_only' ? (
-      <Box name={name} type={FillTypeEnum.FILL} />
+      <Box name={name} type={TextPosition.CENTER} />
     ) : null}
     {activeItem === 'left_text' ? (
       <Box
         name={name}
-        type={FillTypeEnum.SEPARATE}
+        type={TextPosition.LEFT}
         left={InputTypeEnum.Text}
         right={InputTypeEnum.Image}
       />
@@ -37,7 +38,7 @@ const InputlayoutRow = ({ activeItem, name }: RowProps) => (
     {activeItem === 'right_text' ? (
       <Box
         name={name}
-        type={FillTypeEnum.SEPARATE}
+        type={TextPosition.RIGHT}
         left={InputTypeEnum.Image}
         right={InputTypeEnum.Text}
       />

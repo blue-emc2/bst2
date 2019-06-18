@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ApiConfig, DEFAULT_API_CONFIG } from './APIConfig';
 import { SectionForRequest } from '../types/StoryCreateApiProps';
-import { LayoutProps } from '../App';
+import { LayoutProps } from '../types/LayoutProps';
 
 export const StroiesCreateApi = (
   data: LayoutProps,
@@ -17,9 +17,9 @@ export const StroiesCreateApi = (
 
   data.sections.forEach(value => {
     const params: any = {
-      layoutType: value.layoutType,
+      layoutType: value.textPosition,
       text: {
-        body: value.body,
+        body: value.text,
       },
     };
     sectionForRequest.push(params);

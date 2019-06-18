@@ -18,7 +18,7 @@ const InputImage: FC<InputProp> = ({ name }) => {
         control={Input}
         type="file"
         name={name}
-        data-cy={name}
+        data-cy={`file-${name}`}
         onChange={handleChangeImage}
       />
       {image === '' ? null : <Image src={image} />}
