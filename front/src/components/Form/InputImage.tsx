@@ -1,8 +1,8 @@
 import React, { FC, useState, SyntheticEvent } from 'react';
 import { Input, Form, Image, HtmlImageProps } from 'semantic-ui-react';
-import { InputProp } from './Box';
+import { BoxProps } from './Box';
 
-const InputImage: FC<InputProp> = ({ name }) => {
+const InputImage: FC<BoxProps> = ({ name }) => {
   const [image, setImage] = useState('');
   const handleChangeImage = (
     e: SyntheticEvent<HTMLFormElement, HtmlImageProps>,
