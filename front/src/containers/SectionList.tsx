@@ -10,7 +10,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
       case TextPosition.CENTER: {
         return (
           <TextOnly
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             data-cy={`preview${index}`}
           />
@@ -20,7 +20,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
         return (
           <HalfSection
             textPosition={TextPosition.LEFT}
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             image={s.image}
             imageUrl={s.imageUrl}
@@ -31,7 +31,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
         return (
           <HalfSection
             textPosition={TextPosition.RIGHT}
-            text={s.text}
+            text={s.body}
             key={index.toString()}
             image={s.image}
             imageUrl={s.imageUrl}

@@ -12,29 +12,17 @@ export const StroiesCreateApi = (
     ...optionConfig,
   };
 
-  // sectionが送信用のパラメーターになっていなかった。設計ミスで受信用と送信用でバラバラになってしまった。
-  const sectionForRequest: SectionForRequest[] = [];
-
-  data.sections.forEach(value => {
-    const params: any = {
-      layoutType: value.textPosition,
-      text: {
-        body: value.text,
-      },
-    };
-    sectionForRequest.push(params);
-  });
-
   const instance = axios.create(config);
   const createStroies = async () => {
     try {
-      const params = {
-        story: {
-          characterName: data.characterName,
-          userName: data.userName,
-          sections: sectionForRequest,
-        },
-      };
+      const params = new FormData();
+      params.append('story[characterName]', data.characterName);
+      params.append('story[userName]', data.userName);
+      data.sections.forEach(value => {
+        params.append(`story[sections][][layoutType]`, value.textPosition);
+        params.append(`story[sections][][text][body]`, value.body);
+      });
+
       const response = await instance.post('/stories', params, {
         timeout: config.timeout,
       });

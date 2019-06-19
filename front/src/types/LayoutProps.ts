@@ -10,7 +10,7 @@ export enum TextPosition {
 
 export interface Section {
   textPosition: TextPosition;
-  text: string;
+  body: string;
   image?: File | null;
   imageUrl?: string;
 }

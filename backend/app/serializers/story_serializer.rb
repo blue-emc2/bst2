@@ -10,8 +10,8 @@ class StorySerializer
     object.sections.map do |section|
       {
         id: section.id,
-        layoutType: section.layout_type,
-        body: section.text.body
+        textPosition: section.layout_type,  # TDOD: カラム名を変更する
+        body: section.text.body,
       }
     end
   end

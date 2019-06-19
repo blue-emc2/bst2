@@ -44,7 +44,7 @@ const App: FC<{}> = () => {
     sections: [
       {
         textPosition: TextPosition.CENTER,
-        text: '',
+        body: '',
       },
     ],
   };

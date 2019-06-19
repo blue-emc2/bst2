@@ -59,18 +59,18 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
       if (section !== null) {
         const positionType = section.dataset.position;
         let position = TextPosition.CENTER;
-        let text = '';
+        let body = '';
         const selector = `input[name="section${i + 1}"]`; // sectionは1から始まる
         let image = null;
         let imageUrl = '';
 
         if (positionType === TextPosition.CENTER) {
           const textEle = section.querySelector(selector) as HTMLInputElement;
-          text = textEle !== null ? textEle.value : '';
+          body = textEle !== null ? textEle.value : '';
         } else if (positionType === TextPosition.LEFT) {
           position = TextPosition.LEFT;
           const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          text = elemetns[0].value;
+          body = elemetns[0].value;
           const { files } = elemetns[1];
           if (files !== null && files[0] !== undefined) {
             // eslint-disable-next-line prefer-destructuring
@@ -80,7 +80,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
         } else if (positionType === TextPosition.RIGHT) {
           position = TextPosition.RIGHT;
           const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          text = elemetns[1].value;
+          body = elemetns[1].value;
           const { files } = elemetns[0];
           if (files !== null && files[0] !== undefined) {
             // eslint-disable-next-line prefer-destructuring
@@ -93,7 +93,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
 
         const params: Section = {
           textPosition: position,
-          text,
+          body,
           image,
           imageUrl,
         };
@@ -109,7 +109,11 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
 
   return (
     <Container style={{ marginTop: '7em' }}>
-      <Form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+      {/* もしかしてFormいらない説？ */}
+      <Form
+        encType="multipart/form-data"
+        onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
+      >
         <Form.Input
           required
           name="characterName"
