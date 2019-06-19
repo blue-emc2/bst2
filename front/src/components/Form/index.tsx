@@ -72,8 +72,21 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
           const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
           text = elemetns[0].value;
           const { files } = elemetns[1];
-          image = files === null ? null : files[0];
-          imageUrl = URL.createObjectURL(image);
+          if (files !== null && files[0] !== null) {
+            // eslint-disable-next-line prefer-destructuring
+            image = files[0];
+            imageUrl = URL.createObjectURL(image);
+          }
+        } else if (positionType === TextPosition.RIGHT) {
+          position = TextPosition.RIGHT;
+          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
+          text = elemetns[1].value;
+          const { files } = elemetns[0];
+          if (files !== null && files[0] !== null) {
+            // eslint-disable-next-line prefer-destructuring
+            image = files[0];
+            imageUrl = URL.createObjectURL(image);
+          }
         } else {
           throw new Error(`予期しないtypeです ->${positionType}`);
         }

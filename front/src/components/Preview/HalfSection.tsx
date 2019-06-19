@@ -20,13 +20,7 @@ const HalfSection = ({ ...props }) => {
         {text}
       </Container>
     );
-    left = (
-      <Image
-        floated="right"
-        size="large"
-        src="https://react.semantic-ui.com/images/wireframe/image.png"
-      />
-    );
+    left = <Image floated="right" size="large" src={imageUrl} />;
   }
 
   return (

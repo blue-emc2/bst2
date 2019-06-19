@@ -21,8 +21,8 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
           <HalfSection
             textPosition={TextPosition.LEFT}
             text={s.text}
-            image={s.image}
             key={index.toString()}
+            image={s.image}
             imageUrl={s.imageUrl}
           />
         );
@@ -33,6 +33,8 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
             textPosition={TextPosition.RIGHT}
             text={s.text}
             key={index.toString()}
+            image={s.image}
+            imageUrl={s.imageUrl}
           />
         );
       }
