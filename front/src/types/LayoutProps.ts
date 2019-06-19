@@ -11,8 +11,8 @@ export enum TextPosition {
 export interface Section {
   textPosition: TextPosition;
   body: string;
-  image?: File | null;
-  imageUrl?: string;
+  image?: File | undefined;
+  imageUrl?: string | undefined;
 }
 
 export interface SectionListProps {

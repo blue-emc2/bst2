@@ -61,7 +61,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
         let position = TextPosition.CENTER;
         let body = '';
         const selector = `input[name="section${i + 1}"]`; // sectionは1から始まる
-        let image = null;
+        let image;
         let imageUrl = '';
 
         if (positionType === TextPosition.CENTER) {

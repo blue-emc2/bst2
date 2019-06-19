@@ -21,6 +21,9 @@ export const StroiesCreateApi = (
       data.sections.forEach(value => {
         params.append(`story[sections][][layoutType]`, value.textPosition);
         params.append(`story[sections][][text][body]`, value.body);
+        if (value.image !== undefined) {
+          params.append(`story[sections][][image][body]`, value.image);
+        }
       });
 
       const response = await instance.post('/stories', params, {

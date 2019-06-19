@@ -34,7 +34,6 @@ const useFetchStroy = (id: string) => {
     fetchStroy()
       .then(response => {
         const { data } = response.data;
-        console.log('data', data);
         setState({ loaded: true, data });
       })
       .catch(() => {
