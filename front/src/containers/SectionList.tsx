@@ -2,10 +2,9 @@ import React, { FC } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
-import { LayoutType, SectionListProp } from '../App';
-import { Section, TextPosition } from '../types/LayoutProps';
+import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
 
-const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
+const SectionList: FC<SectionListProps> = ({ sections }) => {
   const list = sections.map((s: Section, index: number) => {
     switch (s.textPosition) {
       case TextPosition.CENTER: {
@@ -20,20 +19,20 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
       case TextPosition.LEFT: {
         return (
           <HalfSection
-            textPosition={LayoutType.LeftText}
+            textPosition={TextPosition.LEFT}
             text={s.text}
+            image={s.image}
             key={index.toString()}
-            data-cy={`preview${index}`}
+            imageUrl={s.imageUrl}
           />
         );
       }
       case TextPosition.RIGHT: {
         return (
           <HalfSection
-            textPosition={LayoutType.RightText}
+            textPosition={TextPosition.RIGHT}
             text={s.text}
             key={index.toString()}
-            data-cy={`preview${index}`}
           />
         );
       }

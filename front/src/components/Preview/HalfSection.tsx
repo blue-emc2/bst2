@@ -1,23 +1,25 @@
 import React from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
-import { LayoutType } from '../../App';
+import { TextPosition } from '../../types/LayoutProps';
 
-const HalfSection = (props: { textPosition: LayoutType; text: string }) => {
-  const { textPosition, text } = props;
+const HalfSection = ({ ...props }) => {
+  const { textPosition, text, imageUrl } = props;
 
   let left;
   let right;
-  if (textPosition === LayoutType.LeftText) {
-    left = <Container text>{text}</Container>;
-    right = (
-      <Image
-        floated="left"
-        size="large"
-        src="https://react.semantic-ui.com/images/wireframe/image.png"
-      />
+  if (textPosition === TextPosition.LEFT) {
+    left = (
+      <Container data-cy="previewLeftText" text>
+        {text}
+      </Container>
     );
+    right = <Image floated="left" size="large" src={imageUrl} />;
   } else {
-    right = <Container text>{text}</Container>;
+    right = (
+      <Container data-cy="previewRightText" text>
+        {text}
+      </Container>
+    );
     left = (
       <Image
         floated="right"

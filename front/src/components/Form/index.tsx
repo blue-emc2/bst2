@@ -58,14 +58,22 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
       const section = sectionArray[i];
       if (section !== null) {
         const positionType = section.dataset.position;
-        const position = TextPosition.CENTER;
+        let position = TextPosition.CENTER;
         let text = '';
+        const selector = `input[name="section${i + 1}"]`; // sectionは1から始まる
+        let image = null;
+        let imageUrl = '';
 
         if (positionType === TextPosition.CENTER) {
-          const textEle = section.querySelector(
-            `input[name="section${i + 1}"]`, // sectionは1から始まる
-          ) as HTMLInputElement;
+          const textEle = section.querySelector(selector) as HTMLInputElement;
           text = textEle !== null ? textEle.value : '';
+        } else if (positionType === TextPosition.LEFT) {
+          position = TextPosition.LEFT;
+          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
+          text = elemetns[0].value;
+          const { files } = elemetns[1];
+          image = files === null ? null : files[0];
+          imageUrl = URL.createObjectURL(image);
         } else {
           throw new Error(`予期しないtypeです ->${positionType}`);
         }
@@ -73,6 +81,8 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
         const params: Section = {
           textPosition: position,
           text,
+          image,
+          imageUrl,
         };
         sections.push(params);
       }

@@ -69,6 +69,7 @@ const SectionBar: FC<SectionBarProps> = ({ name }) => {
       key={index.toString()}
       name={value.type}
       active={activeItem === value.type}
+      data-cy={value.type}
       onClick={(e: SyntheticEvent) => handleMenuChange(e, value.type)}
     >
       {value.body}

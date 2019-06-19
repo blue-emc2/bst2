@@ -11,11 +11,15 @@ export enum TextPosition {
 export interface Section {
   textPosition: TextPosition;
   text: string;
-  image?: File;
+  image?: File | null;
+  imageUrl?: string;
 }
 
-export interface LayoutProps {
+export interface SectionListProps {
+  sections: Section[];
+}
+
+export interface LayoutProps extends SectionListProps {
   characterName: string;
   userName: string;
-  sections: Section[];
 }

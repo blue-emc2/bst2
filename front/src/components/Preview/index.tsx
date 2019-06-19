@@ -25,7 +25,7 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
           history.replace(`/story/${id}`);
         })
         .catch(reason => {
-          console.info(reason);
+          console.error(reason);
         });
     }
   }, [characterName, history, loading, sections, userName]);
