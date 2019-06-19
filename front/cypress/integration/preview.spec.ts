@@ -51,6 +51,22 @@ describe('/preview', () => {
     });
   });
 
+  describe('レイアウト選択を画像と文章を選択する', () => {
+    beforeEach(() => {
+      cy.get('[data-cy=right_text]:first').click();
+      cy.get('[data-cy=section1] > input').type(text0);
+      cy.contains('プレビュー').click();
+    });
+
+    it('キャラクター名が表示されている', () => {
+      cy.get('[data-test=charactername]').should('have.text', charactername);
+    });
+
+    it('ストーリーが表示されている', () => {
+      cy.get('[data-cy=previewRightText]').should('have.text', text0);
+    });
+  });
+
   // ファイルアップロードのテストコードを書いているができない
   describe.skip('文章入力と画像を添付したとき', () => {
     beforeEach(() => {
