@@ -21,10 +21,17 @@ class StoryForm
       story.save!
 
       @sections.each do |section|
+        image_exist = section.has_key?(:image)
+        if image_exist
+          image = Image.new(body: section[:image][:body])
+          image.save!
+        end
+
         text = Text.new(body: section[:text][:body])
         text.save!
 
         child = Section.new(layout_type: section[:layout_type], story: story, text: text)
+        child.image = image if image_exist
         child.save!
       end
 
