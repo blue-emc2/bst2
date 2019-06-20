@@ -8,11 +8,16 @@ class StorySerializer
 
   attribute :sections do |object|
     object.sections.map do |section|
-      {
+      result = {
         id: section.id,
         textPosition: section.layout_type,  # TDOD: カラム名を変更する
         body: section.text.body,
       }
+
+      if (section.image)
+        result[:imageUrl] = section.image.body_url
+      end
+      result
     end
   end
 end
