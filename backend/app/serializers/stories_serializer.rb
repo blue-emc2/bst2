@@ -10,6 +10,11 @@ class StoriesSerializer
 
   attribute :body do |object|
     section = object.sections.detect { |section| section.text.present? }
-    section.text.body.truncate(50)
+    description = section.text.body.truncate(50)
+
+    {
+      description: description,
+      imageUrl: section.image&.body_url,
+    }
   end
 end
