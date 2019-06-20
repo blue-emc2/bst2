@@ -5,6 +5,7 @@ import axios from 'axios';
 import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
+import { DEFAULT_API_CONFIG } from '../../containers/APIConfig';
 
 const useFetchStroy = (id: string) => {
   const initialValue = {
@@ -24,9 +25,8 @@ const useFetchStroy = (id: string) => {
 
   useEffect(() => {
     const fetchStroy = async () => {
-      const result = await axios.get<API>(
-        `http://localhost:5000/api/v1/stories/${id}`,
-      );
+      const instance = axios.create(DEFAULT_API_CONFIG);
+      const result = await instance.get<API>(`/stories/${id}`);
 
       return result;
     };

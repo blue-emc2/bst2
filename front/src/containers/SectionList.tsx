@@ -2,14 +2,12 @@ import React, { FC } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
-import { LayoutType, SectionListProp } from '../App';
-import { SectionForLayout } from '../types/ApiProps';
+import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
 
-const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
-  const list = sections.map((s: SectionForLayout, index: number) => {
-    switch (s.layoutType) {
-      case LayoutType.Text:
-      case 'Text': {
+const SectionList: FC<SectionListProps> = ({ sections }) => {
+  const list = sections.map((s: Section, index: number) => {
+    switch (s.textPosition) {
+      case TextPosition.CENTER: {
         return (
           <TextOnly
             text={s.body}
@@ -18,30 +16,30 @@ const SectionList: FC<SectionListProp> = ({ sections = [] }) => {
           />
         );
       }
-      case LayoutType.LeftText:
-      case 'LeftText': {
+      case TextPosition.LEFT: {
         return (
           <HalfSection
-            textPosition={LayoutType.LeftText}
+            textPosition={TextPosition.LEFT}
             text={s.body}
             key={index.toString()}
-            data-cy={`preview${index}`}
+            image={s.image}
+            imageUrl={s.imageUrl}
           />
         );
       }
-      case LayoutType.RightText:
-      case 'RightText': {
+      case TextPosition.RIGHT: {
         return (
           <HalfSection
-            textPosition={LayoutType.RightText}
+            textPosition={TextPosition.RIGHT}
             text={s.body}
             key={index.toString()}
-            data-cy={`preview${index}`}
+            image={s.image}
+            imageUrl={s.imageUrl}
           />
         );
       }
       default:
-        throw new Error(`予期しないtypeです ->${s.layoutType}`);
+        throw new Error(`予期しないtypeです ->${s.textPosition}`);
     }
   });
 

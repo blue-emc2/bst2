@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Container, Header, Segment, Button } from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { LayoutProps } from '../../App';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
+import { LayoutProps } from '../../types/LayoutProps';
 
 type routerWithLayoutProps = RouteComponentProps & LayoutProps;
 
@@ -25,7 +25,7 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
           history.replace(`/story/${id}`);
         })
         .catch(reason => {
-          console.info(reason);
+          console.error(reason);
         });
     }
   }, [characterName, history, loading, sections, userName]);
