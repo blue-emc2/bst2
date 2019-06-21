@@ -18,6 +18,17 @@ services:
     tty: true
     stdin_open: true
 
+  front:
+    image: node:11-alpine
+    command: ["yarn", "start"]
+    tty: true
+    stdin_open: true
+    working_dir: /myapp/front
+    volumes:
+      - ./front:/myapp/front:cached
+    ports:
+      - 3001:3000
+
 volumes:
   bundle:
     driver: local
