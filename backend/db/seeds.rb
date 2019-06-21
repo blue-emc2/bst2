@@ -10,10 +10,13 @@ t1 = Text.create(body: "吾輩（わがはい）は猫である。名前はま�
 t2 = Text.create(body: "どこで生れたかとんと見当（けんとう）がつかぬ。")
 t3 = Text.create(body: "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。")
 
+image1 = Image.create
+image1.body.attach(io: File.open("tmp/真ミラクルフラッシュ.png"), filename: "真ミラクルフラッシュ.png", content_type: "image/png")
+
 sections = [
-  Section.create(layout_type: "Text", text: t1),
-  Section.create(layout_type: "Text", text: t2),
-  Section.create(layout_type: "Text", text: t3),
+  Section.create(layout_type: "left", text: t1, image: image1),
+  Section.create(layout_type: "center", text: t2),
+  Section.create(layout_type: "center", text: t3),
 ]
 
 Story.create(character_name: "Yoshi'p Sampo", user_name: "Yoshi", sections: sections)
@@ -35,6 +38,6 @@ attr = {
 sections = []
 attr[:bodies].each do |b|
   t = Text.create(body: b)
-  sections << Section.create(layout_type: "Text", text: t)
+  sections << Section.create(layout_type: "center", text: t)
 end
 Story.create(character_name: attr[:character_name], user_name: attr[:user_name], sections: sections)

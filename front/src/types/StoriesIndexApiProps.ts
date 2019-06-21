@@ -12,5 +12,10 @@ export interface Datum {
 interface Attributes {
   characterName: string;
   userName: string;
-  body: string;
+  body: Body;
+}
+
+interface Body {
+  description: string;
+  imageUrl?: string | undefined;
 }
