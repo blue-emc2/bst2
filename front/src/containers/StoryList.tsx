@@ -36,7 +36,11 @@ const StoryList: FC<StroryListProps> = ({ data, history }) => {
             data-cy={`story_card${index}`}
           >
             <Image
-              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              src={
+                s.attributes.body.imageUrl
+                  ? s.attributes.body.imageUrl
+                  : 'https://react.semantic-ui.com/images/avatar/large/matthew.png'
+              }
               wrapped
               ui={false}
             />
@@ -48,7 +52,7 @@ const StoryList: FC<StroryListProps> = ({ data, history }) => {
                 {s ? s.attributes.userName : '???'}
               </Card.Meta>
               <Card.Description data-cy={`story_card_desc${index}`}>
-                {s ? s.attributes.body : '???'}
+                {s ? s.attributes.body.description : '???'}
               </Card.Description>
             </Card.Content>
           </Card>

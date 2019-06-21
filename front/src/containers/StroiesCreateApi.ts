@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { ApiConfig, DEFAULT_API_CONFIG } from './APIConfig';
-import { SectionForRequest } from '../types/StoryCreateApiProps';
 import { LayoutProps } from '../types/LayoutProps';
 
 export const StroiesCreateApi = (
