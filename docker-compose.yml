@@ -19,11 +19,10 @@ services:
     stdin_open: true
 
   web:
-    image: node:11-alpine
+    build: ./front
     command: ["yarn", "start"]
     tty: true
     stdin_open: true
-    working_dir: /myapp/front
     volumes:
       - ./front:/myapp/front:cached
     ports:
