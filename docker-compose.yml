@@ -20,7 +20,7 @@ services:
 
   web:
     build: ./front
-    command: ["yarn", "start"]
+    command: ["yarn", "devstart"]
     tty: true
     stdin_open: true
     volumes:
