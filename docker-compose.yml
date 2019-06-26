@@ -6,7 +6,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   backend:
-    build: .
+    build: ./backend
     command: ["bin/rails", "s", "-b", "0.0.0.0", "-p", "5000"]
     volumes:
       - ./backend:/myapp/backend:cached
@@ -17,6 +17,16 @@ services:
       - db
     tty: true
     stdin_open: true
+
+  web:
+    build: ./front
+    command: ["yarn", "devstart"]
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./front:/myapp/front:cached
+    ports:
+      - 3001:3000
 
 volumes:
   bundle:
