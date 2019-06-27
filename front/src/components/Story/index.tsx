@@ -24,6 +24,7 @@ const useFetchStroy = (id: string) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    // TODO: ここはcomponentに切り出したい
     const fetchStroy = async () => {
       const instance = axios.create(DEFAULT_API_CONFIG);
       const result = await instance.get<API>(`/stories/${id}`);
