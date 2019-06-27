@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+return if Story.size > 0
+
 t1 = Text.create(body: "吾輩（わがはい）は猫である。名前はまだ無い。")
 t2 = Text.create(body: "どこで生れたかとんと見当（けんとう）がつかぬ。")
 t3 = Text.create(body: "何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。")
