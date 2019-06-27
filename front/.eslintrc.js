@@ -27,6 +27,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    tsconfigRootDir: '/Users/yamazaki/dev/bst2/front',
     project: '/Users/yamazaki/dev/bst2/front/tsconfig.json',
     sourceType: 'module',
   },
@@ -84,6 +85,8 @@ module.exports = {
     'react/jsx-uses-vars': 'error',
     'react/prop-types': 'off',
     'react/prefer-stateless-function': 'off',
+    'react/jsx-no-bind': 'off',
+    'react/no-deprecated': 'off',
 
     // react hooks
     'react-hooks/rules-of-hooks': 'error',

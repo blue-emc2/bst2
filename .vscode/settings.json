@@ -25,15 +25,12 @@
   "files.trimTrailingWhitespace": true,
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
-  "stylelint.enable": true,
-  "typescript.tsserver.trace": "verbose",
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   },
   "eslint.run": "onSave",
   "eslint.packageManager": "yarn",
-  "[ruby]": {
-    "ruby.format": "rufo",
-  },
-  "editor.tabSize": 2
+  "[ruby]": {},
+  "editor.tabSize": 2,
+  "eslint.provideLintTask": true
 }
