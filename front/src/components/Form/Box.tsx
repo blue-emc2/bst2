@@ -9,7 +9,13 @@ export interface BoxProps {
 }
 
 const InputText: FC<BoxProps> = ({ name }) => (
-  <Form.Field control={Input} name={name} data-cy={name} />
+  <Form.Field
+    required
+    control={Input}
+    name={name}
+    data-cy={name}
+    label="本文"
+  />
 );
 
 const Box: FC<BoxProps> = ({ ...args }) => {
