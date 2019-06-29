@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Container, Header, Segment, Button } from 'semantic-ui-react';
+import { Container, Header, Segment, Button, Icon } from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
@@ -41,7 +41,10 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
           登録中...
         </Button>
       ) : (
-        <Button onClick={handleClick}>公開する</Button>
+        <Button icon labelPosition="right" onClick={handleClick}>
+          <Icon name="long arrow alternate right"></Icon>
+          公開する
+        </Button>
       )}
     </>
   );
@@ -52,8 +55,8 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;
 
   return (
-    <>
-      <Container text style={{ marginTop: '7em' }}>
+    <Container style={{ marginTop: '7em' }}>
+      <Container text>
         <Header as="h1" data-test="charactername">
           {characterName}
         </Header>
@@ -68,9 +71,13 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
       <SectionList sections={sections} />
 
       <Segment>
+        <Button icon labelPosition="left">
+          <Icon name="long arrow alternate left"></Icon>
+          入力画面へ
+        </Button>
         <Deliver {...args} />
       </Segment>
-    </>
+    </Container>
   );
 };
 
