@@ -12,7 +12,7 @@ describe('/preview', () => {
     cy.get('input[name=characterName]').type(charactername);
     cy.get('input[name=userName]').type(username);
     cy.get('[data-cy=section1] > input').type(text0);
-    cy.get('.form > .right > .ui').click();
+    cy.get('.fluid > .right > .ui').click();
     cy.get('[data-cy=section2] > input').type(text1);
   });
 
