@@ -67,6 +67,21 @@ describe('/preview', () => {
     });
   });
 
+  describe('プレビューから入力に戻った時に情報が復元されている', () => {
+    beforeEach(() => {
+      cy.contains('プレビュー').click();
+      cy.get('.ui.left').click();
+    });
+
+    it('入力画面に戻っている', () => {
+      cy.url().should('include', '/new');
+    });
+
+    it('各種情報が復元されている', () => {
+      cy.get('[data-cy=inputCharacterName]').should('have.text', charactername);
+    });
+  });
+
   // ファイルアップロードのテストコードを書いているができない
   describe.skip('文章入力と画像を添付したとき', () => {
     beforeEach(() => {
