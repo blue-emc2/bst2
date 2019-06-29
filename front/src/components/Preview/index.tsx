@@ -5,6 +5,12 @@ import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
 
+const handleClickFormNew = ({ ...props }) => {
+  const { history, characterName } = props;
+
+  history.push('/new', { characterName });
+};
+
 type routerWithLayoutProps = RouteComponentProps & LayoutProps;
 
 const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
@@ -71,7 +77,11 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
       <SectionList sections={sections} />
 
       <Segment>
-        <Button icon labelPosition="left">
+        <Button
+          icon
+          labelPosition="left"
+          onClick={e => handleClickFormNew(args)}
+        >
           <Icon name="long arrow alternate left"></Icon>
           入力画面へ
         </Button>

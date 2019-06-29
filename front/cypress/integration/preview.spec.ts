@@ -78,7 +78,10 @@ describe('/preview', () => {
     });
 
     it('各種情報が復元されている', () => {
-      cy.get('[data-cy=inputCharacterName]').should('have.text', charactername);
+      cy.get('[data-cy=inputCharacterName] > input').should(
+        'have.value',
+        charactername,
+      );
     });
   });
 
