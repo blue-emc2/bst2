@@ -121,7 +121,9 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
           placeholder="キャラクター名"
         />
         <Form.Input name="userName" label="作者" placeholder="作者" />
-        <SectionTable />
+        <Container fluid>
+          <SectionTable />
+        </Container>
         <PreviewButton />
       </Form>
     </Container>

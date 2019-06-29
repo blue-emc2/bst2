@@ -15,7 +15,6 @@ class StorySerializer
       }
 
       if (section.image)
-        logger.debug("url=#{section.image.body_url},    image=#{section.image}")
         result[:imageUrl] = section.image.body_url
       end
       result
