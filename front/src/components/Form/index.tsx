@@ -35,7 +35,9 @@ type FromProps = {
   onPreview: ({ characterName }: LayoutProps) => void;
 } & RouteComponentProps;
 
-const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
+const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
+  const { history, location } = props;
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -107,6 +109,9 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
     history.push('/preview');
   };
 
+  // プレビューから戻って来た時に値がある想定
+  const { state } = location;
+
   return (
     <Container style={{ marginTop: '7em' }}>
       {/* もしかしてFormいらない説？ */}
@@ -119,10 +124,18 @@ const StoryForm: FC<FromProps> = ({ onPreview, history }) => {
           name="characterName"
           label="キャラクター名"
           placeholder="キャラクター名"
+          value={state ? state.characterName : undefined}
+          data-cy="inputCharacterName"
         />
-        <Form.Input name="userName" label="作者" placeholder="作者" />
+        <Form.Input
+          name="userName"
+          label="作者"
+          placeholder="作者"
+          value={state ? state.userName : undefined}
+          data-cy="inputUserName"
+        />
         <Container fluid>
-          <SectionTable />
+          <SectionTable sections={state ? state.sections : undefined} />
         </Container>
         <PreviewButton />
       </Form>

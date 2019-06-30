@@ -12,7 +12,7 @@ describe('/preview', () => {
     cy.get('input[name=characterName]').type(charactername);
     cy.get('input[name=userName]').type(username);
     cy.get('[data-cy=section1] > input').type(text0);
-    cy.get('.form > .right > .ui').click();
+    cy.get('.fluid > .right > .ui').click();
     cy.get('[data-cy=section2] > input').type(text1);
   });
 
@@ -64,6 +64,36 @@ describe('/preview', () => {
 
     it('ストーリーが表示されている', () => {
       cy.get('[data-cy=previewRightText]').should('have.text', text0);
+    });
+  });
+
+  describe('プレビューから入力に戻った時に情報が復元されている', () => {
+    beforeEach(() => {
+      cy.contains('プレビュー').click();
+      cy.get('.ui.left').click();
+    });
+
+    it('入力画面に戻っている', () => {
+      cy.url().should('include', '/new');
+    });
+
+    it('各種情報が復元されている', () => {
+      // キャラ名
+      cy.get('[data-cy=inputCharacterName] > input').should(
+        'have.value',
+        charactername,
+      );
+
+      // ユーザー名
+      cy.get('[data-cy=inputUserName] > input').should('have.value', username);
+
+      // セクション数
+      cy.get('[data-cy=inputSection1]').should('be.visible');
+      cy.get('[data-cy=inputSection2]').should('be.visible');
+
+      // 文章が復帰されている
+      cy.get('[data-cy=section1] > input').should('have.value', text0);
+      cy.get('[data-cy=section2] > input').should('have.value', text1);
     });
   });
 
