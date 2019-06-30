@@ -15,7 +15,11 @@ import {
   Segment,
 } from 'semantic-ui-react';
 import Box from './Box';
-import { TextPosition } from '../../types/LayoutProps';
+import {
+  TextPosition,
+  SectionListProps,
+  Section,
+} from '../../types/LayoutProps';
 
 interface RowProps {
   activeItem: string;
@@ -142,6 +146,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
 
     return initialState;
   };
+
   const initialState = setInitialState(sections);
   const [state, dispatch] = useReducer(reducer, initialState);
 

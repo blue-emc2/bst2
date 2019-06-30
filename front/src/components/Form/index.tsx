@@ -124,14 +124,14 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           name="characterName"
           label="キャラクター名"
           placeholder="キャラクター名"
-          value={state === undefined ? undefined : state.characterName}
+          value={state ? state.characterName : undefined}
           data-cy="inputCharacterName"
         />
         <Form.Input
           name="userName"
           label="作者"
           placeholder="作者"
-          value={state === undefined ? undefined : state.userName}
+          value={state ? state.userName : undefined}
           data-cy="inputUserName"
         />
         <Container fluid>
