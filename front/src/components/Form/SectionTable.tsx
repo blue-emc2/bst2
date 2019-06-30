@@ -121,22 +121,35 @@ interface StateType {
   items: Item[];
 }
 
-const SectionTable: FC<{}> = () => {
-  const initialState = {
-    items: [
-      {
-        id: 1,
-        name: 'section1',
-      },
-    ],
+const SectionTable: FC<SectionListProps> = ({ sections }) => {
+  const setInitialState = (initSections: Section[]) => {
+    let initialState;
+
+    if (initSections) {
+      const i = initSections.map((value, index) => ({
+        id: index + 1,
+        name: `section${index + 1}`,
+      }));
+
+      initialState = {
+        items: i,
+      };
+    } else {
+      initialState = {
+        items: [{ id: 1, name: 'section1' }],
+      };
+    }
+
+    return initialState;
   };
+  const initialState = setInitialState(sections);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <>
       <Grid celled="internally" columns={2}>
         {state.items.map((item: { id: number }) => (
-          <Segment key={item.id.toString()}>
+          <Segment key={item.id.toString()} data-cy={`inputSection${item.id}`}>
             <SectionBar name={`section${item.id}`} />
 
             {/* TODO: 消すときにホワンとさせたいかも */}

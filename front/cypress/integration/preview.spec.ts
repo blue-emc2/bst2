@@ -84,6 +84,10 @@ describe('/preview', () => {
       );
 
       cy.get('[data-cy=inputUserName] > input').should('have.value', username);
+
+      // セクション数
+      cy.get('[data-cy=inputSection1]').should('be.visible');
+      cy.get('[data-cy=inputSection2]').should('be.visible');
     });
   });
 

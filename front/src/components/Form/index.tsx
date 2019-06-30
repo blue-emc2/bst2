@@ -135,7 +135,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           data-cy="inputUserName"
         />
         <Container fluid>
-          <SectionTable />
+          <SectionTable sections={state ? state.sections : undefined} />
         </Container>
         <PreviewButton />
       </Form>
