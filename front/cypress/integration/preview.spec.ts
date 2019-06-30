@@ -78,16 +78,22 @@ describe('/preview', () => {
     });
 
     it('各種情報が復元されている', () => {
+      // キャラ名
       cy.get('[data-cy=inputCharacterName] > input').should(
         'have.value',
         charactername,
       );
 
+      // ユーザー名
       cy.get('[data-cy=inputUserName] > input').should('have.value', username);
 
       // セクション数
       cy.get('[data-cy=inputSection1]').should('be.visible');
       cy.get('[data-cy=inputSection2]').should('be.visible');
+
+      // 文章が復帰されている
+      cy.get('[data-cy=section1] > input').should('have.value', text0);
+      cy.get('[data-cy=section2] > input').should('have.value', text1);
     });
   });
 
