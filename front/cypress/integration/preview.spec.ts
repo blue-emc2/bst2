@@ -82,6 +82,8 @@ describe('/preview', () => {
         'have.value',
         charactername,
       );
+
+      cy.get('[data-cy=inputUserName] > input').should('have.value', username);
     });
   });
 

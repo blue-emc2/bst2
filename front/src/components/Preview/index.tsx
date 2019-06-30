@@ -6,9 +6,9 @@ import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
 
 const handleClickFormNew = ({ ...props }) => {
-  const { history, characterName } = props;
+  const { history, characterName, userName } = props;
 
-  history.push('/new', { characterName });
+  history.push('/new', { characterName, userName });
 };
 
 type routerWithLayoutProps = RouteComponentProps & LayoutProps;
