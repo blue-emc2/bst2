@@ -43,14 +43,13 @@ const Home: FC<{}> = () => {
   return (
     <>
       <Segment
-        inverted
         textAlign="center"
         style={{ minHeight: 400, padding: '1em 0em' }}
         vertical
       >
         <Container text>
-          <Header as="h1" inverted content="back story" />
-          <Button primary inverted size="huge" as={Link} to="/new">
+          <Header as="h1" content="back story" />
+          <Button primary size="huge" as={Link} to="/new">
             ストーリーを書いてみる
             <Icon name="arrow right" />
           </Button>

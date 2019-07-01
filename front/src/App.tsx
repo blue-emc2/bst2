@@ -76,17 +76,19 @@ const App: FC<{}> = () => {
       </Menu>
 
       <main>
-        <Switch>
-          <Route
-            path="/new"
-            render={() => <StoryForm onPreview={handleOnSubmit} />}
-          />
-          <Route path="/about" component={About} />
-          <Route path="/preview" render={() => <Preview {...layout} />} />
-          <Route path="/story/:id" component={Story} />
-          <Route path="/" component={Home} />
-          <Redirect to="/" />;
-        </Switch>
+        <Container style={{ marginTop: '7em' }}>
+          <Switch>
+            <Route
+              path="/new"
+              render={() => <StoryForm onPreview={handleOnSubmit} />}
+            />
+            <Route path="/about" component={About} />
+            <Route path="/preview" render={() => <Preview {...layout} />} />
+            <Route path="/story/:id" component={Story} />
+            <Route path="/" component={Home} />
+            <Redirect to="/" />;
+          </Switch>
+        </Container>
       </main>
 
       <footer>

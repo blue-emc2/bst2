@@ -26,7 +26,7 @@ const StoryList: FC<StroryListProps> = ({ data, history }) => {
 
   return (
     <>
-      <Card.Group>
+      <Card.Group itemsPerRow={3}>
         {data.slice(begin, end).map((s, index) => (
           <Card
             key={s ? s.id : '0'}
