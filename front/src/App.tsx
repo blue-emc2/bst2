@@ -98,12 +98,12 @@ const App: FC<{}> = () => {
       </main>
 
       <footer>
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+        <Segment vertical style={{ padding: '5em 0em' }}>
           <Container textAlign="center">
-            <Grid divided inverted stackable>
+            <Grid divided stackable>
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="About" />
-                <List link inverted>
+                <Header as="h4" content="About" />
+                <List link>
                   <List.Item>
                     <Link to="/about">bstとは</Link>
                   </List.Item>
