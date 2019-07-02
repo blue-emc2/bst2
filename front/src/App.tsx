@@ -39,7 +39,7 @@ export interface SectionListProp {
 // ---------------------------------------
 
 const MainContainer = styled(Container)`
-  margin-top: 7em;
+  margin-top: 6em;
 `;
 
 const App: FC<{}> = () => {

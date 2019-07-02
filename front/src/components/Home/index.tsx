@@ -8,10 +8,13 @@ import {
   Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import StroyList from '../../containers/StoryList';
 import Spinner from '../Spinner';
 import { StoriesIndexApi } from '../../containers/StoriesIndexApi';
 import { Datum } from '../../types/StoriesIndexApiProps';
+
+import background from '../../image/home.png';
 
 const useFetchStoriesIndex = () => {
   const [loaded, setLoaded] = useState(false);
@@ -37,24 +40,29 @@ const useFetchStoriesIndex = () => {
   };
 };
 
+const SummaryContainer = styled(Container)`
+  background-color: #fff;
+  background-image: url(${background});
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 400px;
+`;
+
 const Home: FC<{}> = () => {
   const { loaded, data, isError } = useFetchStoriesIndex();
 
   return (
     <>
-      <Segment
-        textAlign="center"
-        style={{ minHeight: 400, padding: '1em 0em' }}
-        vertical
-      >
-        <Container text>
+      <SummaryContainer>
+        <Segment textAlign="center" vertical>
           <Header as="h1" content="back story" />
           <Button primary size="huge" as={Link} to="/new">
             ストーリーを書いてみる
             <Icon name="arrow right" />
           </Button>
-        </Container>
-      </Segment>
+        </Segment>
+      </SummaryContainer>
 
       {isError ? (
         <Message negative>
