@@ -9,6 +9,7 @@ import {
   Header,
   List,
 } from 'semantic-ui-react';
+import styled from 'styled-components';
 import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
@@ -36,6 +37,10 @@ export interface SectionListProp {
 }
 
 // ---------------------------------------
+
+const MainContainer = styled(Container)`
+  margin-top: 7em;
+`;
 
 const App: FC<{}> = () => {
   const initialValue = {
@@ -76,7 +81,7 @@ const App: FC<{}> = () => {
       </Menu>
 
       <main>
-        <Container style={{ marginTop: '7em' }}>
+        <MainContainer>
           <Switch>
             <Route
               path="/new"
@@ -88,7 +93,7 @@ const App: FC<{}> = () => {
             <Route path="/" component={Home} />
             <Redirect to="/" />;
           </Switch>
-        </Container>
+        </MainContainer>
       </main>
 
       <footer>
