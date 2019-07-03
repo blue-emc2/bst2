@@ -40,13 +40,9 @@ const useFetchStoriesIndex = () => {
   };
 };
 
-const SummaryContainer = styled(Container)`
-  background-color: #fff;
-  background-image: url(${background});
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 400px;
+const SummarySegment = styled(Segment)`
+  min-height: 500px;
+  padding: 1em 0em;
 `;
 
 const Home: FC<{}> = () => {
@@ -54,15 +50,15 @@ const Home: FC<{}> = () => {
 
   return (
     <>
-      <SummaryContainer>
-        <Segment textAlign="center" vertical>
-          <Header as="h1" content="back story" />
-          <Button primary size="huge" as={Link} to="/new">
-            ストーリーを書いてみる
-            <Icon name="arrow right" />
-          </Button>
-        </Segment>
-      </SummaryContainer>
+      <SummarySegment textAlign="center" vertical>
+        <Header size="large">
+          このサイトは光の戦士たちが光の戦士になる前の物語(妄想)を投稿できるサイトです
+        </Header>
+        <Button primary size="huge" as={Link} to="/new">
+          ストーリーを書いてみる
+          <Icon name="arrow right" />
+        </Button>
+      </SummarySegment>
 
       {isError ? (
         <Message negative>
