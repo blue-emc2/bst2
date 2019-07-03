@@ -45,19 +45,30 @@ const SummarySegment = styled(Segment)`
   padding: 1em 0em;
 `;
 
+const SummaryHeader = styled(Header)`
+  &&& {
+    font-weight: normal;
+    margin-bottom: 0px;
+    margin-top: 3em;
+  }
+`;
+
 const Home: FC<{}> = () => {
   const { loaded, data, isError } = useFetchStoriesIndex();
 
   return (
     <>
       <SummarySegment textAlign="center" vertical>
-        <Header size="large">
-          このサイトは光の戦士たちが光の戦士になる前の物語(妄想)を投稿できるサイトです
-        </Header>
-        <Button primary size="huge" as={Link} to="/new">
-          ストーリーを書いてみる
-          <Icon name="arrow right" />
-        </Button>
+        <Container text>
+          <SummaryHeader as="h1" size="large">
+            このサイトは光の戦士たちが光の戦士になる前の
+            物語(妄想)を投稿できるサイトです
+          </SummaryHeader>
+          <Button primary size="huge" as={Link} to="/new">
+            ストーリーを書いてみる
+            <Icon name="arrow right" />
+          </Button>
+        </Container>
       </SummarySegment>
 
       {isError ? (
