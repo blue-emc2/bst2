@@ -82,19 +82,19 @@ const App: FC<{}> = () => {
       </Menu>
 
       <main>
-        <MainContainer>
+        <div style={{ marginTop: '6em' }}>
           <Switch>
             <Route
               path="/new"
               render={() => <StoryForm onPreview={handleOnSubmit} />}
             />
-            <Route path="/about" component={About} />
             <Route path="/preview" render={() => <Preview {...layout} />} />
             <Route path="/story/:id" component={Story} />
+            <Route path="/about" component={About} />
             <Route path="/" component={Home} />
             <Redirect to="/" />;
           </Switch>
-        </MainContainer>
+        </div>
       </main>
 
       <footer>

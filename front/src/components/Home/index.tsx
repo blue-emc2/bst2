@@ -76,7 +76,9 @@ const Home: FC<{}> = () => {
           現在エラーが発生しています。しばらくお待ち下さいmm
         </Message>
       ) : (
-        <>{loaded ? <StroyList data={data} /> : <Spinner />}</>
+        <Segment basic>
+          {loaded ? <StroyList data={data} /> : <Spinner />}
+        </Segment>
       )}
     </>
   );
