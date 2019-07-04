@@ -14,8 +14,6 @@ import Spinner from '../Spinner';
 import { StoriesIndexApi } from '../../containers/StoriesIndexApi';
 import { Datum } from '../../types/StoriesIndexApiProps';
 
-import background from '../../image/home.png';
-
 const useFetchStoriesIndex = () => {
   const [loaded, setLoaded] = useState(false);
   const [stories, setStories] = useState<Datum[]>([]);

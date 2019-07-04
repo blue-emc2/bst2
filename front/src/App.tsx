@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import './App.css';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import {
   Menu,
@@ -10,7 +9,6 @@ import {
   List,
   Grid,
 } from 'semantic-ui-react';
-import styled from 'styled-components';
 import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
@@ -39,10 +37,6 @@ export interface SectionListProp {
 
 // ---------------------------------------
 
-const MainContainer = styled(Container)`
-  margin-top: 6em;
-`;
-
 const App: FC<{}> = () => {
   const initialValue = {
     characterName: '',
@@ -69,8 +63,8 @@ const App: FC<{}> = () => {
   };
 
   return (
-    <>
-      <Menu fixed="top" size="large">
+    <div style={{ backgroundColor: '#f9fafb' }}>
+      <Menu size="large">
         <Container>
           <Menu.Item as={Link} to="/home" active data-cy="home">
             Home
@@ -81,20 +75,18 @@ const App: FC<{}> = () => {
         </Container>
       </Menu>
 
-      <main>
-        <div style={{ marginTop: '6em' }}>
-          <Switch>
-            <Route
-              path="/new"
-              render={() => <StoryForm onPreview={handleOnSubmit} />}
-            />
-            <Route path="/preview" render={() => <Preview {...layout} />} />
-            <Route path="/story/:id" component={Story} />
-            <Route path="/about" component={About} />
-            <Route path="/" component={Home} />
-            <Redirect to="/" />;
-          </Switch>
-        </div>
+      <main role="main">
+        <Switch>
+          <Route
+            path="/new"
+            render={() => <StoryForm onPreview={handleOnSubmit} />}
+          />
+          <Route path="/preview" render={() => <Preview {...layout} />} />
+          <Route path="/story/:id" component={Story} />
+          <Route path="/about" component={About} />
+          <Route path="/" component={Home} />
+          <Redirect to="/" />;
+        </Switch>
       </main>
 
       <footer>
@@ -124,7 +116,7 @@ const App: FC<{}> = () => {
           </Container>
         </Segment>
       </footer>
-    </>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { Form, Container, Button } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
+import { MainContainer } from '../styled';
 
 const characterNameFromInput = () => {
   const characterNameEle = document.querySelector<HTMLInputElement>(
@@ -113,7 +114,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
   const { state } = location;
 
   return (
-    <Container style={{ marginTop: '7em' }}>
+    <MainContainer>
       {/* もしかしてFormいらない説？ */}
       <Form
         encType="multipart/form-data"
@@ -139,7 +140,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         </Container>
         <PreviewButton />
       </Form>
-    </Container>
+    </MainContainer>
   );
 };
 
