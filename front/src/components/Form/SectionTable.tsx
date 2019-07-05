@@ -82,6 +82,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
             {/* TODO: 消すときにホワンとさせたいかも */}
             <Button
               icon
+              floated="right"
               onClick={(e: SyntheticEvent) => {
                 e.preventDefault();
                 dispatch({ type: 'decrement', barId: item.id });
