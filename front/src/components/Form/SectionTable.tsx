@@ -1,5 +1,6 @@
 import React, { FC, SyntheticEvent, useReducer, Reducer } from 'react';
 import { Grid, Button, Icon, Segment } from 'semantic-ui-react';
+import styled from 'styled-components';
 import { SectionListProps, Section } from '../../types/LayoutProps';
 import SectionBar from './SectionBar';
 
@@ -41,6 +42,10 @@ interface StateType {
   items: Item[];
 }
 
+const SectionSegment = styled(Segment)`
+  width: 100%;
+`;
+
 const SectionTable: FC<SectionListProps> = ({ sections }) => {
   const setInitialState = (initSections: Section[]) => {
     let initialState;
@@ -71,7 +76,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
     <>
       <Grid celled="internally" columns={2}>
         {state.items.map(item => (
-          <Segment key={item.id} data-cy={`inputSection${item.id}`}>
+          <SectionSegment key={item.id} data-cy={`inputSection${item.id}`}>
             <SectionBar name={`section${item.id}`} body={item.body} />
 
             {/* TODO: 消すときにホワンとさせたいかも */}
@@ -84,7 +89,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
             >
               <Icon name="minus circle" />
             </Button>
-          </Segment>
+          </SectionSegment>
         ))}
       </Grid>
       <Segment textAlign="right" basic>
