@@ -18,6 +18,7 @@ const InputImage: FC<BoxProps> = ({ name }) => {
         control={Input}
         type="file"
         name={name}
+        label="挿絵"
         data-cy={`file-${name}`}
         onChange={handleChangeImage}
       />
