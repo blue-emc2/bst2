@@ -127,6 +127,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           placeholder="キャラクター名"
           value={state ? state.characterName : undefined}
           data-cy="inputCharacterName"
+          width={12}
         />
         <Form.Input
           name="userName"
@@ -134,6 +135,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           placeholder="作者"
           value={state ? state.userName : undefined}
           data-cy="inputUserName"
+          width={12}
         />
         <Container fluid>
           <SectionTable sections={state ? state.sections : undefined} />

@@ -87,7 +87,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
           </Segment>
         ))}
       </Grid>
-      <Segment textAlign="right">
+      <Segment textAlign="right" basic>
         <Button
           icon
           onClick={(e: SyntheticEvent) => {
