@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Grid, Form, Input } from 'semantic-ui-react';
+import { Grid, Form, TextArea } from 'semantic-ui-react';
 import InputImage from './InputImage';
 import { TextPosition } from '../../types/LayoutProps';
 
@@ -12,11 +12,13 @@ export interface BoxProps {
 const InputText: FC<BoxProps> = ({ name, body }) => (
   <Form.Field
     required
-    control={Input}
+    control={TextArea}
     name={name}
     data-cy={name}
     label="本文"
     value={body || undefined}
+    rows={8}
+    style={{ resize: 'none' }}
   />
 );
 

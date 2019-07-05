@@ -63,7 +63,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         const positionType = section.dataset.position;
         let position = TextPosition.CENTER;
         let body = '';
-        const selector = `input[name="section${i + 1}"]`; // sectionは1から始まる
+        const selector = `textarea[name="section${i + 1}"]`; // sectionは1から始まる
         let image;
         let imageUrl = '';
 
