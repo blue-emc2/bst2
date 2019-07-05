@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, FormEvent } from 'react';
-import { Form, Container, Button } from 'semantic-ui-react';
+import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
@@ -120,23 +120,25 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         encType="multipart/form-data"
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <Form.Input
-          required
-          name="characterName"
-          label="キャラクター名"
-          placeholder="キャラクター名"
-          value={state ? state.characterName : undefined}
-          data-cy="inputCharacterName"
-          width={12}
-        />
-        <Form.Input
-          name="userName"
-          label="作者"
-          placeholder="作者"
-          value={state ? state.userName : undefined}
-          data-cy="inputUserName"
-          width={12}
-        />
+        <Segment basic>
+          <Form.Input
+            required
+            name="characterName"
+            label="キャラクター名"
+            placeholder="キャラクター名"
+            value={state ? state.characterName : undefined}
+            data-cy="inputCharacterName"
+            width={12}
+          />
+          <Form.Input
+            name="userName"
+            label="作者"
+            placeholder="作者"
+            value={state ? state.userName : undefined}
+            data-cy="inputUserName"
+            width={12}
+          />
+        </Segment>
         <Container fluid>
           <SectionTable sections={state ? state.sections : undefined} />
         </Container>
