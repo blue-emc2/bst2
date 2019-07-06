@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, FormEvent } from 'react';
 import { Form, Container, Button, Segment } from 'semantic-ui-react';
@@ -63,34 +64,40 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
       const section = sectionArray[i];
       if (section !== null) {
         const positionType = section.dataset.position;
-        let position = TextPosition.CENTER;
-        let body = '';
         const selector = `textarea[name="section${i + 1}"]`; // sectionは1から始まる
+        const imageSelector = `input[name="section${i + 1}"]`;
+
+        let position = TextPosition.CENTER;
+        let body;
         let image;
         let imageUrl = '';
 
+        // TODO else ifは共通化できる
         if (positionType === TextPosition.CENTER) {
           const textEle = section.querySelector(selector) as HTMLInputElement;
           body = textEle !== null ? textEle.value : '';
         } else if (positionType === TextPosition.LEFT) {
           position = TextPosition.LEFT;
-          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          body = elemetns[0].value;
-          const { files } = elemetns[1];
-          if (files !== null && files[0] !== undefined) {
-            // eslint-disable-next-line prefer-destructuring
-            image = files[0];
+          const textElement = section.querySelector<HTMLTextAreaElement>(
+            selector,
+          );
+          body = textElement ? textElement.value : '';
+          const file = section.querySelector<HTMLInputElement>(imageSelector);
+
+          if (file && file.files) {
+            image = file.files[0];
             imageUrl = URL.createObjectURL(image);
           }
         } else if (positionType === TextPosition.RIGHT) {
           position = TextPosition.RIGHT;
-          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          body = elemetns[1].value;
-          const { files } = elemetns[0];
-          if (files !== null && files[0] !== undefined) {
-            // eslint-disable-next-line prefer-destructuring
-            image = files[0];
-            imageUrl = URL.createObjectURL(image);
+          const textElement = section.querySelector<HTMLTextAreaElement>(
+            selector,
+          );
+          body = textElement ? textElement.value : '';
+          const file = section.querySelector<HTMLInputElement>(imageSelector);
+          if (file && file.files) {
+            image = file.files[0];
+            imageUrl = URL.createObjectURL(file);
           }
         } else {
           throw new Error(`予期しないtypeです ->${positionType}`);
