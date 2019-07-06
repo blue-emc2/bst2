@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import TextOnly from '../components/Preview/TextOnly';
 import HalfSection from '../components/Preview/HalfSection';
 import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
+import TextOnly from '../components/Story/TextOnly';
 
 const SectionList: FC<SectionListProps> = ({ sections }) => {
   const list = sections.map((s: Section, index: number) => {
@@ -43,13 +43,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
     }
   });
 
-  return (
-    <Container>
-      <Grid>
-        <Grid.Row>{list}</Grid.Row>
-      </Grid>
-    </Container>
-  );
+  return <Container text>{list}</Container>;
 };
 
 export default SectionList;

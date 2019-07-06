@@ -6,6 +6,7 @@ import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
 import { DEFAULT_API_CONFIG } from '../../containers/APIConfig';
+import { MainContainer } from '../styled';
 
 const useFetchStroy = (id: string) => {
   const initialValue = {
@@ -55,21 +56,19 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
   ) : (
     <>
       {loaded ? (
-        <>
-          <Container text style={{ marginTop: '7em' }}>
+        <MainContainer>
+          <Container text textAlign="center">
             <Header as="h1" data-cy="charactername">
               {data.attributes.characterName}
             </Header>
-          </Container>
 
-          <Container text>
-            <Header as="h1" data-cy="username">
+            <Header as="h3" data-cy="username">
               {data.attributes.userName}
             </Header>
           </Container>
 
           <SectionList sections={data.attributes.sections} />
-        </>
+        </MainContainer>
       ) : (
         <Spinner />
       )}
