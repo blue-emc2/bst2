@@ -84,7 +84,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           body = textElement ? textElement.value : '';
           const file = section.querySelector<HTMLInputElement>(imageSelector);
 
-          if (file && file.files) {
+          if (file && file.files && file.files.length > 0) {
             image = file.files[0];
             imageUrl = URL.createObjectURL(image);
           }
@@ -95,7 +95,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           );
           body = textElement ? textElement.value : '';
           const file = section.querySelector<HTMLInputElement>(imageSelector);
-          if (file && file.files) {
+          if (file && file.files && file.files.length > 0) {
             image = file.files[0];
             imageUrl = URL.createObjectURL(image);
           }
