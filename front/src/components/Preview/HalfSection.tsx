@@ -9,25 +9,25 @@ const HalfSection = ({ ...props }) => {
   let right;
   if (textPosition === TextPosition.LEFT) {
     left = (
-      <Container data-cy="previewLeftText" text>
-        {text}
+      <Container data-cy="previewLeftText">
+        <p>{text}</p>
       </Container>
     );
     right = <Image floated="left" size="large" src={imageUrl} />;
   } else {
     right = (
-      <Container data-cy="previewRightText" text>
-        {text}
+      <Container data-cy="previewRightText">
+        <p>{text}</p>
       </Container>
     );
     left = <Image floated="right" size="large" src={imageUrl} />;
   }
 
   return (
-    <>
+    <Grid>
       <Grid.Column width={8}>{left}</Grid.Column>
       <Grid.Column width={8}>{right}</Grid.Column>
-    </>
+    </Grid>
   );
 };
 
