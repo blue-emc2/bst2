@@ -97,7 +97,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
           const file = section.querySelector<HTMLInputElement>(imageSelector);
           if (file && file.files) {
             image = file.files[0];
-            imageUrl = URL.createObjectURL(file);
+            imageUrl = URL.createObjectURL(image);
           }
         } else {
           throw new Error(`予期しないtypeです ->${positionType}`);
