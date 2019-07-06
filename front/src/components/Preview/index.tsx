@@ -47,7 +47,7 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
           登録中...
         </Button>
       ) : (
-        <Button icon labelPosition="right" onClick={handleClick}>
+        <Button icon labelPosition="right" primary onClick={handleClick}>
           <Icon name="long arrow alternate right"></Icon>
           公開する
         </Button>
@@ -76,17 +76,22 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
 
       <SectionList sections={sections} />
 
-      <Segment>
-        <Button
-          icon
-          labelPosition="left"
-          onClick={e => handleClickFormNew(args)}
-        >
-          <Icon name="long arrow alternate left"></Icon>
-          入力画面へ
-        </Button>
-        <Deliver {...args} />
-      </Segment>
+      <Segment.Group horizontal style={{ border: 0 }}>
+        <Segment basic>
+          <Button
+            icon
+            labelPosition="left"
+            secondary
+            onClick={e => handleClickFormNew(args)}
+          >
+            <Icon name="long arrow alternate left"></Icon>
+            入力画面へ
+          </Button>
+        </Segment>
+        <Segment textAlign="right" basic style={{ border: 0 }}>
+          <Deliver {...args} />
+        </Segment>
+      </Segment.Group>
     </Container>
   );
 };

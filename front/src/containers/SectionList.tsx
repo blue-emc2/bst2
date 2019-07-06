@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
-import HalfSection from '../components/Preview/HalfSection';
+import { Container } from 'semantic-ui-react';
+import HalfSection from '../components/Story/HalfSection';
 import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
 import TextOnly from '../components/Story/TextOnly';
 
