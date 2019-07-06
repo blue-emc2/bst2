@@ -79,23 +79,26 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
           <SectionSegment key={item.id} data-cy={`inputSection${item.id}`}>
             <SectionBar name={`section${item.id}`} body={item.body} />
 
-            {/* TODO: 消すときにホワンとさせたいかも */}
-            <Button
-              icon
-              floated="right"
-              onClick={(e: SyntheticEvent) => {
-                e.preventDefault();
-                dispatch({ type: 'decrement', barId: item.id });
-              }}
-            >
-              <Icon name="minus circle" />
-            </Button>
+            <Segment floated="right" basic>
+              {/* TODO: 消すときにホワンとさせたいかも */}
+              <Button
+                icon
+                size="large"
+                onClick={(e: SyntheticEvent) => {
+                  e.preventDefault();
+                  dispatch({ type: 'decrement', barId: item.id });
+                }}
+              >
+                <Icon name="minus circle" />
+              </Button>
+            </Segment>
           </SectionSegment>
         ))}
       </Grid>
       <Segment textAlign="right" basic>
         <Button
           icon
+          size="large"
           onClick={(e: SyntheticEvent) => {
             e.preventDefault();
             dispatch({ type: 'increment' });

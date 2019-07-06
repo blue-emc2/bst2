@@ -26,9 +26,11 @@ const userNameFromInput = () => {
 
 const PreviewButton = () => {
   return (
-    <Button basic type="submit">
-      プレビュー
-    </Button>
+    <Segment basic textAlign="center">
+      <Button primary type="submit" size="large">
+        プレビュー
+      </Button>
+    </Segment>
   );
 };
 

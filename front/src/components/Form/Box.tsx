@@ -18,7 +18,8 @@ const InputText: FC<BoxProps> = ({ name, body }) => (
     label="本文"
     value={body || undefined}
     rows={8}
-    style={{ resize: 'none' }}
+    style={{ resize: 'vertical' }}
+    maxLength={200}
   />
 );
 
