@@ -1,6 +1,12 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, FormEvent } from 'react';
+import React, {
+  FC,
+  FormEvent,
+  SyntheticEvent,
+  useState,
+  useCallback,
+} from 'react';
 import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
@@ -122,6 +128,22 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
   // プレビューから戻って来た時に値がある想定
   const { state } = location;
 
+  const [name, setName] = useState(state ? state.characterName : '');
+  const handleCharacterNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setName(event.target.value);
+    },
+    [],
+  );
+
+  const [userName, setUserName] = useState(state ? state.userName : '');
+  const handleUserNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUserName(event.target.value);
+    },
+    [],
+  );
+
   return (
     <MainContainer>
       {/* もしかしてFormいらない説？ */}
@@ -135,17 +157,19 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
             name="characterName"
             label="キャラクター名"
             placeholder="キャラクター名"
-            value={state ? state.characterName : undefined}
+            value={name}
             data-cy="inputCharacterName"
             width={12}
+            onChange={handleCharacterNameChange}
           />
           <Form.Input
             name="userName"
             label="作者"
             placeholder="作者"
-            value={state ? state.userName : undefined}
+            value={userName}
             data-cy="inputUserName"
             width={12}
+            onChange={handleUserNameChange}
           />
         </Segment>
         <Container fluid>

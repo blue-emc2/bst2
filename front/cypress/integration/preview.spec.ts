@@ -95,6 +95,28 @@ describe('/preview', () => {
       cy.get('[data-cy=section1]').should('have.value', text0);
       cy.get('[data-cy=section2]').should('have.value', text1);
     });
+
+    it('編集ができる', () => {
+      cy.get('input[name=characterName]').type('hoge');
+      cy.get('[data-cy=inputCharacterName] > input').should(
+        'have.value',
+        `${charactername}hoge`,
+      );
+
+      // ユーザー名
+      cy.get('input[name=userName]').type('キャバレー');
+      cy.get('[data-cy=inputUserName] > input').should(
+        'have.value',
+        `${username}キャバレー`,
+      );
+
+      // 本文
+      cy.get('[data-cy=section1]').type('アマノビル');
+      cy.get('[data-cy=section1]').should('have.value', `${text0}アマノビル`);
+
+      cy.get('[data-cy=section2]').type('謎の刺客');
+      cy.get('[data-cy=section2]').should('have.value', `${text1}謎の刺客`);
+    });
   });
 
   // ファイルアップロードのテストコードを書いているができない

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { Grid, Form, TextArea } from 'semantic-ui-react';
 import InputImage from './InputImage';
 import { TextPosition } from '../../types/LayoutProps';
@@ -9,19 +9,31 @@ export interface BoxProps {
   body?: string;
 }
 
-const InputText: FC<BoxProps> = ({ name, body }) => (
-  <Form.Field
-    required
-    control={TextArea}
-    name={name}
-    data-cy={name}
-    label="本文"
-    value={body || undefined}
-    rows={8}
-    style={{ resize: 'vertical' }}
-    maxLength={200}
-  />
-);
+const InputText: FC<BoxProps> = ({ name, body }) => {
+  const [newBody, setBody] = useState(body || '');
+
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setBody(event.target.value);
+    },
+    [],
+  );
+
+  return (
+    <Form.Field
+      required
+      control={TextArea}
+      name={name}
+      data-cy={name}
+      label="本文"
+      value={newBody}
+      rows={8}
+      style={{ resize: 'vertical' }}
+      maxLength={200}
+      onChange={handleChange}
+    />
+  );
+};
 
 const Box: FC<BoxProps> = ({ ...props }) => {
   const { name, type } = props;
