@@ -11,9 +11,9 @@ describe('/preview', () => {
     cy.visit(`${baseUrl}/new`);
     cy.get('input[name=characterName]').type(charactername);
     cy.get('input[name=userName]').type(username);
-    cy.get('[data-cy=section1] > input').type(text0);
+    cy.get('[data-cy=section1]').type(text0);
     cy.get('.fluid > .right > .ui').click();
-    cy.get('[data-cy=section2] > input').type(text1);
+    cy.get('[data-cy=section2]').type(text1);
   });
 
   describe('入力画面でストーリーを入力したとき', () => {
@@ -30,15 +30,15 @@ describe('/preview', () => {
     });
 
     it('ストーリーが表示されている', () => {
-      cy.get('[data-cy=preview0]').should('have.text', text0);
-      cy.get('[data-cy=preview1]').should('have.text', text1);
+      cy.contains(text0);
+      cy.contains(text1);
     });
   });
 
   describe('レイアウト選択を文章と画像を選択する', () => {
     beforeEach(() => {
       cy.get('[data-cy=left_text]:first').click();
-      cy.get('[data-cy=section1] > input').type(text0);
+      cy.get('[data-cy=section1]').type(text0);
       cy.contains('プレビュー').click();
     });
 
@@ -54,7 +54,7 @@ describe('/preview', () => {
   describe('レイアウト選択を画像と文章を選択する', () => {
     beforeEach(() => {
       cy.get('[data-cy=right_text]:first').click();
-      cy.get('[data-cy=section1] > input').type(text0);
+      cy.get('[data-cy=section1]').type(text0);
       cy.contains('プレビュー').click();
     });
 
@@ -92,8 +92,8 @@ describe('/preview', () => {
       cy.get('[data-cy=inputSection2]').should('be.visible');
 
       // 文章が復帰されている
-      cy.get('[data-cy=section1] > input').should('have.value', text0);
-      cy.get('[data-cy=section2] > input').should('have.value', text1);
+      cy.get('[data-cy=section1]').should('have.value', text0);
+      cy.get('[data-cy=section2]').should('have.value', text1);
     });
   });
 
