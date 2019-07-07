@@ -1,5 +1,11 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
-import { Image, Card, Pagination, PaginationProps } from 'semantic-ui-react';
+import {
+  Image,
+  Card,
+  Pagination,
+  PaginationProps,
+  Segment,
+} from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { StroiesIndexAPIProps } from '../types/StoriesIndexApiProps';
 
@@ -58,16 +64,18 @@ const StoryList: FC<StroryListProps> = ({ data, history }) => {
           </Card>
         ))}
       </Card.Group>
-      <Pagination
-        boundaryRange={0}
-        defaultActivePage={1}
-        ellipsisItem={null}
-        firstItem={null}
-        lastItem={null}
-        siblingRange={1}
-        totalPages={Math.ceil(data.length / PER_PAGE_CARD_MAX_COUNT)}
-        onPageChange={handlePaginationChange}
-      />
+      <Segment basic textAlign="center">
+        <Pagination
+          boundaryRange={0}
+          defaultActivePage={1}
+          ellipsisItem={null}
+          firstItem={null}
+          lastItem={null}
+          siblingRange={1}
+          totalPages={Math.ceil(data.length / PER_PAGE_CARD_MAX_COUNT)}
+          onPageChange={handlePaginationChange}
+        />
+      </Segment>
     </>
   );
 };
