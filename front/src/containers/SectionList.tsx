@@ -8,13 +8,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
   const list = sections.map((s: Section, index: number) => {
     switch (s.textPosition) {
       case TextPosition.CENTER: {
-        return (
-          <TextOnly
-            text={s.body}
-            key={index.toString()}
-            data-cy={`preview${index}`}
-          />
-        );
+        return <TextOnly text={s.body} key={index.toString()} />;
       }
       case TextPosition.LEFT: {
         return (
