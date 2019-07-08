@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, FormEvent, useState, useCallback } from 'react';
-import { Form, Container, Button, Segment } from 'semantic-ui-react';
+import { Form, Container, Button, Segment, Input } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
@@ -138,6 +138,8 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
     [],
   );
 
+  const handleThemeChange = () => {};
+
   return (
     <MainContainer>
       {/* もしかしてFormいらない説？ */}
@@ -145,17 +147,26 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         encType="multipart/form-data"
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <Segment basic>
-          <Form.Input
-            required
-            name="characterName"
-            label="キャラクター名"
-            placeholder="キャラクター名"
-            value={name}
-            data-cy="inputCharacterName"
-            width={12}
-            onChange={handleCharacterNameChange}
-          />
+        <Segment style={{ background: '#272729' }}>
+          <Form.Group inline>
+            <label style={{ color: '#A299FF' }}>テーマ</label>
+            <Form.Radio
+              label="ノーマル"
+              value="sm"
+              onChange={handleThemeChange}
+            />
+            <Form.Radio label="漆黒のヴィランズ" value="md" />
+          </Form.Group>
+          <Form.Field required width={12}>
+            <label style={{ color: '#A299FF' }}>キャラクター名</label>
+            <Input
+              name="characterName"
+              placeholder="キャラクター名"
+              value={name}
+              data-cy="inputCharacterName"
+              onChange={handleCharacterNameChange}
+            />
+          </Form.Field>
           <Form.Input
             name="userName"
             label="作者"
