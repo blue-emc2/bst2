@@ -1,20 +1,14 @@
 import React, { FC } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
-import TextOnly from '../components/Preview/TextOnly';
-import HalfSection from '../components/Preview/HalfSection';
+import { Container } from 'semantic-ui-react';
+import HalfSection from '../components/Story/HalfSection';
 import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
+import TextOnly from '../components/Story/TextOnly';
 
 const SectionList: FC<SectionListProps> = ({ sections }) => {
   const list = sections.map((s: Section, index: number) => {
     switch (s.textPosition) {
       case TextPosition.CENTER: {
-        return (
-          <TextOnly
-            text={s.body}
-            key={index.toString()}
-            data-cy={`preview${index}`}
-          />
-        );
+        return <TextOnly text={s.body} key={index.toString()} />;
       }
       case TextPosition.LEFT: {
         return (
@@ -43,13 +37,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
     }
   });
 
-  return (
-    <Container>
-      <Grid>
-        <Grid.Row>{list}</Grid.Row>
-      </Grid>
-    </Container>
-  );
+  return <Container text>{list}</Container>;
 };
 
 export default SectionList;

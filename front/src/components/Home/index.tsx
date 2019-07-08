@@ -8,6 +8,7 @@ import {
   Message,
 } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import StroyList from '../../containers/StoryList';
 import Spinner from '../Spinner';
 import { StoriesIndexApi } from '../../containers/StoriesIndexApi';
@@ -37,32 +38,45 @@ const useFetchStoriesIndex = () => {
   };
 };
 
+const SummarySegment = styled(Segment)`
+  min-height: 500px;
+  padding: 1em 0em;
+`;
+
+const SummaryHeader = styled(Header)`
+  &&& {
+    font-weight: normal;
+    margin-bottom: 0px;
+    margin-top: 3em;
+  }
+`;
+
 const Home: FC<{}> = () => {
   const { loaded, data, isError } = useFetchStoriesIndex();
 
   return (
     <>
-      <Segment
-        inverted
-        textAlign="center"
-        style={{ minHeight: 400, padding: '1em 0em' }}
-        vertical
-      >
+      <SummarySegment textAlign="center" vertical>
         <Container text>
-          <Header as="h1" inverted content="back story" />
-          <Button primary inverted size="huge" as={Link} to="/new">
+          <SummaryHeader as="h1" size="large">
+            このサイトは光の戦士たちが光の戦士になる前の
+            物語(妄想)を投稿できるサイトです
+          </SummaryHeader>
+          <Button primary size="huge" as={Link} to="/new">
             ストーリーを書いてみる
             <Icon name="arrow right" />
           </Button>
         </Container>
-      </Segment>
+      </SummarySegment>
 
       {isError ? (
         <Message negative>
           現在エラーが発生しています。しばらくお待ち下さいmm
         </Message>
       ) : (
-        <>{loaded ? <StroyList data={data} /> : <Spinner />}</>
+        <Segment basic>
+          {loaded ? <StroyList data={data} /> : <Spinner />}
+        </Segment>
       )}
     </>
   );

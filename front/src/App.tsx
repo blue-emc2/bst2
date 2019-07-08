@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-import './App.css';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import {
   Menu,
@@ -8,6 +7,7 @@ import {
   Segment,
   Header,
   List,
+  Grid,
 } from 'semantic-ui-react';
 import Home from './components/Home';
 import About from './components/About';
@@ -63,8 +63,8 @@ const App: FC<{}> = () => {
   };
 
   return (
-    <>
-      <Menu fixed="top" size="large">
+    <div style={{ backgroundColor: '#f9fafb' }}>
+      <Menu size="large">
         <Container>
           <Menu.Item as={Link} to="/home" active data-cy="home">
             Home
@@ -75,35 +75,48 @@ const App: FC<{}> = () => {
         </Container>
       </Menu>
 
-      <main>
+      <main role="main">
         <Switch>
           <Route
             path="/new"
             render={() => <StoryForm onPreview={handleOnSubmit} />}
           />
-          <Route path="/about" component={About} />
           <Route path="/preview" render={() => <Preview {...layout} />} />
           <Route path="/story/:id" component={Story} />
+          <Route path="/about" component={About} />
           <Route path="/" component={Home} />
           <Redirect to="/" />;
         </Switch>
       </main>
 
       <footer>
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
-          <Container>
-            <Header inverted as="h4" content="About" />
-            <List link inverted>
-              <List.Item>
-                <Link to="/about">bstとは</Link>
-              </List.Item>
-              <List.Item as="a">作者</List.Item>
-              <List.Item as="a">問い合わせ</List.Item>
-            </List>
+        <Segment vertical style={{ padding: '5em 0em' }}>
+          <Container textAlign="center">
+            <Grid divided stackable>
+              <Grid.Column width={3}>
+                <Header as="h4" content="About" />
+                <List link>
+                  <List.Item>
+                    <Link to="/about">bstについて</Link>
+                  </List.Item>
+                  <List.Item as="a">作者</List.Item>
+                  <List.Item as="a">問い合わせ</List.Item>
+                </List>
+              </Grid.Column>
+              <Grid.Column width={10}>
+                <p>
+                  記載されている会社名・製品名・システム名などは、各社の商標、または登録商標です。
+                </p>
+                <p>
+                  Copyright (C) 2010 - 2019 SQUARE ENIX CO., LTD. All Rights
+                  Reserved.
+                </p>
+              </Grid.Column>
+            </Grid>
           </Container>
         </Segment>
       </footer>
-    </>
+    </div>
   );
 };
 

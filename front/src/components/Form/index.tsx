@@ -1,9 +1,17 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, FormEvent } from 'react';
-import { Form, Container, Button } from 'semantic-ui-react';
+import React, {
+  FC,
+  FormEvent,
+  SyntheticEvent,
+  useState,
+  useCallback,
+} from 'react';
+import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
+import { MainContainer } from '../styled';
 
 const characterNameFromInput = () => {
   const characterNameEle = document.querySelector<HTMLInputElement>(
@@ -25,9 +33,11 @@ const userNameFromInput = () => {
 
 const PreviewButton = () => {
   return (
-    <Button basic type="submit">
-      プレビュー
-    </Button>
+    <Segment basic textAlign="center">
+      <Button primary type="submit" size="large">
+        プレビュー
+      </Button>
+    </Segment>
   );
 };
 
@@ -60,33 +70,39 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
       const section = sectionArray[i];
       if (section !== null) {
         const positionType = section.dataset.position;
+        const selector = `textarea[name="section${i + 1}"]`; // sectionは1から始まる
+        const imageSelector = `input[name="section${i + 1}"]`;
+
         let position = TextPosition.CENTER;
-        let body = '';
-        const selector = `input[name="section${i + 1}"]`; // sectionは1から始まる
+        let body;
         let image;
         let imageUrl = '';
 
+        // TODO else ifは共通化できる
         if (positionType === TextPosition.CENTER) {
           const textEle = section.querySelector(selector) as HTMLInputElement;
           body = textEle !== null ? textEle.value : '';
         } else if (positionType === TextPosition.LEFT) {
           position = TextPosition.LEFT;
-          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          body = elemetns[0].value;
-          const { files } = elemetns[1];
-          if (files !== null && files[0] !== undefined) {
-            // eslint-disable-next-line prefer-destructuring
-            image = files[0];
+          const textElement = section.querySelector<HTMLTextAreaElement>(
+            selector,
+          );
+          body = textElement ? textElement.value : '';
+          const file = section.querySelector<HTMLInputElement>(imageSelector);
+
+          if (file && file.files && file.files.length > 0) {
+            image = file.files[0];
             imageUrl = URL.createObjectURL(image);
           }
         } else if (positionType === TextPosition.RIGHT) {
           position = TextPosition.RIGHT;
-          const elemetns = section.querySelectorAll<HTMLInputElement>(selector);
-          body = elemetns[1].value;
-          const { files } = elemetns[0];
-          if (files !== null && files[0] !== undefined) {
-            // eslint-disable-next-line prefer-destructuring
-            image = files[0];
+          const textElement = section.querySelector<HTMLTextAreaElement>(
+            selector,
+          );
+          body = textElement ? textElement.value : '';
+          const file = section.querySelector<HTMLInputElement>(imageSelector);
+          if (file && file.files && file.files.length > 0) {
+            image = file.files[0];
             imageUrl = URL.createObjectURL(image);
           }
         } else {
@@ -112,34 +128,56 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
   // プレビューから戻って来た時に値がある想定
   const { state } = location;
 
+  const [name, setName] = useState(state ? state.characterName : '');
+  const handleCharacterNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setName(event.target.value);
+    },
+    [],
+  );
+
+  const [userName, setUserName] = useState(state ? state.userName : '');
+  const handleUserNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setUserName(event.target.value);
+    },
+    [],
+  );
+
   return (
-    <Container style={{ marginTop: '7em' }}>
+    <MainContainer>
       {/* もしかしてFormいらない説？ */}
       <Form
         encType="multipart/form-data"
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <Form.Input
-          required
-          name="characterName"
-          label="キャラクター名"
-          placeholder="キャラクター名"
-          value={state ? state.characterName : undefined}
-          data-cy="inputCharacterName"
-        />
-        <Form.Input
-          name="userName"
-          label="作者"
-          placeholder="作者"
-          value={state ? state.userName : undefined}
-          data-cy="inputUserName"
-        />
+        <Segment basic>
+          <Form.Input
+            required
+            name="characterName"
+            label="キャラクター名"
+            placeholder="キャラクター名"
+            value={name}
+            data-cy="inputCharacterName"
+            width={12}
+            onChange={handleCharacterNameChange}
+          />
+          <Form.Input
+            name="userName"
+            label="作者"
+            placeholder="作者"
+            value={userName}
+            data-cy="inputUserName"
+            width={12}
+            onChange={handleUserNameChange}
+          />
+        </Segment>
         <Container fluid>
           <SectionTable sections={state ? state.sections : undefined} />
         </Container>
         <PreviewButton />
       </Form>
-    </Container>
+    </MainContainer>
   );
 };
 
