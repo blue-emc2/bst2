@@ -5,6 +5,6 @@ import { Container } from 'semantic-ui-react';
 export const MainContainer = styled(Container)`
   background: white;
   background-clip: border-box;
-  height: 100vh;
+  min-height: 100vh;
   padding: 1em;
 `;
