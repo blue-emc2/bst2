@@ -147,9 +147,9 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         encType="multipart/form-data"
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <Segment style={{ background: '#272729' }}>
+        <Segment>
           <Form.Group inline>
-            <label style={{ color: '#A299FF' }}>テーマ</label>
+            <label>テーマ</label>
             <Form.Radio
               label="ノーマル"
               value="sm"
@@ -158,7 +158,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
             <Form.Radio label="漆黒のヴィランズ" value="md" />
           </Form.Group>
           <Form.Field required width={12}>
-            <label style={{ color: '#A299FF' }}>キャラクター名</label>
+            <label>キャラクター名</label>
             <Input
               name="characterName"
               placeholder="キャラクター名"
