@@ -58,11 +58,15 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
       {loaded ? (
         <MainContainer>
           <Container text textAlign="center">
-            <Header as="h1" data-cy="charactername">
+            <Header
+              as="h1"
+              data-cy="charactername"
+              style={{ color: '#a299ff' }}
+            >
               {data.attributes.characterName}
             </Header>
 
-            <Header as="h3" data-cy="username">
+            <Header as="h3" data-cy="username" style={{ color: '#a299ff' }}>
               {data.attributes.userName}
             </Header>
           </Container>

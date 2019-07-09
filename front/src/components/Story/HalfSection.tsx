@@ -10,14 +10,14 @@ const HalfSection = ({ ...props }) => {
   if (textPosition === TextPosition.LEFT) {
     left = (
       <Container data-cy="previewLeftText">
-        <p>{text}</p>
+        <p style={{ color: '#FFFFFF' }}>{text}</p>
       </Container>
     );
     right = <Image floated="left" size="large" src={imageUrl} />;
   } else {
     right = (
       <Container data-cy="previewRightText">
-        <p>{text}</p>
+        <p style={{ color: '#FFFFFF' }}>{text}</p>
       </Container>
     );
     left = <Image floated="right" size="large" src={imageUrl} />;

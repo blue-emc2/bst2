@@ -63,7 +63,7 @@ const App: FC<{}> = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#f9fafb' }}>
+    <div style={{ background: '#f9fafb' }}>
       <Menu size="large">
         <Container>
           <Menu.Item as={Link} to="/home" active data-cy="home">
