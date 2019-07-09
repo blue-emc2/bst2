@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, FormEvent, useState, useCallback } from 'react';
-import { Form, Container, Button, Segment, Input } from 'semantic-ui-react';
+import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
@@ -147,7 +147,7 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         encType="multipart/form-data"
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
-        <Segment>
+        <Segment basic>
           <Form.Group inline>
             <label>テーマ</label>
             <Form.Radio
@@ -157,16 +157,16 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
             />
             <Form.Radio label="漆黒のヴィランズ" value="md" />
           </Form.Group>
-          <Form.Field required width={12}>
-            <label>キャラクター名</label>
-            <Input
-              name="characterName"
-              placeholder="キャラクター名"
-              value={name}
-              data-cy="inputCharacterName"
-              onChange={handleCharacterNameChange}
-            />
-          </Form.Field>
+          <Form.Input
+            required
+            name="characterName"
+            label="キャラクター名"
+            placeholder="キャラクター名"
+            value={name}
+            data-cy="inputCharacterName"
+            width={12}
+            onChange={handleCharacterNameChange}
+          />
           <Form.Input
             name="userName"
             label="作者"
