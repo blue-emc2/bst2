@@ -65,10 +65,12 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
   );
 };
 
-const handleThemeChange = () => {};
-
 const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;
+  const [initTheme, setTheme] = useState('normal');
+  const handleThemeChange = (value: string) => {
+    setTheme(value);
+  };
 
   return (
     <MainContainer>
@@ -77,11 +79,16 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
           <label>テーマ</label>
           <Form.Radio
             label="ノーマル"
-            value="sm"
-            defaultChecked
-            onChange={handleThemeChange}
+            value={initTheme}
+            checked={initTheme === 'normal'}
+            onChange={() => handleThemeChange('normal')}
           />
-          <Form.Radio label="漆黒のヴィランズ" value="md" />
+          <Form.Radio
+            label="漆黒のヴィランズ"
+            value="shadowbringers"
+            checked={initTheme === 'shadowbringers'}
+            onChange={() => handleThemeChange('shadowbringers')}
+          />
         </Form.Group>
       </Form>
 
@@ -89,9 +96,7 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
         <Header as="h1" data-test="charactername">
           {characterName}
         </Header>
-      </Container>
 
-      <Container text>
         <Header as="h1" data-test="username">
           {userName}
         </Header>
