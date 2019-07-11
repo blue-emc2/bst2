@@ -1,9 +1,18 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState, useEffect } from 'react';
-import { Container, Header, Segment, Button, Icon } from 'semantic-ui-react';
+import {
+  Container,
+  Header,
+  Segment,
+  Button,
+  Icon,
+  Form,
+} from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
+import { MainContainer } from '../styled';
 
 const handleClickFormNew = ({ ...props }) => {
   const { history, characterName, userName, sections } = props;
@@ -56,13 +65,27 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
   );
 };
 
-// TODO: まとめて受け取れないか？
+const handleThemeChange = () => {};
+
 const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;
 
   return (
-    <Container style={{ marginTop: '7em' }}>
-      <Container text>
+    <MainContainer>
+      <Form>
+        <Form.Group inline>
+          <label>テーマ</label>
+          <Form.Radio
+            label="ノーマル"
+            value="sm"
+            defaultChecked
+            onChange={handleThemeChange}
+          />
+          <Form.Radio label="漆黒のヴィランズ" value="md" />
+        </Form.Group>
+      </Form>
+
+      <Container text textAlign="center">
         <Header as="h1" data-test="charactername">
           {characterName}
         </Header>
@@ -92,7 +115,7 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
           <Deliver {...args} />
         </Segment>
       </Segment.Group>
-    </Container>
+    </MainContainer>
   );
 };
 

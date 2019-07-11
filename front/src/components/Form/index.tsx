@@ -1,5 +1,4 @@
 /* eslint-disable prefer-destructuring */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, FormEvent, useState, useCallback } from 'react';
 import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -138,8 +137,6 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
     [],
   );
 
-  const handleThemeChange = () => {};
-
   return (
     <MainContainer>
       {/* もしかしてFormいらない説？ */}
@@ -148,15 +145,6 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
         onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
       >
         <Segment basic>
-          <Form.Group inline>
-            <label>テーマ</label>
-            <Form.Radio
-              label="ノーマル"
-              value="sm"
-              onChange={handleThemeChange}
-            />
-            <Form.Radio label="漆黒のヴィランズ" value="md" />
-          </Form.Group>
           <Form.Input
             required
             name="characterName"
