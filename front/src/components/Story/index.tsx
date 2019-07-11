@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useContext } from 'react';
 import { Header, Container } from 'semantic-ui-react';
 import { RouteComponentProps, Redirect, withRouter } from 'react-router';
 import axios from 'axios';
+import { ThemeContext } from 'styled-components';
 import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
@@ -50,6 +51,7 @@ const useFetchStroy = (id: string) => {
 // TODO: このコンポーネントはPreview/indexと大体同じなので共通化したくなるが、APIとの連携が終わってからにする
 const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
   const { loaded, data, error } = useFetchStroy(match.params.id);
+  const themeContext = useContext(ThemeContext);
 
   return error ? (
     <Redirect to="/" />
@@ -58,11 +60,7 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
       {loaded ? (
         <MainContainer>
           <Container text textAlign="center">
-            <Header
-              as="h1"
-              data-cy="charactername"
-              style={{ color: '#a299ff' }}
-            >
+            <Header as="h1" data-cy="charactername">
               {data.attributes.characterName}
             </Header>
 

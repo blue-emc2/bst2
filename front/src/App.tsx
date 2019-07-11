@@ -9,12 +9,14 @@ import {
   List,
   Grid,
 } from 'semantic-ui-react';
+import { ThemeProvider } from 'styled-components';
 import Home from './components/Home';
 import About from './components/About';
 import StoryForm from './components/Form';
 import Preview from './components/Preview';
 import Story from './components/Story';
 import { LayoutProps, TextPosition, Section } from './types/LayoutProps';
+import { GlobalStyle } from './theme/GrobalStyles';
 
 // ---------------------------------------
 // 共通interface定義
@@ -35,6 +37,10 @@ export interface SectionListProp {
   sections: Section[];
 }
 
+// ---------------------------------------
+const theme = {
+  main: 'mediumseagreen',
+};
 // ---------------------------------------
 
 const App: FC<{}> = () => {
@@ -64,6 +70,7 @@ const App: FC<{}> = () => {
 
   return (
     <div style={{ background: '#f9fafb' }}>
+      <GlobalStyle />
       <Menu size="large">
         <Container>
           <Menu.Item as={Link} to="/home" active data-cy="home">
@@ -75,19 +82,21 @@ const App: FC<{}> = () => {
         </Container>
       </Menu>
 
-      <main role="main">
-        <Switch>
-          <Route
-            path="/new"
-            render={() => <StoryForm onPreview={handleOnSubmit} />}
-          />
-          <Route path="/preview" render={() => <Preview {...layout} />} />
-          <Route path="/story/:id" component={Story} />
-          <Route path="/about" component={About} />
-          <Route path="/" component={Home} />
-          <Redirect to="/" />;
-        </Switch>
-      </main>
+      <ThemeProvider theme={theme}>
+        <main role="main">
+          <Switch>
+            <Route
+              path="/new"
+              render={() => <StoryForm onPreview={handleOnSubmit} />}
+            />
+            <Route path="/preview" render={() => <Preview {...layout} />} />
+            <Route path="/story/:id" component={Story} />
+            <Route path="/about" component={About} />
+            <Route path="/" component={Home} />
+            <Redirect to="/" />;
+          </Switch>
+        </main>
+      </ThemeProvider>
 
       <footer>
         <Segment vertical style={{ padding: '5em 0em' }}>
