@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback, useContext } from 'react';
 import {
   Container,
   Header,
@@ -9,10 +9,12 @@ import {
   Form,
 } from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { ThemeContext } from 'styled-components';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
 import { MainContainer } from '../styled';
+import { ThemeName, themes } from '../../theme/GrobalStyles';
 
 const handleClickFormNew = ({ ...props }) => {
   const { history, characterName, userName, sections } = props;
@@ -67,10 +69,26 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
 
 const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;
-  const [initTheme, setTheme] = useState('normal');
-  const handleThemeChange = (value: string) => {
-    setTheme(value);
-  };
+  const themeContext = useContext(ThemeContext);
+  const [initThemeName, setThemeName] = useState(ThemeName.Normal);
+  const handleThemeChange = useCallback(
+    (value: ThemeName) => {
+      setThemeName(value);
+
+      switch (value) {
+        case ThemeName.Normal:
+          themeContext.theme = themes.normal;
+          break;
+        case ThemeName.Shadowbringers:
+          themeContext.theme = themes.shadowbringers;
+          break;
+        default:
+          themeContext.theme = themes.normal;
+          break;
+      }
+    },
+    [themeContext.theme],
+  );
 
   return (
     <MainContainer>
@@ -79,22 +97,29 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
           <label>テーマ</label>
           <Form.Radio
             label="ノーマル"
-            value={initTheme}
-            checked={initTheme === 'normal'}
-            onChange={() => handleThemeChange('normal')}
+            value={initThemeName}
+            checked={initThemeName === ThemeName.Normal}
+            onChange={() => handleThemeChange(ThemeName.Normal)}
           />
           <Form.Radio
             label="漆黒のヴィランズ"
-            value="shadowbringers"
-            checked={initTheme === 'shadowbringers'}
-            onChange={() => handleThemeChange('shadowbringers')}
+            value={ThemeName.Shadowbringers}
+            checked={initThemeName === ThemeName.Shadowbringers}
+            onChange={() => handleThemeChange(ThemeName.Shadowbringers)}
           />
         </Form.Group>
       </Form>
 
       <Container text textAlign="center">
         <Header as="h1" data-test="charactername">
-          {characterName}
+          {/* {characterName} */}
+          <p
+            style={{
+              background: `linear-gradient(transparent 50%, ${themeContext.theme.color} 50%)`,
+            }}
+          >
+            桐生一馬ちゃん
+          </p>
         </Header>
 
         <Header as="h1" data-test="username">

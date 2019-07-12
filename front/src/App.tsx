@@ -16,7 +16,7 @@ import StoryForm from './components/Form';
 import Preview from './components/Preview';
 import Story from './components/Story';
 import { LayoutProps, TextPosition, Section } from './types/LayoutProps';
-import { GlobalStyle } from './theme/GrobalStyles';
+import { GlobalStyle, themes } from './theme/GrobalStyles';
 
 // ---------------------------------------
 // 共通interface定義
@@ -38,9 +38,11 @@ export interface SectionListProp {
 }
 
 // ---------------------------------------
+
 const theme = {
-  main: 'mediumseagreen',
+  theme: themes.normal,
 };
+
 // ---------------------------------------
 
 const App: FC<{}> = () => {

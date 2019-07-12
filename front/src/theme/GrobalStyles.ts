@@ -8,3 +8,21 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans JP', sans-serif;
   }
 `;
+
+export enum ThemeName {
+  Normal = 'normal',
+  Shadowbringers = 'shadowbringers',
+}
+
+const normal = {
+  color: '#FFFFFF',
+};
+
+const shadowbringers = {
+  color: '#A299FF',
+};
+
+export const themes = {
+  normal,
+  shadowbringers,
+};

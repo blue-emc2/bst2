@@ -3,14 +3,8 @@ import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
 
 export const MainContainer = styled(Container)`
-  background: #272729;
+  background: white;
   background-clip: border-box;
   min-height: 100vh;
   padding: 1em;
 `;
-
-// 漆黒
-// 背景
-// style={{ backgroundColor: '#272729' }}
-// 文字色
-// style={{ backgroundColor: '#A299FF' }}
