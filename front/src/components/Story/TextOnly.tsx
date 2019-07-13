@@ -3,7 +3,7 @@ import React from 'react';
 const TextOnly = (props: { text: string }) => {
   const { text } = props;
 
-  return <p style={{ color: '#FFFFFF' }}>{text}</p>;
+  return <p>{text}</p>;
 };
 
 export default TextOnly;

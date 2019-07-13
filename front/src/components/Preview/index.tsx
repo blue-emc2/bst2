@@ -9,7 +9,7 @@ import {
   Form,
 } from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
@@ -67,6 +67,10 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
   );
 };
 
+const ThemeWithP = styled.p`
+  background: linear-gradient(transparent 50%, ${props => props.color} 50%);
+`;
+
 const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;
   const themeContext = useContext(ThemeContext);
@@ -112,17 +116,12 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
 
       <Container text textAlign="center">
         <Header as="h1" data-test="charactername">
-          {/* {characterName} */}
-          <p
-            style={{
-              background: `linear-gradient(transparent 50%, ${themeContext.theme.color} 50%)`,
-            }}
-          >
-            桐生一馬ちゃん
-          </p>
+          <ThemeWithP color={themeContext.theme.color}>
+            {characterName}
+          </ThemeWithP>
         </Header>
 
-        <Header as="h1" data-test="username">
+        <Header as="h3" data-test="username">
           {userName}
         </Header>
       </Container>
