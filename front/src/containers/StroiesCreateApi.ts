@@ -15,6 +15,7 @@ export const StroiesCreateApi = (
   const createStroies = async () => {
     try {
       const params = new FormData();
+      params.append('story[theme]', JSON.stringify(data.theme));
       params.append('story[characterName]', data.characterName);
       params.append('story[userName]', data.userName);
       data.sections.forEach(value => {

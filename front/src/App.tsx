@@ -58,11 +58,8 @@ const App: FC<{}> = () => {
   };
   const [layout, setLayout] = useState<LayoutProps>(initialValue);
 
-  const handleOnSubmit = ({
-    characterName,
-    userName,
-    sections,
-  }: LayoutProps) => {
+  const handleOnSubmit = ({ ...args }) => {
+    const { characterName, userName, sections } = args;
     setLayout({
       characterName,
       userName,

@@ -34,6 +34,7 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
         characterName,
         userName,
         sections,
+        theme: themes.normal,
       };
       const createStroies = StroiesCreateApi(data);
       createStroies()
@@ -141,7 +142,7 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
           </Button>
         </Segment>
         <Segment textAlign="right" basic style={{ border: 0 }}>
-          <Deliver {...args} />
+          <Deliver {...args} theme={themeContext.theme} />
         </Segment>
       </Segment.Group>
     </MainContainer>
