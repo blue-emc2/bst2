@@ -15,7 +15,12 @@ export interface Data {
 export interface Attributes {
   characterName: string;
   userName: string;
+  theme: Theme;
   sections: Section[];
+}
+
+export interface Theme {
+  color: string;
 }
 
 // LayoutTypeは変換したい

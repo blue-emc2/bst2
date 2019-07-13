@@ -14,7 +14,7 @@ import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
 import { MainContainer } from '../styled';
-import { ThemeName, themes } from '../../theme/GrobalStyles';
+import { ThemeName, themes, ThemeWithP } from '../../theme/GrobalStyles';
 
 const handleClickFormNew = ({ ...props }) => {
   const { history, characterName, userName, sections } = props;
@@ -27,6 +27,7 @@ type routerWithLayoutProps = RouteComponentProps & LayoutProps;
 const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
   const [loading, setLoading] = useState(false);
   const { history, characterName, userName, sections } = args;
+  const themeContext = useContext(ThemeContext);
 
   useEffect(() => {
     if (loading) {
@@ -34,11 +35,12 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
         characterName,
         userName,
         sections,
-        theme: themes.normal,
+        theme: themeContext.theme,
       };
       const createStroies = StroiesCreateApi(data);
       createStroies()
         .then(response => {
+          themeContext.theme = themes.normal;
           const id = response.data as number;
           history.replace(`/story/${id}`);
         })
@@ -46,7 +48,7 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
           console.error(reason);
         });
     }
-  }, [characterName, history, loading, sections, userName]);
+  }, [characterName, history, loading, sections, themeContext.theme, userName]);
 
   const handleClick = () => {
     setLoading(true);
@@ -67,10 +69,6 @@ const Deliver: FC<routerWithLayoutProps> = ({ ...args }) => {
     </>
   );
 };
-
-const ThemeWithP = styled.p`
-  background: linear-gradient(transparent 50%, ${props => props.color} 50%);
-`;
 
 const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   const { characterName, userName, sections } = args;

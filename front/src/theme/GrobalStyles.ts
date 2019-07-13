@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 // eslint-disable-next-line no-unused-expressions
 export const GlobalStyle = createGlobalStyle`
@@ -26,3 +26,7 @@ export const themes = {
   normal,
   shadowbringers,
 };
+
+export const ThemeWithP = styled.p`
+  background: linear-gradient(transparent 50%, ${props => props.color} 50%);
+`;
