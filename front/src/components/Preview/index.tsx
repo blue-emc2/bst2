@@ -9,12 +9,12 @@ import {
   Form,
 } from 'semantic-ui-react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import styled, { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import SectionList from '../../containers/SectionList';
 import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
-import { MainContainer } from '../styled';
-import { ThemeName, themes, ThemeWithP } from '../../theme/GrobalStyles';
+import { MainContainer, ThemeWithP } from '../styled';
+import { ThemeName, themes } from '../../theme/GrobalStyles';
 
 const handleClickFormNew = ({ ...props }) => {
   const { history, characterName, userName, sections } = props;

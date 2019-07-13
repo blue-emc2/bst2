@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Header, Container } from 'semantic-ui-react';
 import { RouteComponentProps, Redirect, withRouter } from 'react-router';
 import axios from 'axios';
@@ -6,8 +6,8 @@ import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
 import { DEFAULT_API_CONFIG } from '../../containers/APIConfig';
-import { MainContainer } from '../styled';
-import { ThemeWithP, ThemeName } from '../../theme/GrobalStyles';
+import { MainContainer, ThemeWithP } from '../styled';
+import { ThemeName } from '../../theme/GrobalStyles';
 
 const useFetchStroy = (id: string) => {
   const initialValue = {
