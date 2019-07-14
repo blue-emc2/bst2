@@ -1,14 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
-import {
-  Menu,
-  Button,
-  Container,
-  Segment,
-  Header,
-  List,
-  Grid,
-} from 'semantic-ui-react';
+import { Container, Segment, Header, List, Grid } from 'semantic-ui-react';
 import { ThemeProvider } from 'styled-components';
 import Home from './components/Home';
 import About from './components/About';
