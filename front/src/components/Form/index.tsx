@@ -5,6 +5,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';
 import { TextPosition, Section, LayoutProps } from '../../types/LayoutProps';
 import { MainContainer } from '../styled';
+import HeaderMenu from '../HeaderMenu';
 
 const characterNameFromInput = () => {
   const characterNameEle = document.querySelector<HTMLInputElement>(
@@ -138,39 +139,42 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
   );
 
   return (
-    <MainContainer>
-      {/* もしかしてFormいらない説？ */}
-      <Form
-        encType="multipart/form-data"
-        onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
-      >
-        <Segment basic>
-          <Form.Input
-            required
-            name="characterName"
-            label="キャラクター名"
-            placeholder="キャラクター名"
-            value={name}
-            data-cy="inputCharacterName"
-            width={12}
-            onChange={handleCharacterNameChange}
-          />
-          <Form.Input
-            name="userName"
-            label="作者"
-            placeholder="作者"
-            value={userName}
-            data-cy="inputUserName"
-            width={12}
-            onChange={handleUserNameChange}
-          />
-        </Segment>
-        <Container fluid>
-          <SectionTable sections={state ? state.sections : undefined} />
-        </Container>
-        <PreviewButton />
-      </Form>
-    </MainContainer>
+    <>
+      <HeaderMenu />
+      <MainContainer>
+        {/* もしかしてFormいらない説？ */}
+        <Form
+          encType="multipart/form-data"
+          onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}
+        >
+          <Segment basic>
+            <Form.Input
+              required
+              name="characterName"
+              label="キャラクター名"
+              placeholder="キャラクター名"
+              value={name}
+              data-cy="inputCharacterName"
+              width={12}
+              onChange={handleCharacterNameChange}
+            />
+            <Form.Input
+              name="userName"
+              label="作者"
+              placeholder="作者"
+              value={userName}
+              data-cy="inputUserName"
+              width={12}
+              onChange={handleUserNameChange}
+            />
+          </Segment>
+          <Container fluid>
+            <SectionTable sections={state ? state.sections : undefined} />
+          </Container>
+          <PreviewButton />
+        </Form>
+      </MainContainer>
+    </>
   );
 };
 

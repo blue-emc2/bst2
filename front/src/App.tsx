@@ -70,17 +70,6 @@ const App: FC<{}> = () => {
   return (
     <div style={{ background: '#f9fafb' }}>
       <GlobalStyle />
-      <Menu size="large">
-        <Container>
-          <Menu.Item as={Link} to="/home" active data-cy="home">
-            Home
-          </Menu.Item>
-          <Menu.Item position="right">
-            <Button as="a">Log in</Button>
-          </Menu.Item>
-        </Container>
-      </Menu>
-
       <ThemeProvider theme={theme}>
         <main role="main">
           <Switch>

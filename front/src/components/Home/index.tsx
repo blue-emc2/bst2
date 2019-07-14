@@ -13,6 +13,7 @@ import StroyList from '../../containers/StoryList';
 import Spinner from '../Spinner';
 import { StoriesIndexApi } from '../../containers/StoriesIndexApi';
 import { Datum } from '../../types/StoriesIndexApiProps';
+import HeaderMenu from '../HeaderMenu';
 
 const useFetchStoriesIndex = () => {
   const [loaded, setLoaded] = useState(false);
@@ -56,6 +57,7 @@ const Home: FC<{}> = () => {
 
   return (
     <>
+      <HeaderMenu />
       <SummarySegment textAlign="center" vertical>
         <Container text>
           <SummaryHeader as="h1" size="large">
