@@ -8,11 +8,18 @@ type Props = {
 } & RouteComponentProps;
 
 const MenuItemDestroyButton: FC<Props> = ({ id, history }) => {
+  const [opened, setOpen] = useState(false);
+
+  const close = () => {
+    setOpen(false);
+  };
+
   const handleDestory = (storyId: string) => {
     const destory = StoriesDestoryApi(storyId);
 
     destory()
       .then(() => {
+        close();
         history.push('/home');
       })
       .catch(reason => {
@@ -21,16 +28,11 @@ const MenuItemDestroyButton: FC<Props> = ({ id, history }) => {
       });
   };
 
-  const [opened, setOpen] = useState(false);
   const open = () => {
     setOpen(true);
   };
-  const close = () => {
-    setOpen(false);
-  };
   const destroy = () => {
     handleDestory(id);
-    close();
   };
 
   return (
