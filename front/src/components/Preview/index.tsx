@@ -136,7 +136,10 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
             icon
             labelPosition="left"
             secondary
-            onClick={e => handleClickFormNew(args)}
+            onClick={() => {
+              themeContext.theme = themes.normal; // テーマは引き継がない
+              handleClickFormNew(args);
+            }}
           >
             <Icon name="long arrow alternate left"></Icon>
             入力画面へ
