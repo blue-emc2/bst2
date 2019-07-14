@@ -94,8 +94,11 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   );
 
   return (
-    <MainContainer>
-      <Form>
+    <MainContainer
+      background={themeContext.theme.background}
+      color={themeContext.theme.color}
+    >
+      <Form inverted={themeContext.theme.background !== 'white'}>
         <Form.Group inline>
           <label>テーマ</label>
           <Form.Radio
@@ -115,7 +118,7 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
 
       <Container text textAlign="center">
         <Header as="h1" data-test="charactername">
-          <ThemeWithP color={themeContext.theme.color}>
+          <ThemeWithP title={themeContext.theme.titleColor}>
             {characterName}
           </ThemeWithP>
         </Header>

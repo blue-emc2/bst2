@@ -21,6 +21,8 @@ export interface Attributes {
 
 export interface Theme {
   color: string;
+  background?: string;
+  titleColor?: string;
 }
 
 // LayoutTypeは変換したい

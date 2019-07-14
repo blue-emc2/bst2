@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 // eslint-disable-next-line no-unused-expressions
 export const GlobalStyle = createGlobalStyle`
@@ -15,18 +15,18 @@ export enum ThemeName {
 }
 
 const normal = {
-  color: '#FFFFFF',
+  color: 'black',
+  background: 'white',
+  titleColor: 'black',
 };
 
 const shadowbringers = {
-  color: '#A299FF',
+  color: '#FFFFFF',
+  background: '#272729',
+  titleColor: '#A299FF',
 };
 
 export const themes = {
   normal,
   shadowbringers,
 };
-
-export const ThemeWithP = styled.p`
-  background: linear-gradient(transparent 50%, ${props => props.color} 50%);
-`;
