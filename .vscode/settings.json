@@ -24,7 +24,6 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
   "[markdown]": {
     "files.trimTrailingWhitespace": false
   },

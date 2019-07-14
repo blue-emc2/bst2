@@ -5,6 +5,7 @@ class StorySerializer
   # フロント側はCamelCaseで処理したい
   attribute :characterName, &:character_name
   attribute :userName, &:user_name
+  attribute :theme
 
   attribute :sections do |object|
     object.sections.map do |section|

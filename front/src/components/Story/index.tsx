@@ -6,7 +6,8 @@ import SectionList from '../../containers/SectionList';
 import Spinner from '../Spinner';
 import { API } from '../../types/ApiProps';
 import { DEFAULT_API_CONFIG } from '../../containers/APIConfig';
-import { MainContainer } from '../styled';
+import { MainContainer, ThemeWithP } from '../styled';
+import { ThemeName } from '../../theme/GrobalStyles';
 
 const useFetchStroy = (id: string) => {
   const initialValue = {
@@ -17,6 +18,7 @@ const useFetchStroy = (id: string) => {
       attributes: {
         characterName: '',
         userName: '',
+        theme: { color: ThemeName.Normal },
         sections: [],
       },
     },
@@ -56,10 +58,15 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
   ) : (
     <>
       {loaded ? (
-        <MainContainer>
+        <MainContainer
+          background={data.attributes.theme.background}
+          color={data.attributes.theme.color}
+        >
           <Container text textAlign="center">
             <Header as="h1" data-cy="charactername">
-              {data.attributes.characterName}
+              <ThemeWithP title={data.attributes.theme.titleColor}>
+                {data.attributes.characterName}
+              </ThemeWithP>
             </Header>
 
             <Header as="h3" data-cy="username">

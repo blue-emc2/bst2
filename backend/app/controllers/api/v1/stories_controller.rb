@@ -52,7 +52,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def story_params
-        params.require(:story).permit({ sections: [:layoutType, { text: [:body], image: [:body] }] }, :characterName, :userName)
+        params.require(:story).permit({ sections: [:layoutType, { text: [:body], image: [:body] }] }, :characterName, :userName, :theme)
       end
     end
   end

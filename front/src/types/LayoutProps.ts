@@ -22,4 +22,5 @@ export interface SectionListProps {
 export interface LayoutProps extends SectionListProps {
   characterName: string;
   userName: string;
+  theme?: {};
 }

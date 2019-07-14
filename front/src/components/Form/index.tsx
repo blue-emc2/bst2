@@ -1,12 +1,5 @@
 /* eslint-disable prefer-destructuring */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {
-  FC,
-  FormEvent,
-  SyntheticEvent,
-  useState,
-  useCallback,
-} from 'react';
+import React, { FC, FormEvent, useState, useCallback } from 'react';
 import { Form, Container, Button, Segment } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import SectionTable from './SectionTable';

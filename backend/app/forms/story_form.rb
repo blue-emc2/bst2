@@ -10,6 +10,7 @@ class StoryForm
     p = params.transform_keys { |k| k.underscore }
     @character_name = p[:character_name]
     @user_name = p[:user_name]
+    @theme = JSON.parse(p[:theme])
     @sections = sections_underscoreize(p[:sections])
   end
 
@@ -17,7 +18,7 @@ class StoryForm
     ActiveRecord::Base.transaction do
       return false if invalid?
 
-      story = Story.new(character_name: @character_name, user_name: @user_name)
+      story = Story.new(character_name: @character_name, user_name: @user_name, theme: @theme)
       story.save!
 
       @sections.each do |section|
