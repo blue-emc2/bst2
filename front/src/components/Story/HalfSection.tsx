@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
 import { TextPosition } from '../../types/LayoutProps';
+import { Pre } from '../styled';
 
 const HalfSection = ({ ...props }) => {
   const { textPosition, text, imageUrl } = props;
@@ -10,14 +11,14 @@ const HalfSection = ({ ...props }) => {
   if (textPosition === TextPosition.LEFT) {
     left = (
       <Container data-cy="previewLeftText">
-        <p>{text}</p>
+        <Pre>{text}</Pre>
       </Container>
     );
     right = <Image floated="left" size="large" src={imageUrl} />;
   } else {
     right = (
       <Container data-cy="previewRightText">
-        <p>{text}</p>
+        <Pre>{text}</Pre>
       </Container>
     );
     left = <Image floated="right" size="large" src={imageUrl} />;

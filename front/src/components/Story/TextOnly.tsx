@@ -1,9 +1,10 @@
 import React from 'react';
+import { Pre } from '../styled';
 
 const TextOnly = (props: { text: string }) => {
   const { text } = props;
 
-  return <p>{text}</p>;
+  return <Pre>{text}</Pre>;
 };
 
 export default TextOnly;

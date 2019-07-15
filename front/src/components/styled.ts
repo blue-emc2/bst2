@@ -13,3 +13,7 @@ export const MainContainer = styled(Container)`
 export const ThemeWithP = styled.p`
   color: ${props => props.title || 'black'};
 `;
+
+export const Pre = styled.pre`
+  font-family: 'Noto Sans JP', sans-serif;
+`;
