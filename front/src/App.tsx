@@ -1,14 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
-import {
-  Menu,
-  Button,
-  Container,
-  Segment,
-  Header,
-  List,
-  Grid,
-} from 'semantic-ui-react';
+import { Container, Segment, Header, List, Grid } from 'semantic-ui-react';
 import { ThemeProvider } from 'styled-components';
 import Home from './components/Home';
 import About from './components/About';
@@ -70,17 +62,6 @@ const App: FC<{}> = () => {
   return (
     <div style={{ background: '#f9fafb' }}>
       <GlobalStyle />
-      <Menu size="large">
-        <Container>
-          <Menu.Item as={Link} to="/home" active data-cy="home">
-            Home
-          </Menu.Item>
-          <Menu.Item position="right">
-            <Button as="a">Log in</Button>
-          </Menu.Item>
-        </Container>
-      </Menu>
-
       <ThemeProvider theme={theme}>
         <main role="main">
           <Switch>

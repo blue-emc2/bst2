@@ -15,6 +15,7 @@ import { StroiesCreateApi } from '../../containers/StroiesCreateApi';
 import { LayoutProps } from '../../types/LayoutProps';
 import { MainContainer, ThemeWithP } from '../styled';
 import { ThemeName, themes } from '../../theme/GrobalStyles';
+import HeaderMenu from '../HeaderMenu';
 
 const handleClickFormNew = ({ ...props }) => {
   const { history, characterName, userName, sections } = props;
@@ -94,62 +95,65 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
   );
 
   return (
-    <MainContainer
-      background={themeContext.theme.background}
-      color={themeContext.theme.color}
-    >
-      <Form inverted={themeContext.theme.background !== 'white'}>
-        <Form.Group inline>
-          <label>テーマ</label>
-          <Form.Radio
-            label="ノーマル"
-            value={initThemeName}
-            checked={initThemeName === ThemeName.Normal}
-            onChange={() => handleThemeChange(ThemeName.Normal)}
-          />
-          <Form.Radio
-            label="漆黒のヴィランズ"
-            value={ThemeName.Shadowbringers}
-            checked={initThemeName === ThemeName.Shadowbringers}
-            onChange={() => handleThemeChange(ThemeName.Shadowbringers)}
-          />
-        </Form.Group>
-      </Form>
+    <>
+      <HeaderMenu />
+      <MainContainer
+        background={themeContext.theme.background}
+        color={themeContext.theme.color}
+      >
+        <Form inverted={themeContext.theme.background !== 'white'}>
+          <Form.Group inline>
+            <label>テーマ</label>
+            <Form.Radio
+              label="ノーマル"
+              value={initThemeName}
+              checked={initThemeName === ThemeName.Normal}
+              onChange={() => handleThemeChange(ThemeName.Normal)}
+            />
+            <Form.Radio
+              label="漆黒のヴィランズ"
+              value={ThemeName.Shadowbringers}
+              checked={initThemeName === ThemeName.Shadowbringers}
+              onChange={() => handleThemeChange(ThemeName.Shadowbringers)}
+            />
+          </Form.Group>
+        </Form>
 
-      <Container text textAlign="center">
-        <Header as="h1" data-test="charactername">
-          <ThemeWithP title={themeContext.theme.titleColor}>
-            {characterName}
-          </ThemeWithP>
-        </Header>
+        <Container text textAlign="center">
+          <Header as="h1" data-test="charactername">
+            <ThemeWithP title={themeContext.theme.titleColor}>
+              {characterName}
+            </ThemeWithP>
+          </Header>
 
-        <Header as="h3" data-test="username">
-          {userName}
-        </Header>
-      </Container>
+          <Header as="h3" data-test="username">
+            {userName}
+          </Header>
+        </Container>
 
-      <SectionList sections={sections} />
+        <SectionList sections={sections} />
 
-      <Segment.Group horizontal style={{ border: 0 }}>
-        <Segment basic>
-          <Button
-            icon
-            labelPosition="left"
-            secondary
-            onClick={() => {
-              themeContext.theme = themes.normal; // テーマは引き継がない
-              handleClickFormNew(args);
-            }}
-          >
-            <Icon name="long arrow alternate left"></Icon>
-            入力画面へ
-          </Button>
-        </Segment>
-        <Segment textAlign="right" basic style={{ border: 0 }}>
-          <Deliver {...args} theme={themeContext.theme} />
-        </Segment>
-      </Segment.Group>
-    </MainContainer>
+        <Segment.Group horizontal style={{ border: 0 }}>
+          <Segment basic>
+            <Button
+              icon
+              labelPosition="left"
+              secondary
+              onClick={() => {
+                themeContext.theme = themes.normal; // テーマは引き継がない
+                handleClickFormNew(args);
+              }}
+            >
+              <Icon name="long arrow alternate left"></Icon>
+              入力画面へ
+            </Button>
+          </Segment>
+          <Segment textAlign="right" basic style={{ border: 0 }}>
+            <Deliver {...args} theme={themeContext.theme} />
+          </Segment>
+        </Segment.Group>
+      </MainContainer>
+    </>
   );
 };
 

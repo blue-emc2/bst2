@@ -8,6 +8,8 @@ import { API } from '../../types/ApiProps';
 import { DEFAULT_API_CONFIG } from '../../containers/APIConfig';
 import { MainContainer, ThemeWithP } from '../styled';
 import { ThemeName } from '../../theme/GrobalStyles';
+import HeaderMenu from '../HeaderMenu';
+import MenuItemDestroyButton from './MenuItemDestroyButton';
 
 const useFetchStroy = (id: string) => {
   const initialValue = {
@@ -57,6 +59,9 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     <Redirect to="/" />
   ) : (
     <>
+      <HeaderMenu>
+        <MenuItemDestroyButton id={match.params.id} />
+      </HeaderMenu>
       {loaded ? (
         <MainContainer
           background={data.attributes.theme.background}
