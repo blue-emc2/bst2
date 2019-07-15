@@ -9,7 +9,7 @@ const reducer: Reducer<StateType, ActionType> = (state, action) => {
   switch (action.type) {
     case 'increment': {
       const updatedItems = [...state.items];
-      const newId = state.items.length + 1;
+      const newId = state.items.slice(-1)[0].id + 1;
       if (updatedItems.length < 10) {
         updatedItems.push({
           id: newId,
@@ -94,7 +94,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
                   e.preventDefault();
                   dispatch({ type: 'decrement', barId: item.id });
                 }}
-                data-cy="minusCircle"
+                data-cy={`minusCircle${item.id}`}
               >
                 <Icon name="minus circle" />
               </Button>

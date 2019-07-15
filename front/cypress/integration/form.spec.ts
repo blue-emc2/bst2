@@ -86,8 +86,17 @@ describe('stories#create request', () => {
   });
 
   it('セクションは1個以下にしない', () => {
-    cy.get('[data-cy=minusCircle]').click();
+    cy.get('[data-cy=minusCircle1]').click();
 
     cy.get(`[data-cy=inputSection1]`).should('be.visible');
+  });
+
+  it('セクションのIDはかぶらないようにする', () => {
+    [...Array(2)].map(() => cy.get('[data-cy=plusCircle]').click());
+    cy.get('[data-cy=minusCircle2]').click();
+    cy.get('[data-cy=plusCircle]').click();
+
+    cy.get(`[data-cy=inputSection2]`).should('not.visible');
+    cy.get(`[data-cy=inputSection4]`).should('be.visible');
   });
 });
