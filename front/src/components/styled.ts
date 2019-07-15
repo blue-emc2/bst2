@@ -16,4 +16,5 @@ export const ThemeWithP = styled.p`
 
 export const Pre = styled.pre`
   font-family: 'Noto Sans JP', sans-serif;
+  white-space: pre-wrap;
 `;
