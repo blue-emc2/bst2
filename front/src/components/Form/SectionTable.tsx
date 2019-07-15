@@ -20,7 +20,11 @@ const reducer: Reducer<StateType, ActionType> = (state, action) => {
       return { ...state, items: updatedItems };
     }
     case 'decrement': {
-      const updatedItems = [...state.items].filter(i => i.id !== action.barId);
+      let updatedItems = [...state.items].filter(i => i.id !== action.barId);
+
+      if (updatedItems.length < 1) {
+        updatedItems = state.items;
+      }
 
       return { ...state, items: updatedItems };
     }
@@ -90,6 +94,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
                   e.preventDefault();
                   dispatch({ type: 'decrement', barId: item.id });
                 }}
+                data-cy="minusCircle"
               >
                 <Icon name="minus circle" />
               </Button>

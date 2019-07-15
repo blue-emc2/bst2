@@ -84,4 +84,10 @@ describe('stories#create request', () => {
 
     cy.get(`[data-cy=inputSection11]`).should('not.visible');
   });
+
+  it('セクションは1個以下にしない', () => {
+    cy.get('[data-cy=minusCircle]').click();
+
+    cy.get(`[data-cy=inputSection1]`).should('be.visible');
+  });
 });
