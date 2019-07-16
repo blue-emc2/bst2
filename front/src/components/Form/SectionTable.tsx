@@ -9,16 +9,22 @@ const reducer: Reducer<StateType, ActionType> = (state, action) => {
   switch (action.type) {
     case 'increment': {
       const updatedItems = [...state.items];
-      const newId = state.items.length + 1;
-      updatedItems.push({
-        id: newId,
-        name: `section${state.items.length}`,
-      });
+      const newId = state.items.slice(-1)[0].id + 1;
+      if (updatedItems.length < 10) {
+        updatedItems.push({
+          id: newId,
+          name: `section${state.items.length}`,
+        });
+      }
 
       return { ...state, items: updatedItems };
     }
     case 'decrement': {
-      const updatedItems = [...state.items].filter(i => i.id !== action.barId);
+      let updatedItems = [...state.items].filter(i => i.id !== action.barId);
+
+      if (updatedItems.length < 1) {
+        updatedItems = state.items;
+      }
 
       return { ...state, items: updatedItems };
     }
@@ -88,6 +94,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
                   e.preventDefault();
                   dispatch({ type: 'decrement', barId: item.id });
                 }}
+                data-cy={`minusCircle${item.id}`}
               >
                 <Icon name="minus circle" />
               </Button>
@@ -103,6 +110,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
             e.preventDefault();
             dispatch({ type: 'increment' });
           }}
+          data-cy="plusCircle"
         >
           <Icon name="plus circle" />
         </Button>

@@ -12,9 +12,12 @@ class StoriesSerializer
     section = object.sections.detect { |section| section.text.present? }
     description = section.text.body.truncate(50)
 
+    imgSection = object.sections.detect { |section| section.image&.attached? }
+    imageUrl = imgSection ? imgSection.image&.body_url : nil
+
     {
       description: description,
-      imageUrl: section.image&.body_url,
+      imageUrl: imageUrl,
     }
   end
 end

@@ -1,8 +1,14 @@
 import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
+import styled from 'styled-components';
 import HalfSection from '../components/Story/HalfSection';
 import { Section, TextPosition, SectionListProps } from '../types/LayoutProps';
 import TextOnly from '../components/Story/TextOnly';
+
+const ListContainer = styled(Container)`
+  margin-block-end: 2em;
+  margin-block-start: 2em;
+`;
 
 const SectionList: FC<SectionListProps> = ({ sections }) => {
   const list = sections.map((s: Section, index: number) => {
@@ -37,7 +43,7 @@ const SectionList: FC<SectionListProps> = ({ sections }) => {
     }
   });
 
-  return <Container text>{list}</Container>;
+  return <ListContainer text>{list}</ListContainer>;
 };
 
 export default SectionList;

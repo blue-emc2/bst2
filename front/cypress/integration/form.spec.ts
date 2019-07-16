@@ -1,9 +1,11 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/camelcase */
 describe('stories#create request', () => {
   const baseUrl = Cypress.env('baseUrl');
   const backendBaseUrl = Cypress.env('backendUrl');
 
-  it('登録が成功する', () => {
+  // backendはmock化したい
+  it.skip('登録が成功する', () => {
     cy.request({
       url: `${backendBaseUrl}/api/v1/stories`,
       method: 'POST',
@@ -37,8 +39,8 @@ describe('stories#create request', () => {
     });
   });
 
-  describe('入力した内容で登録が成功する', () => {
-    // eslint-disable-next-line no-undef
+  // backendはmock化したい
+  describe.skip('入力した内容で登録が成功する', () => {
     before(() => {
       cy.visit(`${baseUrl}/new`);
       cy.get('input[name=characterName]').type('a');
@@ -66,5 +68,35 @@ describe('stories#create request', () => {
       cy.get('[data-cy=preview0]').should('have.text', 'c');
       cy.get('[data-cy=preview1]').should('have.text', 'd');
     });
+  });
+
+  beforeEach(() => {
+    cy.visit(`${baseUrl}/new`);
+  });
+
+  it('セクションは10個以上増えない', () => {
+    [...Array(10)].map(() => cy.get('[data-cy=plusCircle]').click());
+
+    // eslint-disable-next-line array-callback-return
+    [...Array(10)].map((_, i) => {
+      cy.get(`[data-cy=inputSection${i + 1}]`).should('be.visible');
+    });
+
+    cy.get(`[data-cy=inputSection11]`).should('not.visible');
+  });
+
+  it('セクションは1個以下にしない', () => {
+    cy.get('[data-cy=minusCircle1]').click();
+
+    cy.get(`[data-cy=inputSection1]`).should('be.visible');
+  });
+
+  it('セクションのIDはかぶらないようにする', () => {
+    [...Array(2)].map(() => cy.get('[data-cy=plusCircle]').click());
+    cy.get('[data-cy=minusCircle2]').click();
+    cy.get('[data-cy=plusCircle]').click();
+
+    cy.get(`[data-cy=inputSection2]`).should('not.visible');
+    cy.get(`[data-cy=inputSection4]`).should('be.visible');
   });
 });
