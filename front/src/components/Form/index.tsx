@@ -52,10 +52,8 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
       sections: [],
     };
 
-    const sectionIndexes = Array.from(Array(10), (_, i) => i + 1);
-    // 存在するセクションを抜き出す
-    const sectionArray = sectionIndexes.map(value =>
-      document.getElementById(`column-section${value}`),
+    const sectionArray = document.querySelectorAll<HTMLElement>(
+      '[id^=column-section]',
     );
 
     const sections: Section[] = [];
@@ -63,9 +61,10 @@ const StoryForm: FC<FromProps> = ({ onPreview, ...props }) => {
     for (let i = 0; i < sectionArray.length; i += 1) {
       const section = sectionArray[i];
       if (section !== null) {
+        const selectorName = section.id.split('-')[1];
         const positionType = section.dataset.position;
-        const selector = `textarea[name="section${i + 1}"]`; // sectionは1から始まる
-        const imageSelector = `input[name="section${i + 1}"]`;
+        const selector = `textarea[name="${selectorName}"]`;
+        const imageSelector = `input[name="${selectorName}"]`;
 
         let position = TextPosition.CENTER;
         let body;
