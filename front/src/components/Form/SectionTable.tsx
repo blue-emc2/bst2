@@ -18,6 +18,7 @@ const reducer: Reducer<StateType, ActionType> = (state, action) => {
         updatedItems.push({
           id: newId,
           name: `section${state.items.length}`,
+          body: '',
           textPosition: TextPosition.CENTER,
         });
       }
@@ -48,7 +49,7 @@ type ActionType =
 interface Item {
   id: number;
   name: string;
-  body?: string;
+  body: string;
   textPosition: TextPosition;
 }
 interface StateType {
@@ -76,7 +77,14 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
       };
     } else {
       initialState = {
-        items: [{ id: 1, name: 'section1', textPosition: TextPosition.CENTER }],
+        items: [
+          {
+            id: 1,
+            name: 'section1',
+            body: '',
+            textPosition: TextPosition.CENTER,
+          },
+        ],
       };
     }
 

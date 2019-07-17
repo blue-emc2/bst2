@@ -37,7 +37,7 @@ const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
 // TODO: 消したい
 interface SectionBarProps {
   name: string;
-  body?: string;
+  body: string;
   imageUrl?: string;
   textPosition: TextPosition;
 }
