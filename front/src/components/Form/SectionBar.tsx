@@ -55,9 +55,9 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
   };
 
   const menuItems = [
-    { body: '文章のみ', type: TextPosition.CENTER },
-    { body: '文章と画像', type: TextPosition.LEFT },
-    { body: '画像と文章', type: TextPosition.RIGHT },
+    { name: '文章のみ', type: TextPosition.CENTER },
+    { name: '文章と画像', type: TextPosition.LEFT },
+    { name: '画像と文章', type: TextPosition.RIGHT },
   ].map((value, index) => (
     <Menu.Item
       key={index.toString()}
@@ -66,7 +66,7 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
       data-cy={value.type}
       onClick={(e: SyntheticEvent) => handleMenuChange(e, value.type)}
     >
-      {value.body}
+      {value.name}
     </Menu.Item>
   ));
 
