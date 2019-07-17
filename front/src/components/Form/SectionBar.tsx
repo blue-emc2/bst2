@@ -12,20 +12,10 @@ const InputlayoutRow = ({ ...props }) => {
         <Box name={name} body={body} type={TextPosition.CENTER} />
       ) : null}
       {activeItem === TextPosition.LEFT ? (
-        <Box
-          name={name}
-          body={body}
-          type={TextPosition.LEFT}
-          imageUrl={imageUrl}
-        />
+        <Box name={name} body={body} type={TextPosition.LEFT} />
       ) : null}
       {activeItem === TextPosition.RIGHT ? (
-        <Box
-          name={name}
-          body={body}
-          type={TextPosition.RIGHT}
-          imageUrl={imageUrl}
-        />
+        <Box name={name} body={body} type={TextPosition.RIGHT} />
       ) : null}
     </Grid.Row>
   );
