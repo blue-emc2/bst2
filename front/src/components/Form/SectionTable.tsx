@@ -1,7 +1,11 @@
 import React, { FC, SyntheticEvent, useReducer, Reducer } from 'react';
 import { Grid, Button, Icon, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
-import { SectionListProps, Section } from '../../types/LayoutProps';
+import {
+  SectionListProps,
+  Section,
+  TextPosition,
+} from '../../types/LayoutProps';
 import SectionBar from './SectionBar';
 
 // ここのstateは1つ前のイベントのオブジェクト
@@ -14,6 +18,7 @@ const reducer: Reducer<StateType, ActionType> = (state, action) => {
         updatedItems.push({
           id: newId,
           name: `section${state.items.length}`,
+          textPosition: TextPosition.CENTER,
         });
       }
 
@@ -39,10 +44,12 @@ type ActionType =
   | { type: 'decrement'; barId: number }
   | { type: 'increment' };
 
+// TODO: 消したい
 interface Item {
   id: number;
   name: string;
   body?: string;
+  textPosition: TextPosition;
 }
 interface StateType {
   items: Item[];
@@ -61,6 +68,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
         id: index + 1,
         name: `section${index + 1}`,
         body: value.body,
+        textPosition: value.textPosition,
       }));
 
       initialState = {
@@ -68,7 +76,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
       };
     } else {
       initialState = {
-        items: [{ id: 1, name: 'section1' }],
+        items: [{ id: 1, name: 'section1', textPosition: TextPosition.CENTER }],
       };
     }
 
@@ -83,7 +91,11 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
       <Grid celled="internally" columns={2}>
         {state.items.map(item => (
           <SectionSegment key={item.id} data-cy={`inputSection${item.id}`}>
-            <SectionBar name={`section${item.id}`} body={item.body} />
+            <SectionBar
+              name={`section${item.id}`}
+              body={item.body}
+              textPosition={item.textPosition}
+            />
 
             <Segment floated="right" basic>
               {/* TODO: 消すときにホワンとさせたいかも */}

@@ -4,18 +4,28 @@ import { TextPosition } from '../../types/LayoutProps';
 import Box from './Box';
 
 const InputlayoutRow = ({ ...props }) => {
-  const { activeItem, name, body } = props;
+  const { activeItem, name, body, imageUrl } = props;
 
   return (
     <Grid.Row>
-      {activeItem === 'text_only' ? (
+      {activeItem === TextPosition.CENTER ? (
         <Box name={name} body={body} type={TextPosition.CENTER} />
       ) : null}
-      {activeItem === 'left_text' ? (
-        <Box name={name} body={body} type={TextPosition.LEFT} />
+      {activeItem === TextPosition.LEFT ? (
+        <Box
+          name={name}
+          body={body}
+          type={TextPosition.LEFT}
+          imageUrl={imageUrl}
+        />
       ) : null}
-      {activeItem === 'right_text' ? (
-        <Box name={name} body={body} type={TextPosition.RIGHT} />
+      {activeItem === TextPosition.RIGHT ? (
+        <Box
+          name={name}
+          body={body}
+          type={TextPosition.RIGHT}
+          imageUrl={imageUrl}
+        />
       ) : null}
     </Grid.Row>
   );
@@ -34,23 +44,30 @@ const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
   );
 };
 
+// TODO: 消したい
 interface SectionBarProps {
   name: string;
   body?: string;
+  imageUrl?: string;
+  textPosition: TextPosition;
 }
 
 const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
-  const [activeItem, setActiveItem] = useState('text_only');
+  const { textPosition } = props;
 
-  const handleMenuChange = (e: SyntheticEvent, type: string) => {
+  const [activeItem, setActiveItem] = useState(
+    textPosition || TextPosition.CENTER,
+  );
+
+  const handleMenuChange = (e: SyntheticEvent, type: TextPosition) => {
     e.preventDefault();
     setActiveItem(type);
   };
 
   const menuItems = [
-    { body: '文章のみ', type: 'text_only' },
-    { body: '文章と画像', type: 'left_text' },
-    { body: '画像と文章', type: 'right_text' },
+    { body: '文章のみ', type: TextPosition.CENTER },
+    { body: '文章と画像', type: TextPosition.LEFT },
+    { body: '画像と文章', type: TextPosition.RIGHT },
   ].map((value, index) => (
     <Menu.Item
       key={index.toString()}
