@@ -127,7 +127,9 @@ const Preview: FC<routerWithLayoutProps> = ({ ...args }) => {
           </Header>
 
           <Header as="h3" data-test="username">
-            {userName}
+            <ThemeWithP title={themeContext.theme.titleColor}>
+              {userName}
+            </ThemeWithP>
           </Header>
         </Container>
 

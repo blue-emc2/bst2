@@ -75,7 +75,9 @@ const Story: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
             </Header>
 
             <Header as="h3" data-cy="username">
-              {data.attributes.userName}
+              <ThemeWithP title={data.attributes.theme.titleColor}>
+                {data.attributes.userName}
+              </ThemeWithP>
             </Header>
           </Container>
 
