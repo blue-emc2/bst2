@@ -1,36 +1,36 @@
-import React, { FC, useState, useCallback } from 'react';
-import { Grid, Form, TextArea } from 'semantic-ui-react';
+import React, { FC, useCallback, FormEvent } from 'react';
+import { Grid, Form, TextAreaProps } from 'semantic-ui-react';
 import InputImage from './InputImage';
 import { TextPosition } from '../../types/LayoutProps';
 
 export interface BoxProps {
   name: string;
   type: TextPosition;
-  body?: string;
+  body: string;
+  onBodyChange: (body: string) => void;
 }
 
-const InputText: FC<BoxProps> = ({ name, body }) => {
-  const [newBody, setBody] = useState(body || '');
-
+const InputText: FC<BoxProps> = ({ ...props }) => {
+  const { name, body, onBodyChange } = props;
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setBody(event.target.value);
+    (event: FormEvent<HTMLTextAreaElement>, data: TextAreaProps) => {
+      event.preventDefault();
+      onBodyChange(data.value as string);
     },
-    [],
+    [onBodyChange],
   );
 
   return (
-    <Form.Field
+    <Form.TextArea
       required
-      control={TextArea}
       name={name}
       data-cy={name}
       label="本文"
-      value={newBody}
+      value={body}
       rows={8}
       style={{ resize: 'vertical' }}
       maxLength={200}
-      onChange={handleChange}
+      onInput={handleChange}
     />
   );
 };

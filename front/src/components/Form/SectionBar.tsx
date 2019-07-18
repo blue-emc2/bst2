@@ -5,17 +5,36 @@ import Box from './Box';
 
 const InputlayoutRow = ({ ...props }) => {
   const { activeItem, name, body } = props;
+  const [storeBody, setStoreBody] = useState(body);
+  const handleBodyChange = (newBody: string) => {
+    setStoreBody(newBody);
+  };
 
   return (
     <Grid.Row>
-      {activeItem === 'text_only' ? (
-        <Box name={name} body={body} type={TextPosition.CENTER} />
+      {activeItem === TextPosition.CENTER ? (
+        <Box
+          name={name}
+          body={storeBody}
+          type={TextPosition.CENTER}
+          onBodyChange={handleBodyChange}
+        />
       ) : null}
-      {activeItem === 'left_text' ? (
-        <Box name={name} body={body} type={TextPosition.LEFT} />
+      {activeItem === TextPosition.LEFT ? (
+        <Box
+          name={name}
+          body={storeBody}
+          type={TextPosition.LEFT}
+          onBodyChange={handleBodyChange}
+        />
       ) : null}
-      {activeItem === 'right_text' ? (
-        <Box name={name} body={body} type={TextPosition.RIGHT} />
+      {activeItem === TextPosition.RIGHT ? (
+        <Box
+          name={name}
+          body={storeBody}
+          type={TextPosition.RIGHT}
+          onBodyChange={handleBodyChange}
+        />
       ) : null}
     </Grid.Row>
   );
@@ -34,23 +53,30 @@ const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
   );
 };
 
+// TODO: 消したい
 interface SectionBarProps {
   name: string;
+  imageUrl?: string;
   body?: string;
+  textPosition: TextPosition;
 }
 
 const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
-  const [activeItem, setActiveItem] = useState('text_only');
+  const { textPosition } = props;
 
-  const handleMenuChange = (e: SyntheticEvent, type: string) => {
+  const [activeItem, setActiveItem] = useState(
+    textPosition || TextPosition.CENTER,
+  );
+
+  const handleMenuChange = (e: SyntheticEvent, type: TextPosition) => {
     e.preventDefault();
     setActiveItem(type);
   };
 
   const menuItems = [
-    { body: '文章のみ', type: 'text_only' },
-    { body: '文章と画像', type: 'left_text' },
-    { body: '画像と文章', type: 'right_text' },
+    { name: '文章のみ', type: TextPosition.CENTER },
+    { name: '文章と画像', type: TextPosition.LEFT },
+    { name: '画像と文章', type: TextPosition.RIGHT },
   ].map((value, index) => (
     <Menu.Item
       key={index.toString()}
@@ -59,7 +85,7 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
       data-cy={value.type}
       onClick={(e: SyntheticEvent) => handleMenuChange(e, value.type)}
     >
-      {value.body}
+      {value.name}
     </Menu.Item>
   ));
 
