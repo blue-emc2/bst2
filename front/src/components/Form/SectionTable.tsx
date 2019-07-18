@@ -101,7 +101,6 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
           <SectionSegment key={item.id} data-cy={`inputSection${item.id}`}>
             <SectionBar
               name={`section${item.id}`}
-              body={item.body}
               textPosition={item.textPosition}
             />
 

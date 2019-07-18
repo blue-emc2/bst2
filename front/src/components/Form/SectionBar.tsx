@@ -4,18 +4,33 @@ import { TextPosition } from '../../types/LayoutProps';
 import Box from './Box';
 
 const InputlayoutRow = ({ ...props }) => {
-  const { activeItem, name, body, imageUrl } = props;
+  const { activeItem, name, body, onBodyChange } = props;
 
   return (
     <Grid.Row>
       {activeItem === TextPosition.CENTER ? (
-        <Box name={name} body={body} type={TextPosition.CENTER} />
+        <Box
+          name={name}
+          body={body}
+          type={TextPosition.CENTER}
+          onBodyChange={onBodyChange}
+        />
       ) : null}
       {activeItem === TextPosition.LEFT ? (
-        <Box name={name} body={body} type={TextPosition.LEFT} />
+        <Box
+          name={name}
+          body={body}
+          type={TextPosition.LEFT}
+          onBodyChange={onBodyChange}
+        />
       ) : null}
       {activeItem === TextPosition.RIGHT ? (
-        <Box name={name} body={body} type={TextPosition.RIGHT} />
+        <Box
+          name={name}
+          body={body}
+          type={TextPosition.RIGHT}
+          onBodyChange={onBodyChange}
+        />
       ) : null}
     </Grid.Row>
   );
@@ -37,7 +52,6 @@ const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
 // TODO: 消したい
 interface SectionBarProps {
   name: string;
-  body: string;
   imageUrl?: string;
   textPosition: TextPosition;
 }
@@ -48,10 +62,15 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
   const [activeItem, setActiveItem] = useState(
     textPosition || TextPosition.CENTER,
   );
+  const [storeBody, setStoreBody] = useState('');
 
   const handleMenuChange = (e: SyntheticEvent, type: TextPosition) => {
     e.preventDefault();
     setActiveItem(type);
+  };
+
+  const handleBodyChange = (newBody: string) => {
+    setStoreBody(newBody);
   };
 
   const menuItems = [
@@ -73,7 +92,12 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
   return (
     <Grid divided>
       <InputLayoutChangeMenu>{menuItems}</InputLayoutChangeMenu>
-      <InputlayoutRow activeItem={activeItem} {...props} />
+      <InputlayoutRow
+        activeItem={activeItem}
+        body={storeBody}
+        onBodyChange={handleBodyChange}
+        {...props}
+      />
     </Grid>
   );
 };

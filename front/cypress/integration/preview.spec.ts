@@ -37,8 +37,7 @@ describe('/preview', () => {
 
   describe('レイアウト選択を文章と画像を選択する', () => {
     beforeEach(() => {
-      cy.get('[data-cy=left_text]:first').click();
-      cy.get('[data-cy=section1]').type(text0);
+      cy.get('[data-cy=left]:first').click();
       cy.contains('プレビュー').click();
     });
 
@@ -53,8 +52,7 @@ describe('/preview', () => {
 
   describe('レイアウト選択を画像と文章を選択する', () => {
     beforeEach(() => {
-      cy.get('[data-cy=right_text]:first').click();
-      cy.get('[data-cy=section1]').type(text0);
+      cy.get('[data-cy=right]:first').click();
       cy.contains('プレビュー').click();
     });
 
