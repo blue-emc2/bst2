@@ -61,8 +61,9 @@ const Home: FC<{}> = () => {
       <SummarySegment textAlign="center" vertical>
         <Container text>
           <SummaryHeader as="h1" size="large">
-            このサイトは光の戦士たちが光の戦士になる前の
-            物語(妄想)を投稿できるサイトです
+            bst2は光の戦士たちが光の戦士になる前の
+            <br />
+            生い立ちを投稿・共有ができるサイトです
           </SummaryHeader>
           <Button primary size="huge" as={Link} to="/new">
             ストーリーを書いてみる

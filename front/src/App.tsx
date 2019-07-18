@@ -86,7 +86,7 @@ const App: FC<{}> = () => {
                 <Header as="h4" content="About" />
                 <List link>
                   <List.Item>
-                    <Link to="/about">bstについて</Link>
+                    <Link to="/about">bst2について</Link>
                   </List.Item>
                   <List.Item as="a">作者</List.Item>
                   <List.Item as="a">問い合わせ</List.Item>
