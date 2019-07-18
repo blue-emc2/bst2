@@ -49,7 +49,7 @@ type ActionType =
 interface Item {
   id: number;
   name: string;
-  body: string;
+  body?: string;
   textPosition: TextPosition;
 }
 interface StateType {
@@ -63,7 +63,6 @@ const SectionSegment = styled(Segment)`
 const SectionTable: FC<SectionListProps> = ({ sections }) => {
   const setInitialState = (initSections: Section[]) => {
     let initialState;
-
     if (initSections) {
       const i = initSections.map((value, index) => ({
         id: index + 1,
@@ -102,6 +101,7 @@ const SectionTable: FC<SectionListProps> = ({ sections }) => {
             <SectionBar
               name={`section${item.id}`}
               textPosition={item.textPosition}
+              body={item.body}
             />
 
             <Segment floated="right" basic>

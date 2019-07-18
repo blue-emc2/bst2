@@ -4,32 +4,36 @@ import { TextPosition } from '../../types/LayoutProps';
 import Box from './Box';
 
 const InputlayoutRow = ({ ...props }) => {
-  const { activeItem, name, body, onBodyChange } = props;
+  const { activeItem, name, body } = props;
+  const [storeBody, setStoreBody] = useState(body);
+  const handleBodyChange = (newBody: string) => {
+    setStoreBody(newBody);
+  };
 
   return (
     <Grid.Row>
       {activeItem === TextPosition.CENTER ? (
         <Box
           name={name}
-          body={body}
+          body={storeBody}
           type={TextPosition.CENTER}
-          onBodyChange={onBodyChange}
+          onBodyChange={handleBodyChange}
         />
       ) : null}
       {activeItem === TextPosition.LEFT ? (
         <Box
           name={name}
-          body={body}
+          body={storeBody}
           type={TextPosition.LEFT}
-          onBodyChange={onBodyChange}
+          onBodyChange={handleBodyChange}
         />
       ) : null}
       {activeItem === TextPosition.RIGHT ? (
         <Box
           name={name}
-          body={body}
+          body={storeBody}
           type={TextPosition.RIGHT}
-          onBodyChange={onBodyChange}
+          onBodyChange={handleBodyChange}
         />
       ) : null}
     </Grid.Row>
@@ -53,6 +57,7 @@ const InputLayoutChangeMenu: FC<{}> = ({ children }) => {
 interface SectionBarProps {
   name: string;
   imageUrl?: string;
+  body?: string;
   textPosition: TextPosition;
 }
 
@@ -62,15 +67,10 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
   const [activeItem, setActiveItem] = useState(
     textPosition || TextPosition.CENTER,
   );
-  const [storeBody, setStoreBody] = useState('');
 
   const handleMenuChange = (e: SyntheticEvent, type: TextPosition) => {
     e.preventDefault();
     setActiveItem(type);
-  };
-
-  const handleBodyChange = (newBody: string) => {
-    setStoreBody(newBody);
   };
 
   const menuItems = [
@@ -92,12 +92,7 @@ const SectionBar: FC<SectionBarProps> = ({ ...props }) => {
   return (
     <Grid divided>
       <InputLayoutChangeMenu>{menuItems}</InputLayoutChangeMenu>
-      <InputlayoutRow
-        activeItem={activeItem}
-        body={storeBody}
-        onBodyChange={handleBodyChange}
-        {...props}
-      />
+      <InputlayoutRow activeItem={activeItem} {...props} />
     </Grid>
   );
 };
